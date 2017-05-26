@@ -23,6 +23,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 /**
  * 启动程序
@@ -41,7 +42,8 @@ import org.springframework.data.mongodb.config.EnableMongoAuditing;
 @ServletComponentScan //配置websocket必须
 @ComponentScan({"cn.didano"})
 @EnableCaching
-@EnableMongoAuditing
+//@EnableMongoAuditing
+//@EnableMongoRepositories(basePackages = "cn.didano.remotecontrol.base.robot.data.repository")
 public class StartVideoApplication {
 	static Logger logger = Logger.getLogger(StartVideoApplication.class);
 	
