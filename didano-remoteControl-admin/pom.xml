@@ -2,7 +2,7 @@
 <project
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
- <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.didano</groupId>
 	<artifactId>didano-remoteControl-admin</artifactId>
 	<version>1.0.0</version>
@@ -13,7 +13,7 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.4.2.RELEASE</version>
 	</parent>
-  <organization>
+	<organization>
 		<name>Pivotal Software, Inc.</name>
 		<url>http://www.spring.io</url>
 	</organization>
@@ -30,13 +30,13 @@
 	</properties>
 	<dependencies>
 		<dependency>
-	      <groupId>cn.didano</groupId>
-	      <artifactId>didano-remoteControl-base</artifactId>
-	      <version>1.0.0</version>
-    	</dependency>
-    	<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-rest</artifactId>
+			<groupId>cn.didano</groupId>
+			<artifactId>didano-remoteControl-base</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -133,5 +133,28 @@
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-xml</artifactId>
 		</dependency>
-  </dependencies>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>5.1.40</version>
+			</plugin>
+			<plugin>
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<version>1.3.5</version>
+				<configuration>
+					<verbose>true</verbose>
+					<overwrite>true</overwrite>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
 </project>
