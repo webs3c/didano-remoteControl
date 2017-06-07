@@ -5,6 +5,7 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.convert.CustomConversions;
@@ -25,7 +26,7 @@ import com.mongodb.MongoClientURI;
  * @author wangyi
  * @TODO 需要缩小范围，并且需要增加鉴权
  */
-@Component
+@Configuration
 public class SpringMongoConfig extends AbstractMongoConfiguration {
 
 	@Value("${spring.data.mongodb.database}")

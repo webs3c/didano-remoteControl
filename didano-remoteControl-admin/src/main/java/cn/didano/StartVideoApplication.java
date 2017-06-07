@@ -33,17 +33,11 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
  * @author stephen
  * Created on 2016年12月25日 上午11:48:46 
  */
-//@ServletComponentScan
-//Configures component scanning directives for use with @{@link Configuration} classes.
-//@EnableConfigurationProperties({OssInfo.class})
-//@SpringBootApplication(scanBasePackages="cn.didano")//Base packages to scan for annotated components. Use {@link #scanBasePackageClasses}
-
 @SpringBootApplication
 @ServletComponentScan //配置websocket必须
 @ComponentScan({"cn.didano"})
 @EnableCaching
-//@EnableMongoAuditing
-//@EnableMongoRepositories(basePackages = "cn.didano.remotecontrol.base.robot.data.repository")
+@EnableMongoAuditing//开启mongodb审计，createDate 和 user标签可以使用
 public class StartVideoApplication {
 	static Logger logger = Logger.getLogger(StartVideoApplication.class);
 	
