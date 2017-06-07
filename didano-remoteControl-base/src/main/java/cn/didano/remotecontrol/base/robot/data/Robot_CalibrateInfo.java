@@ -26,11 +26,13 @@ import io.swagger.annotations.ApiModelProperty;
  * @Todo 没有安卓操作系统版本号
  */
 @ApiModel
-@TypeAlias("体重校准")
+@TypeAlias("体重校准信息")
 public class Robot_CalibrateInfo extends RInfo {
 	
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
+	@ApiModelProperty(value = "版本类型", required = true)
+	private String systemType;
 	@ApiModelProperty(value = "自动零点校准值", required = true)
 	private String calibrate_zero_weight;
 	@ApiModelProperty(value = "标准体重校准值", required = true)
@@ -42,6 +44,13 @@ public class Robot_CalibrateInfo extends RInfo {
 	}
 	public void setDeviceNo(String deviceNo) {
 		this.deviceNo = deviceNo;
+	}
+	
+	public String getSystemType() {
+		return systemType;
+	}
+	public void setSystemType(String systemType) {
+		this.systemType = systemType;
 	}
 	public String getCalibrate_zero_weight() {
 		return calibrate_zero_weight;

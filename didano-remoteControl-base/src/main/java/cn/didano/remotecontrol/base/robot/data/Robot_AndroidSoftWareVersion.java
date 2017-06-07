@@ -31,6 +31,8 @@ public class Robot_AndroidSoftWareVersion extends RInfo {
 	
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
+	@ApiModelProperty(value = "版本类型", required = true)
+	private String systemType;
 	@ApiModelProperty(value = "Android程序版本号", required = true)
 	private String andriod_version_software;
 	@ApiModelProperty(value = "Andriod系统版本号", required = true)
@@ -48,6 +50,13 @@ public class Robot_AndroidSoftWareVersion extends RInfo {
 		return "Robot_AndroidSoftWareVersion [deviceNo=" + deviceNo + ", andriod_version_software="
 				+ andriod_version_software + ", andriod_version_system=" + andriod_version_system
 				+ ", andriod_version_kernel=" + andriod_version_kernel + "]";
+	}
+	
+	public String getSystemType() {
+		return systemType;
+	}
+	public void setSystemType(String systemType) {
+		this.systemType = systemType;
 	}
 	public String getAndriod_version_software() {
 		return andriod_version_software;

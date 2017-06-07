@@ -1,5 +1,7 @@
 package cn.didano.remotecontrol.base.robot.data.repository;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import cn.didano.remotecontrol.base.robot.data.Robot_LinuxEnvTemperatureInfo;
@@ -9,4 +11,5 @@ import cn.didano.remotecontrol.base.robot.data.Robot_LinuxEnvTemperatureInfo;
  */
 public interface LinuxEnvTemperatureInfoRepository extends MongoRepository<Robot_LinuxEnvTemperatureInfo, String> {
 	public Robot_LinuxEnvTemperatureInfo findByDeviceNo(String device_no);
+	public List<Robot_LinuxEnvTemperatureInfo> findBySystemType(String system_type);
 }

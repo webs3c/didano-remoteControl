@@ -1,5 +1,7 @@
 package cn.didano.remotecontrol.base.robot.data.repository;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import cn.didano.remotecontrol.base.robot.data.Robot_CalibrateInfo;
@@ -9,4 +11,5 @@ import cn.didano.remotecontrol.base.robot.data.Robot_CalibrateInfo;
  */
 public interface CalibrateInfoRepository extends MongoRepository<Robot_CalibrateInfo, String> {
 	public Robot_CalibrateInfo findByDeviceNo(String device_no);
+	public List<Robot_CalibrateInfo> findBySystemType(String system_type);
 }

@@ -16,16 +16,14 @@
 
 package cn.didano.remotecontrol.base.robot.data;
 
-import java.time.Instant;
+import java.util.Date;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
-import org.springframework.data.domain.Persistable;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.Date;
 
 import io.swagger.annotations.ApiModel;
 
@@ -55,8 +53,7 @@ public class RInfo {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8") //格林时间转换为北京时间，mongo只存格林时间
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public Date getCreateDate() {
 		return createDate;
 	}

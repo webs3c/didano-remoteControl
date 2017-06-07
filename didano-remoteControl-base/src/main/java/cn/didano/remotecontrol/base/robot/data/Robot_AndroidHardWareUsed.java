@@ -25,10 +25,12 @@ import io.swagger.annotations.ApiModelProperty;
  *主要是上行和下行的信息容器
  */
 @ApiModel
-@TypeAlias("安卓的运行环境")
+@TypeAlias("安卓的硬件使用")
 public class Robot_AndroidHardWareUsed extends RInfo {
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
+	@ApiModelProperty(value = "版本类型", required = true)
+	private String systemType;
 	@ApiModelProperty(value = "Android版CPU最高使用率", required = true)
 	private String android_cpu_used;
 	@ApiModelProperty(value = "Android板CPU使用率最高对应的app", required = true)
@@ -59,6 +61,12 @@ public class Robot_AndroidHardWareUsed extends RInfo {
 	}
 	public void setDeviceNo(String deviceNo) {
 		this.deviceNo = deviceNo;
+	}
+	public String getSystemType() {
+		return systemType;
+	}
+	public void setSystemType(String systemType) {
+		this.systemType = systemType;
 	}
 	public String getAndroid_cpu_used() {
 		return android_cpu_used;

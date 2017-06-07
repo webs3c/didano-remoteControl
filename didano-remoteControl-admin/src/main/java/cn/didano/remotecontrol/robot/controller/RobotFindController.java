@@ -51,13 +51,14 @@ public class RobotFindController {
 	 * 不带翻页
 	 * @return
 	 */
-	@RequestMapping(value = "queryAndroidHardWareUsed", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "queryAndroidHardWareUsed/{system_type}", method = {RequestMethod.GET, RequestMethod.POST})
 	@ApiOperation(value = "查询版本信息,并且不分页", notes = "查询版本信息,并且不分页")
 	@ResponseBody
-	public List<Robot_AndroidHardWareUsed> queryAndroidHardWareUsed() {
+	public List<Robot_AndroidHardWareUsed> queryAndroidHardWareUsed(@PathVariable("system_type") String system_type) {
 		List<Robot_AndroidHardWareUsed> rAndroidHardWareUsed=null;
 		try {
-			rAndroidHardWareUsed = robotMongoDbFindService.queryAndroidHardWareUsed();
+			System.err.println(system_type+"查询版本讯息");
+			rAndroidHardWareUsed = robotMongoDbFindService.queryAndroidHardWareUsed(system_type);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -68,13 +69,13 @@ public class RobotFindController {
 	 * 不带翻页
 	 * @return
 	 */
-	@RequestMapping(value = "queryAndroidSoftWareVersion", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "queryAndroidSoftWareVersion/{system_type}", method = {RequestMethod.GET, RequestMethod.POST})
 	@ApiOperation(value = "查询版本信息,并且不分页", notes = "查询版本信息,并且不分页")
 	@ResponseBody
-	public List<Robot_AndroidSoftWareVersion> queryAndroidSoftWareVersion() {
+	public List<Robot_AndroidSoftWareVersion> queryAndroidSoftWareVersion(@PathVariable("system_type") String system_type) {
 		List<Robot_AndroidSoftWareVersion> rAndroidSoftWareVersion=null;
 		try {
-			rAndroidSoftWareVersion = robotMongoDbFindService.queryAndroidSoftWareVersion();
+			rAndroidSoftWareVersion = robotMongoDbFindService.queryAndroidSoftWareVersion(system_type);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -86,13 +87,13 @@ public class RobotFindController {
 	 * 不带翻页
 	 * @return
 	 */
-	@RequestMapping(value = "queryCalibrateInfo", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "queryCalibrateInfo/{system_type}", method = {RequestMethod.GET, RequestMethod.POST})
 	@ApiOperation(value = "查询版本信息,并且不分页", notes = "查询版本信息,并且不分页")
 	@ResponseBody
-	public List<Robot_CalibrateInfo> queryCalibrateInfo() {
+	public List<Robot_CalibrateInfo> queryCalibrateInfo(@PathVariable("system_type") String system_type) {
 		List<Robot_CalibrateInfo> rCalibrateInfo=null;
 		try {
-			rCalibrateInfo = robotMongoDbFindService.queryCalibrateInfo();
+			rCalibrateInfo = robotMongoDbFindService.queryCalibrateInfo(system_type);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -104,13 +105,13 @@ public class RobotFindController {
 	 * 不带翻页
 	 * @return
 	 */
-	@RequestMapping(value = "queryAppRunningStatus", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "queryAppRunningStatus/{system_type}", method = {RequestMethod.GET, RequestMethod.POST})
 	@ApiOperation(value = "查询版本信息,并且不分页", notes = "查询版本信息,并且不分页")
 	@ResponseBody
-	public List<Robot_AppRunningStatus> queryAppRunningStatus() {
+	public List<Robot_AppRunningStatus> queryAppRunningStatus(@PathVariable("system_type") String system_type) {
 		List<Robot_AppRunningStatus> rAppRunningStatus=null;
 		try {
-			rAppRunningStatus = robotMongoDbFindService.queryAppRunningStatus();
+			rAppRunningStatus = robotMongoDbFindService.queryAppRunningStatus(system_type);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -123,13 +124,13 @@ public class RobotFindController {
 	 * 不带翻页
 	 * @return
 	 */
-	@RequestMapping(value = "queryCandidatesInfo", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "queryCandidatesInfo/{system_type}", method = {RequestMethod.GET, RequestMethod.POST})
 	@ApiOperation(value = "查询版本信息,并且不分页", notes = "查询版本信息,并且不分页")
 	@ResponseBody
-	public List<Robot_CandidatesInfo> queryCandidatesInfo() {
+	public List<Robot_CandidatesInfo> queryCandidatesInfo(@PathVariable("system_type") String system_type) {
 		List<Robot_CandidatesInfo> rCandidatesInfo=null;
 		try {
-			rCandidatesInfo = robotMongoDbFindService.queryCandidatesInfo();
+			rCandidatesInfo = robotMongoDbFindService.queryCandidatesInfo(system_type);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -142,13 +143,13 @@ public class RobotFindController {
 	 * 不带翻页
 	 * @return
 	 */
-	@RequestMapping(value = "queryFinalRecogResult", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "queryFinalRecogResult/{system_type}", method = {RequestMethod.GET, RequestMethod.POST})
 	@ApiOperation(value = "查询版本信息,并且不分页", notes = "查询版本信息,并且不分页")
 	@ResponseBody
-	public List<Robot_FinalRecogResult> queryFinalRecogResult() {
+	public List<Robot_FinalRecogResult> queryFinalRecogResult(@PathVariable("system_type") String system_type) {
 		List<Robot_FinalRecogResult> rFinalRecogResult=null;
 		try {
-			rFinalRecogResult = robotMongoDbFindService.queryFinalRecogResult();
+			rFinalRecogResult = robotMongoDbFindService.queryFinalRecogResult(system_type);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -161,13 +162,13 @@ public class RobotFindController {
 	 * 不带翻页
 	 * @return
 	 */
-	@RequestMapping(value = "queryLinuxEnvTemperatureInfo", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "queryLinuxEnvTemperatureInfo/{system_type}", method = {RequestMethod.GET, RequestMethod.POST})
 	@ApiOperation(value = "查询版本信息,并且不分页", notes = "查询版本信息,并且不分页")
 	@ResponseBody
-	public List<Robot_LinuxEnvTemperatureInfo> queryLinuxEnvTemperatureInfo() {
+	public List<Robot_LinuxEnvTemperatureInfo> queryLinuxEnvTemperatureInfo(@PathVariable("system_type") String system_type) {
 		List<Robot_LinuxEnvTemperatureInfo> rLinuxEnvTemperatureInfo=null;
 		try {
-			rLinuxEnvTemperatureInfo = robotMongoDbFindService.queryLinuxEnvTemperatureInfo();
+			rLinuxEnvTemperatureInfo = robotMongoDbFindService.queryLinuxEnvTemperatureInfo(system_type);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -179,13 +180,13 @@ public class RobotFindController {
 	 * 不带翻页
 	 * @return
 	 */
-	@RequestMapping(value = "queryLinuxHardWareInfo", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "queryLinuxHardWareInfo/{system_type}", method = {RequestMethod.GET, RequestMethod.POST})
 	@ApiOperation(value = "查询版本信息,并且不分页", notes = "查询版本信息,并且不分页")
 	@ResponseBody
-	public List<Robot_LinuxHardWareInfo> queryLinuxHardWareInfo() {
+	public List<Robot_LinuxHardWareInfo> queryLinuxHardWareInfo(@PathVariable("system_type") String system_type) {
 		List<Robot_LinuxHardWareInfo> rLinuxHardWareInfo=null;
 		try {
-			rLinuxHardWareInfo = robotMongoDbFindService.queryLinuxHardWareInfo();
+			rLinuxHardWareInfo = robotMongoDbFindService.queryLinuxHardWareInfo(system_type);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -198,13 +199,17 @@ public class RobotFindController {
 	 * 不带翻页
 	 * @return
 	 */
-	@RequestMapping(value = "queryLinuxHardWareUsed", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "queryLinuxHardWareUsed/{system_type}", method = {RequestMethod.GET, RequestMethod.POST})
 	@ApiOperation(value = "查询版本信息,并且不分页", notes = "查询版本信息,并且不分页")
 	@ResponseBody
-	public List<Robot_LinuxHardWareUsed> queryLinuxHardWareUsed() {
+	public List<Robot_LinuxHardWareUsed> queryLinuxHardWareUsed(@PathVariable("system_type") String system_type) {
 		List<Robot_LinuxHardWareUsed> rLinuxHardWareUsed=null;
 		try {
-			rLinuxHardWareUsed = robotMongoDbFindService.queryLinuxHardWareUsed();
+			System.err.println(system_type+"-----------------------------------..................");
+			rLinuxHardWareUsed = robotMongoDbFindService.queryLinuxHardWareUsed(system_type);
+			for (Robot_LinuxHardWareUsed robot_LinuxHardWareUsed : rLinuxHardWareUsed) {
+				System.err.println(robot_LinuxHardWareUsed.getDeviceNo());
+			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -216,13 +221,13 @@ public class RobotFindController {
 	 * 不带翻页
 	 * @return
 	 */
-	@RequestMapping(value = "queryLinuxSoftWareVersion", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "queryLinuxSoftWareVersion/{system_type}", method = {RequestMethod.GET, RequestMethod.POST})
 	@ApiOperation(value = "查询版本信息,并且不分页", notes = "查询版本信息,并且不分页")
 	@ResponseBody
-	public List<Robot_LinuxSoftWareVersion> queryLinuxSoftWareVersion() {
+	public List<Robot_LinuxSoftWareVersion> queryLinuxSoftWareVersion(@PathVariable("system_type") String system_type) {
 		List<Robot_LinuxSoftWareVersion> rVersionInfo=null;
 		try {
-			rVersionInfo = robotMongoDbFindService.queryLinuxSoftWareVersion();
+			rVersionInfo = robotMongoDbFindService.queryLinuxSoftWareVersion(system_type);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -233,13 +238,13 @@ public class RobotFindController {
 	 * 不带翻页
 	 * @return
 	 */
-	@RequestMapping(value = "queryLinuxStartUpRecord", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "queryLinuxStartUpRecord/{system_type}", method = {RequestMethod.GET, RequestMethod.POST})
 	@ApiOperation(value = "查询版本信息,并且不分页", notes = "查询版本信息,并且不分页")
 	@ResponseBody
-	public List<Robot_LinuxStartUpRecord> queryLinuxStartUpRecord() {
+	public List<Robot_LinuxStartUpRecord> queryLinuxStartUpRecord(@PathVariable("system_type") String system_type) {
 		List<Robot_LinuxStartUpRecord> rLinuxStartUpRecord=null;
 		try {
-			rLinuxStartUpRecord = robotMongoDbFindService.queryLinuxStartUpRecord();
+			rLinuxStartUpRecord = robotMongoDbFindService.queryLinuxStartUpRecord(system_type);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -250,13 +255,13 @@ public class RobotFindController {
 	 * 不带翻页
 	 * @return
 	 */
-	@RequestMapping(value = "queryMotionSoftWareVersion", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "queryMotionSoftWareVersion/{system_type}", method = {RequestMethod.GET, RequestMethod.POST})
 	@ApiOperation(value = "查询版本信息,并且不分页", notes = "查询版本信息,并且不分页")
 	@ResponseBody
-	public List<Robot_MotionSoftWareVersion> queryMotionSoftWareVersion() {
+	public List<Robot_MotionSoftWareVersion> queryMotionSoftWareVersion(@PathVariable("system_type") String system_type) {
 		List<Robot_MotionSoftWareVersion> rMotionSoftWareVersion=null;
 		try {
-			rMotionSoftWareVersion = robotMongoDbFindService.queryMotionSoftWareVersion();
+			rMotionSoftWareVersion = robotMongoDbFindService.queryMotionSoftWareVersion(system_type);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -268,13 +273,13 @@ public class RobotFindController {
 	 * 不带翻页
 	 * @return
 	 */
-	@RequestMapping(value = "queryPhotographicQualityInfo", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "queryPhotographicQualityInfo/{system_type}", method = {RequestMethod.GET, RequestMethod.POST})
 	@ApiOperation(value = "查询版本信息,并且不分页", notes = "查询版本信息,并且不分页")
 	@ResponseBody
-	public List<Robot_PhotographicQualityInfo> queryPhotographicQualityInfo() {
+	public List<Robot_PhotographicQualityInfo> queryPhotographicQualityInfo(@PathVariable("system_type") String system_type) {
 		List<Robot_PhotographicQualityInfo> rPhotographicQualityInfo=null;
 		try {
-			rPhotographicQualityInfo = robotMongoDbFindService.queryPhotographicQualityInfo();
+			rPhotographicQualityInfo = robotMongoDbFindService.queryPhotographicQualityInfo(system_type);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -285,13 +290,13 @@ public class RobotFindController {
 	 * 不带翻页
 	 * @return
 	 */
-	@RequestMapping(value = "querySelfLnspectionInfo", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "querySelfLnspectionInfo/{system_type}", method = {RequestMethod.GET, RequestMethod.POST})
 	@ApiOperation(value = "查询版本信息,并且不分页", notes = "查询版本信息,并且不分页")
 	@ResponseBody
-	public List<Robot_SelfLnspectionInfo> querySelfLnspectionInfo() {
+	public List<Robot_SelfLnspectionInfo> querySelfLnspectionInfo(@PathVariable("system_type") String system_type) {
 		List<Robot_SelfLnspectionInfo> rSelfLnspectionInfo=null;
 		try {
-			rSelfLnspectionInfo = robotMongoDbFindService.querySelfLnspectionInfo();
+			rSelfLnspectionInfo = robotMongoDbFindService.querySelfLnspectionInfo(system_type);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}

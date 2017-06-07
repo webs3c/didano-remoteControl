@@ -26,6 +26,8 @@ import io.swagger.annotations.ApiModelProperty;
 public class Robot_CandidatesInfo extends RInfo {
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
+	@ApiModelProperty(value = "版本类型", required = true)
+	private String systemType;
 	@ApiModelProperty(value = "候选人ID", required = true)
 	private String candidates_id;
 	@ApiModelProperty(value = "候选人相似度", required = true)
@@ -54,6 +56,14 @@ public class Robot_CandidatesInfo extends RInfo {
 
 	public void setDeviceNo(String deviceNo) {
 		this.deviceNo = deviceNo;
+	}
+	
+	public String getSystemType() {
+		return systemType;
+	}
+
+	public void setSystemType(String systemType) {
+		this.systemType = systemType;
 	}
 
 	public String getCandidates_id() {

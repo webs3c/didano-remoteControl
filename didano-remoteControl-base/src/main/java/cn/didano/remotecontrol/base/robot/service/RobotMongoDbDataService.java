@@ -25,6 +25,7 @@ import cn.didano.remotecontrol.base.robot.data.repository.AppRunningStatusReposi
 import cn.didano.remotecontrol.base.robot.data.repository.CalibrateInfoRepository;
 import cn.didano.remotecontrol.base.robot.data.repository.CandidatesInfoRepository;
 import cn.didano.remotecontrol.base.robot.data.repository.FinalRecogResultRepository;
+import cn.didano.remotecontrol.base.robot.data.repository.LinuxEnvTemperatureInfoRepository;
 import cn.didano.remotecontrol.base.robot.data.repository.LinuxHardWareInfoRepository;
 import cn.didano.remotecontrol.base.robot.data.repository.LinuxHardWareUsedRepository;
 import cn.didano.remotecontrol.base.robot.data.repository.LinuxSoftWareVersionRepository;
@@ -33,7 +34,6 @@ import cn.didano.remotecontrol.base.robot.data.repository.MotionSoftWareVersionR
 import cn.didano.remotecontrol.base.robot.data.repository.PhotographicQualityInfoRepository;
 import cn.didano.remotecontrol.base.robot.data.repository.SchoolRepository;
 import cn.didano.remotecontrol.base.robot.data.repository.SelfLnspectionInfoRepository;
-import cn.didano.remotecontrol.base.robot.data.repository.TemperatureInfoRepsitory;
 import cn.didano.remotecontrol.base.robot.data.repository.TypeNameRepository;
 
 /**
@@ -47,7 +47,7 @@ public class RobotMongoDbDataService {
 	@Autowired
 	private LinuxSoftWareVersionRepository v_repository;
 	@Autowired
-	private TemperatureInfoRepsitory t_repository;
+	private LinuxEnvTemperatureInfoRepository t_repository;
 	@Autowired
 	private LinuxHardWareUsedRepository o_repository;
 	@Autowired

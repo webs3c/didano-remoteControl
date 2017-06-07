@@ -31,6 +31,8 @@ public class Robot_LinuxSoftWareVersion extends RInfo {
 	
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
+	@ApiModelProperty(value = "版本类型", required = true)
+	private String systemType;
 	@ApiModelProperty(value = "软件版本", required = true)
 	private String linux_version_software;
 	@ApiModelProperty(value = "系统版本", required = true)
@@ -42,6 +44,13 @@ public class Robot_LinuxSoftWareVersion extends RInfo {
 	}
 	public void setDeviceNo(String deviceNo) {
 		this.deviceNo = deviceNo;
+	}
+	
+	public String getSystemType() {
+		return systemType;
+	}
+	public void setSystemType(String systemType) {
+		this.systemType = systemType;
 	}
 	public String getLinux_version_software() {
 		return linux_version_software;

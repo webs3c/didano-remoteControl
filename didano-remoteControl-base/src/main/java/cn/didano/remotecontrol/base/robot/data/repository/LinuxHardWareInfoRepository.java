@@ -1,5 +1,7 @@
 package cn.didano.remotecontrol.base.robot.data.repository;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import cn.didano.remotecontrol.base.robot.data.Robot_LinuxHardWareInfo;
@@ -9,4 +11,5 @@ import cn.didano.remotecontrol.base.robot.data.Robot_LinuxHardWareInfo;
  */
 public interface LinuxHardWareInfoRepository extends MongoRepository<Robot_LinuxHardWareInfo, String> {
 	public Robot_LinuxHardWareInfo findByDeviceNo(String device_no);
+	public List<Robot_LinuxHardWareInfo> findBySystemType(String system_type);
 }

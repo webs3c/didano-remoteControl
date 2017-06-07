@@ -25,10 +25,12 @@ import io.swagger.annotations.ApiModelProperty;
  *主要是上行和下行的信息容器
  */
 @ApiModel
-@TypeAlias("Linux运行环境")
+@TypeAlias("Linux的硬件使用信息")
 public class Robot_LinuxHardWareUsed extends RInfo {
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
+	@ApiModelProperty(value = "版本类型", required = true)
+	private String systemType;
 	@ApiModelProperty(value = "linux版CPU最高使用率", required = true)
 	private String linux_cpu_used;
 	@ApiModelProperty(value = "linux板CPU使用率最高对应的app", required = true)
@@ -59,6 +61,13 @@ public class Robot_LinuxHardWareUsed extends RInfo {
 	}
 	public void setDeviceNo(String deviceNo) {
 		this.deviceNo = deviceNo;
+	}
+	
+	public String getSystemType() {
+		return systemType;
+	}
+	public void setSystemType(String systemType) {
+		this.systemType = systemType;
 	}
 	public String getLinux_cpu_used() {
 		return linux_cpu_used;

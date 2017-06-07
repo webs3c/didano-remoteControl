@@ -31,6 +31,8 @@ public class Robot_MotionSoftWareVersion extends RInfo {
 	
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
+	@ApiModelProperty(value = "版本类型", required = true)
+	private String systemType;
 	@ApiModelProperty(value = "运动控制软件版本号", required = true)
 	private String motion_version_software;
 	public String getDeviceNo() {
@@ -38,6 +40,13 @@ public class Robot_MotionSoftWareVersion extends RInfo {
 	}
 	public void setDeviceNo(String deviceNo) {
 		this.deviceNo = deviceNo;
+	}
+	
+	public String getSystemType() {
+		return systemType;
+	}
+	public void setSystemType(String systemType) {
+		this.systemType = systemType;
 	}
 	public String getMotion_version_software() {
 		return motion_version_software;

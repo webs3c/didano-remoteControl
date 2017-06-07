@@ -55,6 +55,8 @@ public class RobotUpController {
 		System.err.println("上报linux版本信息");
 		Out<String> out = new Out<String>();
 		try {
+			
+			System.err.println(linuxSoftWareVersion.getCreateDate());
 			Object o = robotMongoDbDataService.saveRVersionInfo(linuxSoftWareVersion);
 			out.setBackTypeWithLog(o.toString(), BackType.SUCCESS);
 		} catch (Exception e) {

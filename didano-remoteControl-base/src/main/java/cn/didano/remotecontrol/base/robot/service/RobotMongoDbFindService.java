@@ -80,51 +80,54 @@ public class RobotMongoDbFindService {
 	private TypeNameRepository tn_repository;
 	
 	
-	public List<Robot_LinuxSoftWareVersion> queryLinuxSoftWareVersion() {
-		return this.v_repository.findAll();
+	public List<Robot_LinuxSoftWareVersion> queryLinuxSoftWareVersion(String system_type) {
+		return this.v_repository.findBySystemType(system_type);
 	}
-	public List<Robot_AndroidHardWareUsed> queryAndroidHardWareUsed() {
-		return this.ahwr_repository.findAll();
+	public List<Robot_AndroidHardWareUsed> queryAndroidHardWareUsed(String system_type) {
+		System.err.println(system_type+"--------------");
+		return this.ahwr_repository.findBySystemType(system_type);
 	}
-	public List<Robot_AndroidSoftWareVersion> queryAndroidSoftWareVersion() {
-		return this.aswr_repository.findAll();
+	public List<Robot_AndroidSoftWareVersion> queryAndroidSoftWareVersion(String system_type) {
+		return this.aswr_repository.findBySystemType(system_type);
 	}
-	public List<Robot_AppRunningStatus> queryAppRunningStatus() {
-		return this.arsr_repository.findAll();
+	public List<Robot_AppRunningStatus> queryAppRunningStatus(String system_type) {
+		return this.arsr_repository.findBySystemType(system_type);
 	}
-	public List<Robot_CalibrateInfo> queryCalibrateInfo() {
-		return this.cir_repository.findAll();
+	public List<Robot_CalibrateInfo> queryCalibrateInfo(String system_type) {
+		return this.cir_repository.findBySystemType(system_type);
 	}
-	public List<Robot_CandidatesInfo> queryCandidatesInfo() {
-		return this.cdir_repository.findAll();
-	}
-	
-	public List<Robot_FinalRecogResult> queryFinalRecogResult() {
-		return this.frrr_repository.findAll();
-	}
-	public List<Robot_LinuxEnvTemperatureInfo> queryLinuxEnvTemperatureInfo() {
-		return this.letr_repository.findAll();
-	}
-	public List<Robot_LinuxHardWareInfo> queryLinuxHardWareInfo() {
-		return this.lhwr_repository.findAll();
-	}
-	public List<Robot_LinuxHardWareUsed> queryLinuxHardWareUsed() {
-		return this.lhur_repository.findAll();
-	}
-	public List<Robot_LinuxStartUpRecord> queryLinuxStartUpRecord() {
-		return this.lsupr_repository.findAll();
+	public List<Robot_CandidatesInfo> queryCandidatesInfo(String system_type) {
+		return this.cdir_repository.findBySystemType(system_type);
 	}
 	
-	public List<Robot_MotionSoftWareVersion> queryMotionSoftWareVersion() {
-		return this.mtwr_repository.findAll();
+	public List<Robot_FinalRecogResult> queryFinalRecogResult(String system_type) {
+		return this.frrr_repository.findBySystemType(system_type);
+	}
+	public List<Robot_LinuxEnvTemperatureInfo> queryLinuxEnvTemperatureInfo(String system_type) {
+		return this.letr_repository.findBySystemType(system_type);
+	}
+	public List<Robot_LinuxHardWareInfo> queryLinuxHardWareInfo(String system_type) {
+		return this.lhwr_repository.findBySystemType(system_type);
+	}
+	public List<Robot_LinuxHardWareUsed> queryLinuxHardWareUsed(String system_type) {
+		return this.lhur_repository.findBySystemType(system_type);
+	}
+	public List<Robot_LinuxStartUpRecord> queryLinuxStartUpRecord(String system_type) {
+		return this.lsupr_repository.findBySystemType(system_type);
 	}
 	
-	public List<Robot_PhotographicQualityInfo> queryPhotographicQualityInfo() {
-		return this.pqr_repository.findAll();
+	public List<Robot_MotionSoftWareVersion> queryMotionSoftWareVersion(String system_type) {
+		return this.mtwr_repository.findBySystemType(system_type);
 	}
-	public List<Robot_SelfLnspectionInfo> querySelfLnspectionInfo() {
-		return this.str_repository.findAll();
+	
+	public List<Robot_PhotographicQualityInfo> queryPhotographicQualityInfo(String system_type) {
+		return this.pqr_repository.findBySystemType(system_type);
 	}
+	public List<Robot_SelfLnspectionInfo> querySelfLnspectionInfo(String system_type) {
+		return this.str_repository.findBySystemType(system_type);
+	}
+	
+	
 	
 	
 	

@@ -29,6 +29,8 @@ import io.swagger.annotations.ApiModelProperty;
 public class Robot_FinalRecogResult extends RInfo {
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
+	@ApiModelProperty(value = "版本类型", required = true)
+	private String systemType;
 	@ApiModelProperty(value = "本次识别场景", required = true)
 	private String recognition_result_scene;
 	@ApiModelProperty(value = "最终候选人ID", required = true)
@@ -45,6 +47,14 @@ public class Robot_FinalRecogResult extends RInfo {
 
 	public void setDeviceNo(String deviceNo) {
 		this.deviceNo = deviceNo;
+	}
+	
+	public String getSystemType() {
+		return systemType;
+	}
+
+	public void setSystemType(String systemType) {
+		this.systemType = systemType;
 	}
 
 	public String getRecognition_result_scene() {

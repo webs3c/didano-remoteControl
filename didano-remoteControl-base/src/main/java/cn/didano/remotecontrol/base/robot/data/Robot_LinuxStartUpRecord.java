@@ -28,6 +28,8 @@ import io.swagger.annotations.ApiModelProperty;
 public class Robot_LinuxStartUpRecord extends RInfo {
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
+	@ApiModelProperty(value = "版本类型", required = true)
+	private String systemType;
 	@ApiModelProperty(value = "上次启动的时间", required = true)
 	private String poweroff_time;
 	@ApiModelProperty(value = "本次启动的时间", required = true)
@@ -39,6 +41,13 @@ public class Robot_LinuxStartUpRecord extends RInfo {
 	}
 	public void setDeviceNo(String deviceNo) {
 		this.deviceNo = deviceNo;
+	}
+	
+	public String getSystemType() {
+		return systemType;
+	}
+	public void setSystemType(String systemType) {
+		this.systemType = systemType;
 	}
 	public String getPoweroff_time() {
 		return poweroff_time;

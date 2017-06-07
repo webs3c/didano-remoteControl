@@ -1,5 +1,7 @@
 package cn.didano.remotecontrol.base.robot.data.repository;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import cn.didano.remotecontrol.base.robot.data.Robot_MotionSoftWareVersion;
@@ -9,4 +11,5 @@ import cn.didano.remotecontrol.base.robot.data.Robot_MotionSoftWareVersion;
  */
 public interface MotionSoftWareVersionRepository extends MongoRepository<Robot_MotionSoftWareVersion, String> {
 	public Robot_MotionSoftWareVersion findByDeviceNo(String device_no);
+	public List<Robot_MotionSoftWareVersion> findBySystemType(String system_type);
 }

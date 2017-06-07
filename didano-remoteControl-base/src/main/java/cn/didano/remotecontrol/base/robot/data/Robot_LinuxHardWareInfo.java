@@ -26,11 +26,13 @@ import io.swagger.annotations.ApiModelProperty;
  * @Todo 没有安卓操作系统版本号
  */
 @ApiModel
-@TypeAlias("linuc的CPU的ECID号")
+@TypeAlias("linux的CPU的ECID号")
 public class Robot_LinuxHardWareInfo extends RInfo {
 	
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
+	@ApiModelProperty(value = "版本类型", required = true)
+	private String systemType;
 	@ApiModelProperty(value = "CPU的ECID号1", required = true)
 	private String linux_hard_ecid_0;
 	@ApiModelProperty(value = "CPU的ECID号2", required = true)
@@ -44,6 +46,13 @@ public class Robot_LinuxHardWareInfo extends RInfo {
 	}
 	public void setDeviceNo(String deviceNo) {
 		this.deviceNo = deviceNo;
+	}
+	
+	public String getSystemType() {
+		return systemType;
+	}
+	public void setSystemType(String systemType) {
+		this.systemType = systemType;
 	}
 	public String getLinux_hard_ecid_0() {
 		return linux_hard_ecid_0;

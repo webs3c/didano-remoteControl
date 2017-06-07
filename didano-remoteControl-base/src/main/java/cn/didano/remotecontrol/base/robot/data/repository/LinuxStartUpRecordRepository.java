@@ -1,5 +1,7 @@
 package cn.didano.remotecontrol.base.robot.data.repository;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import cn.didano.remotecontrol.base.robot.data.Robot_LinuxStartUpRecord;
@@ -9,4 +11,5 @@ import cn.didano.remotecontrol.base.robot.data.Robot_LinuxStartUpRecord;
  */
 public interface LinuxStartUpRecordRepository extends MongoRepository<Robot_LinuxStartUpRecord, String> {
 	public Robot_LinuxStartUpRecord findByDeviceNo(String device_no);
+	public List<Robot_LinuxStartUpRecord> findBySystemType(String system_type);
 }

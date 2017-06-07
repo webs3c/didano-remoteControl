@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 public class UpInfo {
 	private String methodName;
 	private String deviceNo;
+	private String system_type;
 	private JsonNode info;
 	public String getMethodName() {
 		return methodName;
@@ -30,5 +31,12 @@ public class UpInfo {
 	public void setDeviceNo(String deviceNo) {
 		this.deviceNo = deviceNo;
 	}
+	public String getSystem_type() {
+		return system_type;
+	}
+	public void setSystem_type(String system_type) {
+		this.system_type = system_type;
+	}
+	
 	
 }
