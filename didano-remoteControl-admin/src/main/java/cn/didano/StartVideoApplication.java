@@ -20,10 +20,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 /**
  * 启动程序
@@ -42,7 +40,7 @@ public class StartVideoApplication {
 	static Logger logger = Logger.getLogger(StartVideoApplication.class);
 	
 	public static void main(String[] args) throws Exception {
-		ApplicationContext ctx =  SpringApplication.run(StartVideoApplication.class, args);
+		SpringApplication.run(StartVideoApplication.class, args);
 		//ApplicationContext ctx = SpringApplication.run(Application.class, args);
 //		String[] beanNames = ctx.getBeanDefinitionNames();
 //		Arrays.sort(beanNames);
