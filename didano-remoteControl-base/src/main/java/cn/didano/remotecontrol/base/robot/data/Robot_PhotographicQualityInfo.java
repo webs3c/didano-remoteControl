@@ -31,9 +31,9 @@ public class Robot_PhotographicQualityInfo extends RInfo {
 	private String deviceNo;
 	@ApiModelProperty(value = "版本类型", required = true)
 	private String systemType;
-	@ApiModelProperty(value = "平均的信心指数", required = true)
-	private String confidence_statistics_max;
 	@ApiModelProperty(value = "最大信心指数", required = true)
+	private String confidence_statistics_max;
+	@ApiModelProperty(value = "平均的信心指数", required = true)
 	private String confidence_statistics_average;
 	@ApiModelProperty(value = "最小信心指数", required = true)
 	private String confidence_statistics_min;

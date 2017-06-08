@@ -37,6 +37,10 @@ public class Robot_SelfLnspectionInfo extends RInfo {
 	private String selfcheck_color_camera;
 	@ApiModelProperty(value = "黑白摄像头检查结果", required = true)
 	private String selfcheck_black_camera;
+	@ApiModelProperty(value = "二维码摄像头", required = true)
+	private String selfcheck_qrcode_camera;
+	@ApiModelProperty(value = "人脸摄像头", required = true)
+	private String selfcheck_face_camera;
 	@ApiModelProperty(value = "射频卡模块检查结果", required = true)
 	private String selfcheck_rfid;
 	@ApiModelProperty(value = "运动控制模块检查结果", required = true)
@@ -52,7 +56,18 @@ public class Robot_SelfLnspectionInfo extends RInfo {
 	public void setDeviceNo(String deviceNo) {
 		this.deviceNo = deviceNo;
 	}
-	
+	public String getSelfcheck_qrcode_camera() {
+		return selfcheck_qrcode_camera;
+	}
+	public void setSelfcheck_qrcode_camera(String selfcheck_qrcode_camera) {
+		this.selfcheck_qrcode_camera = selfcheck_qrcode_camera;
+	}
+	public String getSelfcheck_face_camera() {
+		return selfcheck_face_camera;
+	}
+	public void setSelfcheck_face_camera(String selfcheck_face_camera) {
+		this.selfcheck_face_camera = selfcheck_face_camera;
+	}
 	public String getSystemType() {
 		return systemType;
 	}

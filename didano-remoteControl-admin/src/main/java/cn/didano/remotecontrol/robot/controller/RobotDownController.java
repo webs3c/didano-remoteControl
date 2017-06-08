@@ -32,24 +32,20 @@ public class RobotDownController {
 	
 	
 	/**
-	 * 有一个最大的问题  在服务器下控的过程中  当下控命令结束后，与服务器连接的设备就会与服务器断开连接
-	 * 在功能中需要设备与服务器一直处于连接状态，不然达不到诊断平台的要求
-	 * 
-	 * 
-	 * 执行,上传版本信息
-	 * @param service_no
+	 *上报linux版本信息
+	 * @param service_no-----------------修改
 	 */
-	@PostMapping(value = "reportVersionInfo/{service_no}")
-	@ApiOperation(value = "执行,上传版本信息", notes = "执行,上传版本信息")
+	@PostMapping(value = "reportLinuxSoftWareVersion/{service_no}")
+	@ApiOperation(value = "执行,上报linux版本信息", notes = "执行,上报linux版本信息")
 	@ResponseBody
 	public Out<String> reportVersion(@PathVariable("service_no") String service_no) {
 		Out<String> back = new Out<String>();
 		if (RobotWebsocketServer.getRobotInfoMap() != null) {
 			DownInfo downInfo = new DownInfo();
-			downInfo.setMethodName("reportVersion");
-			back.setBackTypeWithLog(BackType.SUCCESS_DIAGNOSE_EXCUTE);
+			downInfo.setMethodName("reportLinuxSoftWareVersion");
 			try{
 				RobotWebsocketServer.sendMessage(service_no, downInfo);
+				back.setBackTypeWithLog(BackType.SUCCESS_DIAGNOSE_EXCUTE);
 			}catch(ServiceException ex){
 				back.setBackTypeWithLog(BackType.FAIL_DIAGNOSE_EXCUTE,ex.getExceptionEnums().getMessage());
 			}
@@ -67,18 +63,17 @@ public class RobotDownController {
 	 * 版本：1.0.0
 	 * @throws
 	 */
-	@PostMapping(value = "reporThardwareInfo/{service_no}")
-	@ApiOperation(value = " 执行,上传硬件信息", notes = " 执行,上传硬件信息")
+	@PostMapping(value = "reportAndroidSoftWareVersion/{service_no}")
+	@ApiOperation(value = " 执行,上报Android版本信息", notes = " 执行,上报Android版本信息")
 	@ResponseBody
-	public Out<String> reporThardwareInfo(@PathVariable("service_no") String service_no) {
+	public Out<String> reportAndroidSoftWareVersion(@PathVariable("service_no") String service_no) {
 		Out<String> back = new Out<String>();
 		if (RobotWebsocketServer.getRobotInfoMap() != null) {
-			System.err.println(RobotWebsocketServer.getRobotInfoMap().toString());
 			DownInfo downInfo = new DownInfo();
-			downInfo.setMethodName("reporThardwareInfo");
-			back.setBackTypeWithLog(BackType.SUCCESS_DIAGNOSE_EXCUTE);
+			downInfo.setMethodName("reportAndroidSoftWareVersion");
 			try{
 				RobotWebsocketServer.sendMessage(service_no, downInfo);
+				back.setBackTypeWithLog(BackType.SUCCESS_DIAGNOSE_EXCUTE);
 			}catch(ServiceException ex){
 				back.setBackTypeWithLog(BackType.FAIL_DIAGNOSE_EXCUTE,ex.getExceptionEnums().getMessage());
 			}
