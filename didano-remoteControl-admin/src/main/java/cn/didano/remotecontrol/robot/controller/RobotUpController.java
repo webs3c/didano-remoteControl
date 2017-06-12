@@ -486,7 +486,6 @@ public class RobotUpController {
 		System.err.println("查询设备号所对应的学校");
 		Out<String> out = new Out<String>();
 		try {
-			
 			// 直接保存信息
 			System.err.println("________________________________________________________");
 			Robot_School r_school=new Robot_School();
