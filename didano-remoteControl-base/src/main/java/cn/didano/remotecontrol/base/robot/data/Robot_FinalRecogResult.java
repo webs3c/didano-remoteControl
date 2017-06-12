@@ -40,7 +40,14 @@ public class Robot_FinalRecogResult extends RInfo {
 	
 	@ApiModelProperty(value = "本次识别耗时", required = true)
 	private String recognition_result_time_consumed_ms;
-
+	@ApiModelProperty(value = "学校名称", required = true)
+	private String schoolName;
+	public String getSchoolName() {
+		return schoolName;
+	}
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
+	}
 	public String getDeviceNo() {
 		return deviceNo;
 	}

@@ -31,6 +31,7 @@ public class Robot_AndroidHardWareUsed extends RInfo {
 	private String deviceNo;
 	@ApiModelProperty(value = "版本类型", required = true)
 	private String systemType;
+	
 	@ApiModelProperty(value = "Android版CPU最高使用率", required = true)
 	private String android_cpu_used;
 	@ApiModelProperty(value = "Android板CPU使用率最高对应的app", required = true)
@@ -54,7 +55,14 @@ public class Robot_AndroidHardWareUsed extends RInfo {
 	private String linux_wifi_signal;
 	@ApiModelProperty(value = "wifi信号的时间", required = true)
 	private String linux_wifi_signal_time;
-	
+	@ApiModelProperty(value = "学校名称", required = true)
+	private String schoolName;
+	public String getSchoolName() {
+		return schoolName;
+	}
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
+	}
 	
 	public String getDeviceNo() {
 		return deviceNo;
@@ -62,6 +70,7 @@ public class Robot_AndroidHardWareUsed extends RInfo {
 	public void setDeviceNo(String deviceNo) {
 		this.deviceNo = deviceNo;
 	}
+	
 	public String getSystemType() {
 		return systemType;
 	}

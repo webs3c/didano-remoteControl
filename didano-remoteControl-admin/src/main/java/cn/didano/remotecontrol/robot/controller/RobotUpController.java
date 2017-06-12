@@ -2,12 +2,14 @@ package cn.didano.remotecontrol.robot.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.didano.base.model.Robot_School;
 import cn.didano.remotecontrol.base.exception.BackType;
 import cn.didano.remotecontrol.base.json.Out;
 import cn.didano.remotecontrol.base.robot.data.Robot_AndroidHardWareUsed;
@@ -25,8 +27,8 @@ import cn.didano.remotecontrol.base.robot.data.Robot_MotionSoftWareVersion;
 import cn.didano.remotecontrol.base.robot.data.Robot_PhotographicQualityInfo;
 import cn.didano.remotecontrol.base.robot.data.Robot_SelfLnspectionInfo;
 import cn.didano.remotecontrol.base.robot.data.Robot_UploadType;
-import cn.didano.remotecontrol.base.robot.data.Robot_school;
 import cn.didano.remotecontrol.base.robot.service.RobotMongoDbDataService;
+import cn.didano.remotecontrol.base.robot.service.Robot_SchoolService;
 import cn.didano.remotecontrol.robot.core.UpInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -45,6 +47,10 @@ public class RobotUpController {
 	static Logger logger = Logger.getLogger(RobotUpController.class);
 	@Autowired
 	private RobotMongoDbDataService robotMongoDbDataService;
+	@Autowired
+	private Robot_SchoolService fsnr_SchoolService;
+	
+	
 
 	@PostMapping(value = "reportLinuxSoftWareVersion")
 	@ApiOperation(value = "上报linux版本信息", notes = "上报linux版本信息")
@@ -423,7 +429,7 @@ public class RobotUpController {
 	@ApiOperation(value = "保存学校信息", notes = "保存学校信息")
 	@ResponseBody
 	public Out<String> saveSchool(
-			@ApiParam(value = "远程机器人信息管理", required = true) @RequestBody Robot_school manageInfo) {
+			@ApiParam(value = "远程机器人信息管理", required = true) @RequestBody Robot_School manageInfo) {
 		logger.info("访问  RobotController :reportreportMeetSpeedInfo reportMeetSpeedInfo=" + manageInfo);
 		System.err.println("上报机器人的信息管理");
 		Out<String> out = new Out<String>();
@@ -458,6 +464,35 @@ public class RobotUpController {
 			// 直接保存信息
 			Object o = robotMongoDbDataService.saveRobot_UploadType(robot_UploadType);
 			out.setBackTypeWithLog(o.toString(), BackType.SUCCESS);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			out.setBackTypeWithLog(BackType.FAIL_DIAGNOSE_MONGO_SAVE, e.getMessage());
+		}
+		return out;
+	}
+	/**
+	 * 创建人：SevenYang 
+	 * @创建时间：2017年3月17日 下午3:59:48 
+	 * @Title:
+	 * reportMeetSpeedInfo 
+	 * @Description: （存上传类型信息） 
+	 * @return Out<String> 修改人：
+	 * 版本：1.0.0 @throws
+	 */
+	@PostMapping(value = "find/{deviceNo}")
+	@ApiOperation(value = "查询设备号所对应的学校", notes = "查询设备号所对应的学校")
+	@ResponseBody
+	public Out<String> find(@PathVariable("deviceNo") String deviceNo) {
+		System.err.println("查询设备号所对应的学校");
+		Out<String> out = new Out<String>();
+		try {
+			// 直接保存信息
+			System.err.println("________________________________________________________");
+			Robot_School r_school=new Robot_School();
+			r_school.setDeviceNo(deviceNo);
+			Robot_School findSchollName = fsnr_SchoolService.findSchollName(r_school);
+			System.err.println(findSchollName.getSchoolName()+"------------------");
+			
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			out.setBackTypeWithLog(BackType.FAIL_DIAGNOSE_MONGO_SAVE, e.getMessage());

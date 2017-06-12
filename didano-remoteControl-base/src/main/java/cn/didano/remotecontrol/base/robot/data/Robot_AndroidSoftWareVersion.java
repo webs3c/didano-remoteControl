@@ -39,6 +39,14 @@ public class Robot_AndroidSoftWareVersion extends RInfo {
 	private String andriod_version_system;
 	@ApiModelProperty(value = "Andriod内核版本号", required = true)
 	private String andriod_version_kernel;
+	@ApiModelProperty(value = "学校名称", required = true)
+	private String schoolName;
+	public String getSchoolName() {
+		return schoolName;
+	}
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
+	}
 	public String getDeviceNo() {
 		return deviceNo;
 	}

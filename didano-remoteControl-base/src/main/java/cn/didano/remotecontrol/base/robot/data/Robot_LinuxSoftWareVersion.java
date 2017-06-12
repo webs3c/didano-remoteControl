@@ -39,6 +39,14 @@ public class Robot_LinuxSoftWareVersion extends RInfo {
 	private String linux_version_system;
 	@ApiModelProperty(value = "内核版本", required = true)
 	private String linux_version_kernel;
+	@ApiModelProperty(value = "学校名称", required = true)
+	private String schoolName;
+	public String getSchoolName() {
+		return schoolName;
+	}
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
+	}
 	public String getDeviceNo() {
 		return deviceNo;
 	}

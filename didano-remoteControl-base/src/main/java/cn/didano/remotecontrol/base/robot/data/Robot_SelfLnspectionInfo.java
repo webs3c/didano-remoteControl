@@ -28,19 +28,22 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel
 @TypeAlias("自检信息")
 public class Robot_SelfLnspectionInfo extends RInfo {
-	
+	//公用
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
 	@ApiModelProperty(value = "版本类型", required = true)
 	private String systemType;
+	//小诺使用
 	@ApiModelProperty(value = "彩色摄像头检查结果", required = true)
 	private String selfcheck_color_camera;
 	@ApiModelProperty(value = "黑白摄像头检查结果", required = true)
 	private String selfcheck_black_camera;
+	//刷一刷使用
 	@ApiModelProperty(value = "二维码摄像头", required = true)
 	private String selfcheck_qrcode_camera;
 	@ApiModelProperty(value = "人脸摄像头", required = true)
 	private String selfcheck_face_camera;
+	//公用
 	@ApiModelProperty(value = "射频卡模块检查结果", required = true)
 	private String selfcheck_rfid;
 	@ApiModelProperty(value = "运动控制模块检查结果", required = true)
@@ -49,7 +52,14 @@ public class Robot_SelfLnspectionInfo extends RInfo {
 	private String selfcheck_lepton;
 	@ApiModelProperty(value = "语音模块检查结果", required = true)
 	private String selfcheck_voice;
-	
+	@ApiModelProperty(value = "学校名称", required = true)
+	private String schoolName;
+	public String getSchoolName() {
+		return schoolName;
+	}
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
+	}
 	public String getDeviceNo() {
 		return deviceNo;
 	}

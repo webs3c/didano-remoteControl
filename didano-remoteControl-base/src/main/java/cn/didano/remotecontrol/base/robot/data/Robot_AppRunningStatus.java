@@ -38,7 +38,14 @@ public class Robot_AppRunningStatus extends RInfo {
 	
 	@ApiModelProperty(value = "运动控制程序在线状态", required = true)
 	private String motion_app_status;
-
+	@ApiModelProperty(value = "学校名称", required = true)
+	private String schoolName;
+	public String getSchoolName() {
+		return schoolName;
+	}
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
+	}
 	public String getDeviceNo() {
 		return deviceNo;
 	}

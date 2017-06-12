@@ -39,6 +39,14 @@ public class Robot_CalibrateInfo extends RInfo {
 	private String calibrate_standard_weight;
 	@ApiModelProperty(value = "标准体重下秤原始值", required = true)
 	private String calibrate_raw_weight;
+	@ApiModelProperty(value = "学校名称", required = true)
+	private String schoolName;
+	public String getSchoolName() {
+		return schoolName;
+	}
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
+	}
 	public String getDeviceNo() {
 		return deviceNo;
 	}

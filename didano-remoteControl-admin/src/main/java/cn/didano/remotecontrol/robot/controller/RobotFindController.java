@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.didano.base.model.Robot_School;
 import cn.didano.remotecontrol.base.robot.data.Robot_AndroidHardWareUsed;
 import cn.didano.remotecontrol.base.robot.data.Robot_AndroidSoftWareVersion;
 import cn.didano.remotecontrol.base.robot.data.Robot_AppRunningStatus;
@@ -25,7 +26,6 @@ import cn.didano.remotecontrol.base.robot.data.Robot_MotionSoftWareVersion;
 import cn.didano.remotecontrol.base.robot.data.Robot_PhotographicQualityInfo;
 import cn.didano.remotecontrol.base.robot.data.Robot_SelfLnspectionInfo;
 import cn.didano.remotecontrol.base.robot.data.Robot_UploadType;
-import cn.didano.remotecontrol.base.robot.data.Robot_school;
 import cn.didano.remotecontrol.base.robot.service.RobotMongoDbFindService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -207,9 +207,6 @@ public class RobotFindController {
 		try {
 			System.err.println(system_type+"-----------------------------------..................");
 			rLinuxHardWareUsed = robotMongoDbFindService.queryLinuxHardWareUsed(system_type);
-			for (Robot_LinuxHardWareUsed robot_LinuxHardWareUsed : rLinuxHardWareUsed) {
-				System.err.println(robot_LinuxHardWareUsed.getDeviceNo());
-			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -324,8 +321,8 @@ public class RobotFindController {
 	@RequestMapping(value = "selectSchool", method = {RequestMethod.GET, RequestMethod.POST})
 	@ApiOperation(value = "查询所有的学校", notes = "查询所有的学校")
 	@ResponseBody
-	public List<Robot_school> selectSchool() {
-		List<Robot_school> operationInfo=null;
+	public List<Robot_School> selectSchool() {
+		List<Robot_School> operationInfo=null;
 		try {
 			operationInfo = robotMongoDbFindService.selectSchool();
 			//去掉重复的学校名称并返回
@@ -349,8 +346,8 @@ public class RobotFindController {
 	@RequestMapping(value = "selectSchoolName／{schoolName}", method = {RequestMethod.POST})
 	@ApiOperation(value = "查询所属学校的小诺", notes = "查询所属学校的小诺")
 	@ResponseBody
-	public List<Robot_school> selectSchoolName(@PathVariable("schoolName") String schoolName) {
-		List<Robot_school> operationInfo=null;
+	public List<Robot_School> selectSchoolName(@PathVariable("schoolName") String schoolName) {
+		List<Robot_School> operationInfo=null;
 		try {
 			operationInfo = robotMongoDbFindService.selectSchoolName(schoolName);
 		} catch (Exception e) {

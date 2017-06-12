@@ -41,6 +41,14 @@ public class Robot_LinuxEnvTemperatureInfo extends RInfo {
 	private String linux_cpu_temperature;
 	@ApiModelProperty(value = "得到Linux板CPU当前温度的时间", required = true)
 	private String linux_temperature_time;
+	@ApiModelProperty(value = "学校名称", required = true)
+	private String schoolName;
+	public String getSchoolName() {
+		return schoolName;
+	}
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
+	}
 	public String getDeviceNo() {
 		return deviceNo;
 	}

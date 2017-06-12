@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.didano.remotecontrol.base.robot.data;
+package cn.didano.base.model;
 
 import org.springframework.data.annotation.TypeAlias;
 
+import cn.didano.remotecontrol.base.robot.data.RInfo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -25,7 +26,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @ApiModel
 @TypeAlias("保存小学校")
-public class Robot_school extends RInfo {
+public class Robot_School extends RInfo {
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
 	

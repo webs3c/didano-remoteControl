@@ -28,6 +28,8 @@ public class Robot_CandidatesInfo extends RInfo {
 	private String deviceNo;
 	@ApiModelProperty(value = "版本类型", required = true)
 	private String systemType;
+	@ApiModelProperty(value = "晨检序号", required = true)
+	private String candidates_sid;
 	@ApiModelProperty(value = "候选人ID", required = true)
 	private String candidates_id;
 	@ApiModelProperty(value = "候选人相似度", required = true)
@@ -49,7 +51,14 @@ public class Robot_CandidatesInfo extends RInfo {
 	
 	@ApiModelProperty(value = "候选人最终得分", required = true)
 	private String candidates_final_score;
-
+	@ApiModelProperty(value = "学校名称", required = true)
+	private String schoolName;
+	public String getSchoolName() {
+		return schoolName;
+	}
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
+	}
 	public String getDeviceNo() {
 		return deviceNo;
 	}
@@ -136,6 +145,14 @@ public class Robot_CandidatesInfo extends RInfo {
 
 	public void setCandidates_final_score(String candidates_final_score) {
 		this.candidates_final_score = candidates_final_score;
+	}
+	
+	public String getCandidates_sid() {
+		return candidates_sid;
+	}
+
+	public void setCandidates_sid(String candidates_sid) {
+		this.candidates_sid = candidates_sid;
 	}
 
 	@Override

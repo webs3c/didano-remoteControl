@@ -3,6 +3,7 @@ package cn.didano.remotecontrol.base.robot.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.didano.base.model.Robot_School;
 import cn.didano.remotecontrol.base.robot.data.Robot_AndroidHardWareUsed;
 import cn.didano.remotecontrol.base.robot.data.Robot_AndroidSoftWareVersion;
 import cn.didano.remotecontrol.base.robot.data.Robot_AppRunningStatus;
@@ -18,7 +19,6 @@ import cn.didano.remotecontrol.base.robot.data.Robot_MotionSoftWareVersion;
 import cn.didano.remotecontrol.base.robot.data.Robot_PhotographicQualityInfo;
 import cn.didano.remotecontrol.base.robot.data.Robot_SelfLnspectionInfo;
 import cn.didano.remotecontrol.base.robot.data.Robot_UploadType;
-import cn.didano.remotecontrol.base.robot.data.Robot_school;
 import cn.didano.remotecontrol.base.robot.data.repository.AndroidHardWareUsedRepository;
 import cn.didano.remotecontrol.base.robot.data.repository.AndroidSoftWareVersionRepository;
 import cn.didano.remotecontrol.base.robot.data.repository.AppRunningStatusRepository;
@@ -285,7 +285,7 @@ public class RobotMongoDbDataService {
 	 * 版本：1.0.0
 	 * @throws
 	 */
-	public Robot_school saveRobot_school(Robot_school robot_school) {
+	public Robot_School saveRobot_school(Robot_School robot_school) {
 		return this.sr_sepository.save(robot_school);
 	}
 	public Robot_UploadType saveRobot_UploadType(Robot_UploadType robot_UploadType) {

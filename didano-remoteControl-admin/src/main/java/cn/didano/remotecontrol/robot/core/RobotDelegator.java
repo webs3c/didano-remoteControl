@@ -3,12 +3,15 @@ package cn.didano.remotecontrol.robot.core;
 import java.lang.reflect.Method;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 
+import cn.didano.base.model.Robot_School;
 import cn.didano.remotecontrol.base.exception.BackType;
 import cn.didano.remotecontrol.base.json.Out;
+import cn.didano.remotecontrol.base.robot.service.Robot_SchoolService;
 import cn.didano.remotecontrol.robot.controller.RobotUpController;
 
 /**
@@ -17,6 +20,10 @@ import cn.didano.remotecontrol.robot.controller.RobotUpController;
  * @author stephen.wang 2017年3月5日
  */
 public class RobotDelegator {
+	@Autowired
+	private Robot_SchoolService fsnr_SchoolService;
+	
+	
 	static Logger logger = Logger.getLogger(RobotDelegator.class);
 
 	public RobotDelegator() {
@@ -32,12 +39,30 @@ public class RobotDelegator {
 		Object back = null;
 		Out<String> out = new Out<String>();
 		try {
+			//yang 添加msql根据设备编号查询学校信息
+			//得到设备编号
+			Robot_School r_school=new Robot_School();
+			Robot_School findSchollName=new Robot_School();
+			if(upInfo.getDeviceNo()!=""){
+				System.err.println(upInfo.getDeviceNo()+"____________________________");
+				r_school.setDeviceNo(upInfo.getDeviceNo());
+				System.err.println(r_school.getDeviceNo()+"<*******************************>");
+				findSchollName = fsnr_SchoolService.findSchollName(r_school);
+				if(findSchollName.getSchoolName()==null){
+					findSchollName.setSchoolName("未知学校");
+				}
+			}else{
+				findSchollName.setSchoolName("未知学校");
+			}
+			
+			System.err.println(findSchollName.getSchoolName()+"------------------");
+			//------------------------------------------------------------
 			ObjectMapper mapper = new ObjectMapper();
 			Class<?> para = getParameterType(robot, upInfo.getMethodName());
 			if (para != null) {
 				String jsonString = mapper.writeValueAsString(upInfo.getInfo());
 				jsonString=jsonString.substring(0,jsonString.length()-1);
-				jsonString+=",\"deviceNo\":\""+upInfo.getDeviceNo()+"\",\"systemType\":\""+upInfo.getSystem_type()+"\"}";
+				jsonString+=",\"deviceNo\":\""+upInfo.getDeviceNo()+"\",\"systemType\":\""+upInfo.getSystem_type()+"\",\"schoolName\":\""+findSchollName.getSchoolName()+"\"}";
 				System.err.println(jsonString+"--------");
 				Object[] o = new Object[] { mapper.readValue(jsonString, para) };
 				back = invokeMethod(robot, upInfo.getMethodName(), o);

@@ -35,6 +35,14 @@ public class Robot_MotionSoftWareVersion extends RInfo {
 	private String systemType;
 	@ApiModelProperty(value = "运动控制软件版本号", required = true)
 	private String motion_version_software;
+	@ApiModelProperty(value = "学校名称", required = true)
+	private String schoolName;
+	public String getSchoolName() {
+		return schoolName;
+	}
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
+	}
 	public String getDeviceNo() {
 		return deviceNo;
 	}

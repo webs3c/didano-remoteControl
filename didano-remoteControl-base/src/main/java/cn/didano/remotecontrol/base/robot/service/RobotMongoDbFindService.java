@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.didano.base.model.Robot_School;
 import cn.didano.remotecontrol.base.robot.data.Robot_AndroidHardWareUsed;
 import cn.didano.remotecontrol.base.robot.data.Robot_AndroidSoftWareVersion;
 import cn.didano.remotecontrol.base.robot.data.Robot_AppRunningStatus;
@@ -20,7 +21,6 @@ import cn.didano.remotecontrol.base.robot.data.Robot_MotionSoftWareVersion;
 import cn.didano.remotecontrol.base.robot.data.Robot_PhotographicQualityInfo;
 import cn.didano.remotecontrol.base.robot.data.Robot_SelfLnspectionInfo;
 import cn.didano.remotecontrol.base.robot.data.Robot_UploadType;
-import cn.didano.remotecontrol.base.robot.data.Robot_school;
 import cn.didano.remotecontrol.base.robot.data.repository.AndroidHardWareUsedRepository;
 import cn.didano.remotecontrol.base.robot.data.repository.AndroidSoftWareVersionRepository;
 import cn.didano.remotecontrol.base.robot.data.repository.AppRunningStatusRepository;
@@ -131,11 +131,11 @@ public class RobotMongoDbFindService {
 	
 	
 	
-	public List<Robot_school> selectSchool() {
+	public List<Robot_School> selectSchool() {
 		return this.sr_repository.findAll();
 	}
 	
-	public List<Robot_school> selectSchoolName(String schoolName) {
+	public List<Robot_School> selectSchoolName(String schoolName) {
 		return this.sr_repository.findBySchoolName(schoolName);
 	}
 	
