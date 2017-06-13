@@ -90,11 +90,7 @@ public class RobotDelegator {
 			// 什么也不做
 		} else {
 			// 有异常，反馈客户端错误信息
-			RobotSession session = RobotWebsocketServer.getRobotInfoMap().get(service_no);
-			if (session != null) {
-				RobotWebsocketServer server = session.getRobotWebsocketServer();
-				server.sendMessage(service_no, out);
-			}
+			RobotWebSocketHandler.sendMessage(service_no, out);
 		}
 	}
 

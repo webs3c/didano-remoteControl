@@ -12,7 +12,8 @@ import cn.didano.remotecontrol.base.exception.BackType;
 import cn.didano.remotecontrol.base.exception.ServiceException;
 import cn.didano.remotecontrol.base.json.Out;
 import cn.didano.remotecontrol.robot.core.DownInfo;
-import cn.didano.remotecontrol.robot.core.RobotWebsocketServer;
+import cn.didano.remotecontrol.robot.core.RobotWebSocketHandler;
+import cn.didano.remotecontrol.robot.core.RobotWebSocketHandler;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -40,11 +41,11 @@ public class RobotDownController {
 	@ResponseBody
 	public Out<String> reportVersion(@PathVariable("service_no") String service_no) {
 		Out<String> back = new Out<String>();
-		if (RobotWebsocketServer.getRobotInfoMap() != null) {
+		if (RobotWebSocketHandler.getRobotInfoMap() != null) {
 			DownInfo downInfo = new DownInfo();
 			downInfo.setMethodName("reportLinuxSoftWareVersion");
 			try{
-				RobotWebsocketServer.sendMessage(service_no, downInfo);
+				RobotWebSocketHandler.sendMessage(service_no, downInfo);
 				back.setBackTypeWithLog(BackType.SUCCESS_DIAGNOSE_EXCUTE);
 			}catch(ServiceException ex){
 				back.setBackTypeWithLog(BackType.FAIL_DIAGNOSE_EXCUTE,ex.getExceptionEnums().getMessage());
@@ -68,11 +69,11 @@ public class RobotDownController {
 	@ResponseBody
 	public Out<String> reportAndroidSoftWareVersion(@PathVariable("service_no") String service_no) {
 		Out<String> back = new Out<String>();
-		if (RobotWebsocketServer.getRobotInfoMap() != null) {
+		if (RobotWebSocketHandler.getRobotInfoMap() != null) {
 			DownInfo downInfo = new DownInfo();
 			downInfo.setMethodName("reportAndroidSoftWareVersion");
 			try{
-				RobotWebsocketServer.sendMessage(service_no, downInfo);
+				RobotWebSocketHandler.sendMessage(service_no, downInfo);
 				back.setBackTypeWithLog(BackType.SUCCESS_DIAGNOSE_EXCUTE);
 			}catch(ServiceException ex){
 				back.setBackTypeWithLog(BackType.FAIL_DIAGNOSE_EXCUTE,ex.getExceptionEnums().getMessage());
@@ -96,14 +97,14 @@ public class RobotDownController {
 	@ResponseBody
 	public Out<String> reportTemperatureInfo(@PathVariable("service_no") String service_no) {
 		Out<String> back = new Out<String>();
-		if (RobotWebsocketServer.getRobotInfoMap() != null) {
-			System.err.println(RobotWebsocketServer.getRobotInfoMap().toString());
+		if (RobotWebSocketHandler.getRobotInfoMap() != null) {
+			System.err.println(RobotWebSocketHandler.getRobotInfoMap().toString());
 			
 			DownInfo downInfo = new DownInfo();
 			downInfo.setMethodName("reportTemperatureInfo");
 			back.setBackTypeWithLog(BackType.SUCCESS_DIAGNOSE_EXCUTE);
 			try{
-				RobotWebsocketServer.sendMessage(service_no, downInfo);
+				RobotWebSocketHandler.sendMessage(service_no, downInfo);
 			}catch(ServiceException ex){
 				back.setBackTypeWithLog(BackType.FAIL_DIAGNOSE_EXCUTE,ex.getExceptionEnums().getMessage());
 			}
@@ -126,14 +127,14 @@ public class RobotDownController {
 	@ResponseBody
 	public Out<String> reportOperationInfo(@PathVariable("service_no") String service_no) {
 		Out<String> back = new Out<String>();
-		if (RobotWebsocketServer.getRobotInfoMap() != null) {
-			System.err.println(RobotWebsocketServer.getRobotInfoMap().toString());
+		if (RobotWebSocketHandler.getRobotInfoMap() != null) {
+			System.err.println(RobotWebSocketHandler.getRobotInfoMap().toString());
 			
 			DownInfo downInfo = new DownInfo();
 			downInfo.setMethodName("reportOperationInfo");
 			back.setBackTypeWithLog(BackType.SUCCESS_DIAGNOSE_EXCUTE);
 			try{
-				RobotWebsocketServer.sendMessage(service_no, downInfo);
+				RobotWebSocketHandler.sendMessage(service_no, downInfo);
 			}catch(ServiceException ex){
 				back.setBackTypeWithLog(BackType.FAIL_DIAGNOSE_EXCUTE,ex.getExceptionEnums().getMessage());
 			}
@@ -156,15 +157,15 @@ public class RobotDownController {
 	@ResponseBody
 	public Out<String> reportSelfLnspectionInfo(@PathVariable("service_no") String service_no) {
 		Out<String> back = new Out<String>();
-		if (RobotWebsocketServer.getRobotInfoMap() != null) {
-			System.err.println(RobotWebsocketServer.getRobotInfoMap().toString());
+		if (RobotWebSocketHandler.getRobotInfoMap() != null) {
+			System.err.println(RobotWebSocketHandler.getRobotInfoMap().toString());
 			
 			DownInfo downInfo = new DownInfo();
 			downInfo.setMethodName("reportSelfLnspectionInfo");
 			back.setBackTypeWithLog(BackType.SUCCESS_DIAGNOSE_EXCUTE);
 			try{
 				System.err.println("执行下控自检信息");
-				RobotWebsocketServer.sendMessage(service_no, downInfo);
+				RobotWebSocketHandler.sendMessage(service_no, downInfo);
 			}catch(ServiceException ex){
 				back.setBackTypeWithLog(BackType.FAIL_DIAGNOSE_EXCUTE,ex.getExceptionEnums().getMessage());
 			}
@@ -187,14 +188,14 @@ public class RobotDownController {
 	@ResponseBody
 	public Out<String> reportMeetSpeedInfo(@PathVariable("service_no") String service_no) {
 		Out<String> back = new Out<String>();
-		if (RobotWebsocketServer.getRobotInfoMap() != null) {
-			System.err.println(RobotWebsocketServer.getRobotInfoMap().toString());
+		if (RobotWebSocketHandler.getRobotInfoMap() != null) {
+			System.err.println(RobotWebSocketHandler.getRobotInfoMap().toString());
 			
 			DownInfo downInfo = new DownInfo();
 			downInfo.setMethodName("reportMeetSpeedInfo");
 			back.setBackTypeWithLog(BackType.SUCCESS_DIAGNOSE_EXCUTE);
 			try{
-				RobotWebsocketServer.sendMessage(service_no, downInfo);
+				RobotWebSocketHandler.sendMessage(service_no, downInfo);
 			}catch(ServiceException ex){
 				back.setBackTypeWithLog(BackType.FAIL_DIAGNOSE_EXCUTE,ex.getExceptionEnums().getMessage());
 			}
@@ -217,14 +218,14 @@ public class RobotDownController {
 	@ResponseBody
 	public Out<String> reportMeetPropertyInfo(@PathVariable("service_no") String service_no) {
 		Out<String> back = new Out<String>();
-		if (RobotWebsocketServer.getRobotInfoMap() != null) {
-			System.err.println(RobotWebsocketServer.getRobotInfoMap().toString());
+		if (RobotWebSocketHandler.getRobotInfoMap() != null) {
+			System.err.println(RobotWebSocketHandler.getRobotInfoMap().toString());
 			
 			DownInfo downInfo = new DownInfo();
 			downInfo.setMethodName("reportMeetPropertyInfo");
 			back.setBackTypeWithLog(BackType.SUCCESS_DIAGNOSE_EXCUTE);
 			try{
-				RobotWebsocketServer.sendMessage(service_no, downInfo);
+				RobotWebSocketHandler.sendMessage(service_no, downInfo);
 			}catch(ServiceException ex){
 				back.setBackTypeWithLog(BackType.FAIL_DIAGNOSE_EXCUTE,ex.getExceptionEnums().getMessage());
 			}
@@ -248,14 +249,14 @@ public class RobotDownController {
 	@ResponseBody
 	public Out<String> reportOnLineInfo(@PathVariable("service_no") String service_no) {
 		Out<String> back = new Out<String>();
-		if (RobotWebsocketServer.getRobotInfoMap() != null) {
-			System.err.println(RobotWebsocketServer.getRobotInfoMap().toString());
+		if (RobotWebSocketHandler.getRobotInfoMap() != null) {
+			System.err.println(RobotWebSocketHandler.getRobotInfoMap().toString());
 			
 			DownInfo downInfo = new DownInfo();
 			downInfo.setMethodName("reportOnLineInfo");
 			back.setBackTypeWithLog(BackType.SUCCESS_DIAGNOSE_EXCUTE);
 			try{
-				RobotWebsocketServer.sendMessage(service_no, downInfo);
+				RobotWebSocketHandler.sendMessage(service_no, downInfo);
 			}catch(ServiceException ex){
 				back.setBackTypeWithLog(BackType.FAIL_DIAGNOSE_EXCUTE,ex.getExceptionEnums().getMessage());
 			}
@@ -278,14 +279,14 @@ public class RobotDownController {
 	@ResponseBody
 	public Out<String> reportPhotographicQualityInfo(@PathVariable("service_no") String service_no) {
 		Out<String> back = new Out<String>();
-		if (RobotWebsocketServer.getRobotInfoMap() != null) {
-			System.err.println(RobotWebsocketServer.getRobotInfoMap().toString());
+		if (RobotWebSocketHandler.getRobotInfoMap() != null) {
+			System.err.println(RobotWebSocketHandler.getRobotInfoMap().toString());
 			
 			DownInfo downInfo = new DownInfo();
 			downInfo.setMethodName("reportPhotographicQualityInfo");
 			back.setBackTypeWithLog(BackType.SUCCESS_DIAGNOSE_EXCUTE);
 			try{
-				RobotWebsocketServer.sendMessage(service_no, downInfo);
+				RobotWebSocketHandler.sendMessage(service_no, downInfo);
 			}catch(ServiceException ex){
 				back.setBackTypeWithLog(BackType.FAIL_DIAGNOSE_EXCUTE,ex.getExceptionEnums().getMessage());
 			}
@@ -307,13 +308,13 @@ public class RobotDownController {
 	@ResponseBody
 	public Out<String> reportManageInfo(@PathVariable("service_no") String service_no) {
 		Out<String> back = new Out<String>();
-		if (RobotWebsocketServer.getRobotInfoMap() != null) {
-			System.err.println(RobotWebsocketServer.getRobotInfoMap().toString());
+		if (RobotWebSocketHandler.getRobotInfoMap()!= null) {
+			System.err.println(RobotWebSocketHandler.getRobotInfoMap().toString());
 			DownInfo downInfo = new DownInfo();
 			downInfo.setMethodName("reportManageInfo");
 			back.setBackTypeWithLog(BackType.SUCCESS_DIAGNOSE_EXCUTE);
 			try{
-				RobotWebsocketServer.sendMessage(service_no, downInfo);
+				RobotWebSocketHandler.sendMessage(service_no, downInfo);
 			}catch(ServiceException ex){
 				back.setBackTypeWithLog(BackType.FAIL_DIAGNOSE_EXCUTE,ex.getExceptionEnums().getMessage());
 			}
@@ -329,7 +330,7 @@ public class RobotDownController {
 	@ApiOperation(value = "回复，异常信息", notes = "回复，异常信息")
 	@ResponseBody
 	public void error(@RequestBody String service_no,@RequestBody Out<String> backError) {
-		RobotWebsocketServer.sendMessage(service_no, backError);
+		RobotWebSocketHandler.sendMessage(service_no, backError);
 	}
 
 }
