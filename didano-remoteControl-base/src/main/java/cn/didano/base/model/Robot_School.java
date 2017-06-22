@@ -27,11 +27,24 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel
 @TypeAlias("保存小学校")
 public class Robot_School extends RInfo {
+	
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
-	private String deviceNo;
+	public String deviceNo;
 	
 	@ApiModelProperty(value = "所属学校的名称", required = true)
-	private String schoolName;
+	public String schoolName;
+
+	@ApiModelProperty(value = "设备类型", required = true)
+	public Integer systemType;
+	
+	
+	public Integer getSystemType() {
+		return systemType;
+	}
+
+	public void setSystemType(Integer systemType) {
+		this.systemType = systemType;
+	}
 
 	public String getDeviceNo() {
 		return deviceNo;

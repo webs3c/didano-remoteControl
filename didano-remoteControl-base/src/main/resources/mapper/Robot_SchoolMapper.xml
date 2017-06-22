@@ -3,6 +3,8 @@
 <mapper namespace="cn.didano.base.dao.Robot_SchoolMapper">
 <resultMap id="BaseResultMap" type="cn.didano.base.model.Robot_School">
     <result column="title" jdbcType="VARCHAR" property="schoolName" />
+    <result column="no" jdbcType="VARCHAR" property="deviceNo" />
+    <result column="device_type" jdbcType="INTEGER" property="systemType" />
   </resultMap>
   <select id="findSchoolName" parameterType="cn.didano.base.model.Robot_School" resultMap="BaseResultMap">
      SELECT 
@@ -11,6 +13,22 @@
      left join tb_school b 
      on a.school_id=b.id 
      where a.no=#{deviceNo} and b.deleted=0 and a.deleted=0
+  </select>
+  <select id="findSheBei" parameterType="INTEGER" resultMap="BaseResultMap">
+     SELECT 
+     b.title,a.*
+     FROM `tb_device` a 
+     left join tb_school b 
+     on a.school_id=b.id 
+     where a.device_type=#{system_type} and a.deleted=0 and b.deleted=0
+  </select>
+  <select id="findSheBei1" resultMap="BaseResultMap">
+     SELECT 
+     b.title,a.*
+     FROM `tb_device` a 
+     left join tb_school b 
+     on a.school_id=b.id 
+     where a.deleted=0 and b.deleted=0
   </select>
 </mapper>
 

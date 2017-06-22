@@ -16,6 +16,9 @@
 package cn.didano.remotecontrol.base.robot.data;
 
 import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.querydsl.core.annotations.QueryEntity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -24,6 +27,8 @@ import io.swagger.annotations.ApiModelProperty;
  *机器的运行环境类
  *主要是上行和下行的信息容器
  */
+@QueryEntity
+@Document
 @ApiModel
 @TypeAlias("Linux的硬件使用信息")
 public class Robot_LinuxHardWareUsed extends RInfo {

@@ -1,5 +1,9 @@
 package cn.didano.remotecontrol.robot.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -131,6 +135,9 @@ public class RobotFindController {
 		List<Robot_CandidatesInfo> rCandidatesInfo=null;
 		try {
 			rCandidatesInfo = robotMongoDbFindService.queryCandidatesInfo(system_type);
+			for (Robot_CandidatesInfo robot_CandidatesInfo : rCandidatesInfo) {
+				System.err.println(robot_CandidatesInfo.getCreateDate());
+			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -203,16 +210,64 @@ public class RobotFindController {
 	@ApiOperation(value = "查询版本信息,并且不分页", notes = "查询版本信息,并且不分页")
 	@ResponseBody
 	public List<Robot_LinuxHardWareUsed> queryLinuxHardWareUsed(@PathVariable("system_type") String system_type) {
-		List<Robot_LinuxHardWareUsed> rLinuxHardWareUsed=null;
+		List<Robot_LinuxHardWareUsed> query=null;
 		try {
-			System.err.println(system_type+"-----------------------------------..................");
-			rLinuxHardWareUsed = robotMongoDbFindService.queryLinuxHardWareUsed(system_type);
+//			SimpleDateFormat dft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date beginDate = new Date();
+//			Calendar date = Calendar.getInstance();
+//			date.setTime(beginDate);
+//			date.set(Calendar.DATE, date.get(Calendar.DATE) - 1);
+//			Date endDate = dft.parse(dft.format(date.getTime()));
+//			System.err.println(beginDate);
+//			System.err.println(endDate);
+			Calendar calendar = Calendar.getInstance();
+			calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			System.out.println("一个小时前的时间：" + df.format(calendar.getTime()));
+			System.out.println("当前的时间：" + df.format(new Date()));
+			query = robotMongoDbFindService.queryLinuxHardWareUsed(system_type);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		return rLinuxHardWareUsed;
+		return query;
 	}
-	
+	/**
+	 * ==============================================linu硬件表格数据查询使用==================================================
+	 * 不带翻页
+	 * @return
+	 */
+	@RequestMapping(value = "queryLinuxHardWareUsed/{system_type}/{arr}", method = {RequestMethod.GET, RequestMethod.POST})
+	@ApiOperation(value = "版本信息初始化曲线查询数据", notes = "版本信息初始化曲线查询数据")
+	@ResponseBody
+	public List<Robot_LinuxHardWareUsed> queryLinuxHardWareUsed(@PathVariable("system_type") String system_type,@PathVariable("arr") String arr) {
+		List<Robot_LinuxHardWareUsed> query=null;
+		try {
+			System.err.println(arr+"-------");
+			String[]  strs=arr.split(",");
+			
+			for(int i=0,len=strs.length;i<len;i++){
+				String[]  aa=strs[i].split(":");
+				if(aa[1].toString()!="" && i==0){
+					//说明要用编号进行查询
+					
+					System.err.println(aa[1].toString());
+				}
+			}
+			
+			/*//由于硬件的使用数据非诚的多，所以在初次显示曲线图时只查询一个小时
+			Date beginDate = new Date();
+			Calendar calendar = Calendar.getInstance();
+			calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 20);
+			System.err.println(beginDate+"-----------------"+calendar.getTime());
+			query = robotMongoDbFindService.findRobot_LinuxHardWareUsed(beginDate,calendar.getTime(),system_type);
+			for (Robot_LinuxHardWareUsed robot_LinuxHardWareUsed : query) {
+				System.err.println(robot_LinuxHardWareUsed.getCreateDate()+"==========");
+			}*/
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return query;
+	}
 	/**
 	 * lunix版本信息查询----------------------------------------------------------------------------------------------------------------------------
 	 * 不带翻页
@@ -276,12 +331,20 @@ public class RobotFindController {
 	public List<Robot_PhotographicQualityInfo> queryPhotographicQualityInfo(@PathVariable("system_type") String system_type) {
 		List<Robot_PhotographicQualityInfo> rPhotographicQualityInfo=null;
 		try {
+			
 			rPhotographicQualityInfo = robotMongoDbFindService.queryPhotographicQualityInfo(system_type);
+			System.err.println(rPhotographicQualityInfo.size());
+			int i=0;
+			for (Robot_PhotographicQualityInfo robot_PhotographicQualityInfo : rPhotographicQualityInfo) {
+				i=i+1;
+			}
+			System.err.println(i);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 		return rPhotographicQualityInfo;
 	}
+	
 	/**
 	 *自检信息----------------------------------------------------------------------------------------------------------------------------
 	 * 不带翻页
@@ -367,5 +430,4 @@ public class RobotFindController {
 		}
 		return operationInfo;
 	}
-	
 }

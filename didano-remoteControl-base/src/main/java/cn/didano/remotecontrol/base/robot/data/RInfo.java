@@ -21,9 +21,11 @@ import java.util.Date;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.querydsl.core.annotations.QueryEntity;
 
 import io.swagger.annotations.ApiModel;
 
@@ -31,6 +33,8 @@ import io.swagger.annotations.ApiModel;
  * 
  * @author stephen.wang
  */
+@QueryEntity
+@Document
 @ApiModel
 public class RInfo {
 

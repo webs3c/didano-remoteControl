@@ -1,5 +1,9 @@
 package cn.didano.remotecontrol.robot.controller;
 
+
+
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -404,6 +408,7 @@ public class RobotUpController {
 			@ApiParam(value = "远程机器人照片质量信息", required = true) @RequestBody Robot_PhotographicQualityInfo photographicQualityInfo) {
 		logger.info("访问  RobotController :reportreportMeetSpeedInfo reportMeetSpeedInfo=" + photographicQualityInfo);
 		System.err.println("上报机器人的照片质量信息");
+		System.err.println(photographicQualityInfo.getId()+"______________________________");
 		Out<String> out = new Out<String>();
 		try {
 			// 直接保存信息
@@ -482,21 +487,22 @@ public class RobotUpController {
 	@PostMapping(value = "find/{deviceNo}")
 	@ApiOperation(value = "查询设备号所对应的学校", notes = "查询设备号所对应的学校")
 	@ResponseBody
-	public Out<String> find(@PathVariable("deviceNo") String deviceNo) {
+	public Robot_School find(@PathVariable("deviceNo") String deviceNo) {
 		System.err.println("查询设备号所对应的学校");
 		Out<String> out = new Out<String>();
+		Robot_School findSchollName=new Robot_School();
 		try {
 			// 直接保存信息
 			System.err.println("________________________________________________________");
 			Robot_School r_school=new Robot_School();
 			r_school.setDeviceNo(deviceNo);
-			Robot_School findSchollName = fsnr_SchoolService.findSchollName(r_school);
+			findSchollName = fsnr_SchoolService.findSchollName(r_school);
 			System.err.println(findSchollName.getSchoolName()+"------------------");
 			
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			out.setBackTypeWithLog(BackType.FAIL_DIAGNOSE_MONGO_SAVE, e.getMessage());
 		}
-		return out;
+		return findSchollName;
 	}
 }

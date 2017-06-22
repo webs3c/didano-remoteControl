@@ -3,7 +3,6 @@ package cn.didano.remotecontrol.base.robot.data.repository;
 import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
 
 import cn.didano.remotecontrol.base.robot.data.Robot_LinuxSoftWareVersion;
 /**

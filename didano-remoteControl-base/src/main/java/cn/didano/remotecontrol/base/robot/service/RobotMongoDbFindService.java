@@ -1,5 +1,6 @@
 package cn.didano.remotecontrol.base.robot.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,14 +120,47 @@ public class RobotMongoDbFindService {
 	public List<Robot_MotionSoftWareVersion> queryMotionSoftWareVersion(String system_type) {
 		return this.mtwr_repository.findBySystemType(system_type);
 	}
-	
 	public List<Robot_PhotographicQualityInfo> queryPhotographicQualityInfo(String system_type) {
 		return this.pqr_repository.findBySystemType(system_type);
 	}
 	public List<Robot_SelfLnspectionInfo> querySelfLnspectionInfo(String system_type) {
+		//.sort({“a”:-1}).limit(1)
 		return this.str_repository.findBySystemType(system_type);
 	}
 	
+	
+	
+	//___________________________版本信息曲线图查询___________________
+	public List<Robot_LinuxHardWareUsed> findRobot_LinuxHardWareUsed(Date time1,Date time2,String system_type) {
+		return this.lhur_repository.findByCreateDate1(time1,time2,system_type);
+	}
+	public List<Robot_LinuxHardWareUsed> findRobot_LinuxHardWareUsed(Date time1,Date time2,String system_type,String deviceNo) {
+		return this.lhur_repository.findByCreateDate2(time1,time2,system_type,deviceNo);
+	}
+	public List<Robot_LinuxHardWareUsed> findRobot_LinuxHardWareUsed(String deviceNo,String deviceNo1) {
+		return this.lhur_repository.findByCreateDate3(deviceNo,deviceNo1);
+	}
+	//+++++++++++++++++++++++++++++++照片片曲线图查询+++++++++++++++++++++++++++++++++
+	public List<Robot_PhotographicQualityInfo> queryPhotographicQualityInfo(Date time1,Date time2,String system_type) {
+		return this.pqr_repository.findByCreateDate1(time1,time2,system_type);
+	}
+	public List<Robot_PhotographicQualityInfo> queryPhotographicQualityInfo(Date time1,Date time2,String system_type,String deviceNo) {
+		return this.pqr_repository.findByCreateDate2(time1,time2,system_type,deviceNo);
+	}
+	//===================================体重校准信息查询============================================
+	public List<Robot_CalibrateInfo> queryCalibrateInfo(Date time1,Date time2,String system_type) {
+		return this.cir_repository.findBySystemType1(time1,time2,system_type);
+	}
+	public List<Robot_CalibrateInfo> queryCalibrateInfo(Date time1,Date time2,String system_type,String deviceNo) {
+		return this.cir_repository.findBySystemType2(time1,time2,system_type,deviceNo);
+	}
+	//+++++++++++++++++++++++++++++++++++候选人信息查询+++++++++++++++++++++++++++++++++++++++++++++
+	public List<Robot_CandidatesInfo> queryCandidatesInfo(Date time1,Date time2,String system_type) {
+		return this.cdir_repository.findBySystemType1(time1,time2,system_type);
+	}
+	public List<Robot_CandidatesInfo> queryCandidatesInfo(Date time1,Date time2,String system_type,String deviceNo) {
+		return this.cdir_repository.findBySystemType2(time1,time2,system_type,deviceNo);
+	}
 	
 	
 	
