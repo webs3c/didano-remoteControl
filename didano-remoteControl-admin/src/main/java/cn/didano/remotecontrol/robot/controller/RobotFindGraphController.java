@@ -8,6 +8,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.query.MorphiaIterator;
+import org.mongodb.morphia.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +25,6 @@ import cn.didano.base.model.Robot_School;
 import cn.didano.remotecontrol.base.exception.BackType;
 import cn.didano.remotecontrol.base.json.Out;
 import cn.didano.remotecontrol.base.robot.data.QRobot_LinuxHardWareUsed;
-import cn.didano.remotecontrol.base.robot.data.RInfo;
 import cn.didano.remotecontrol.base.robot.data.Robot_AndroidHardWareUsed;
 import cn.didano.remotecontrol.base.robot.data.Robot_AndroidSoftWareVersion;
 import cn.didano.remotecontrol.base.robot.data.Robot_AppRunningStatus;
@@ -113,43 +114,12 @@ public class RobotFindGraphController {
 			//由于硬件的使用数据非诚的多，所以在初次显示曲线图时只查询一个小时
 			Date beginDate = new Date();
 			Calendar calendar = Calendar.getInstance();
-			calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 3);
+			calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 100);
 			System.err.println(beginDate+"-----------------"+calendar.getTime());
 			query = robotMongoDbFindService.findRobot_LinuxHardWareUsed(beginDate,calendar.getTime(),system_type);
-			
-			/*List<Robot_LinuxHardWareUsed> findRobot_LinuxHardWareUsed = robotMongoDbFindService.findRobot_LinuxHardWareUsed("d232fb00","1");
-			for (Robot_LinuxHardWareUsed robot_LinuxHardWareUsed : findRobot_LinuxHardWareUsed) {
-				System.err.println(robot_LinuxHardWareUsed.getDeviceNo()+"-------------------"+robot_LinuxHardWareUsed.getCreateDate());
-			}*/
-			
-			Morphia morphia; 
-			MongoClient mongoClient; 
-
-			morphia = new Morphia();
-			// Person is an entity object with Morphia annotations
-			morphia.map(Robot_LinuxHardWareUsed.class);
-
-			// THESE properties MUST be read from environment variables in Spring BOOT.
-			 String host = "localhost";
-			 int port = 27017;
-
-			mongoClient = new MongoClient(host, port);
-
-			//Set database
-			// this instance would be autowired all data access classes
-			Datastore ds  = morphia.createDatastore(mongoClient, "Robot_LinuxHardWareUsed");
-			
-//			Morphia morphia;
-//			Datastore datastore;
-			//不是任何的包，而是定义的类
-			QRobot_LinuxHardWareUsed qRobot_LinuxHardWareUsed = new QRobot_LinuxHardWareUsed("robot_LinuxHardWareUsed");
-			MorphiaQuery<Robot_LinuxHardWareUsed> query1 = new MorphiaQuery<Robot_LinuxHardWareUsed>(morphia, ds, qRobot_LinuxHardWareUsed);
-			List<Robot_LinuxHardWareUsed> list =query1.fetch();
-			
-			for (Robot_LinuxHardWareUsed robot_LinuxHardWareUsed : list) {
+			for (Robot_LinuxHardWareUsed robot_LinuxHardWareUsed : query) {
 				System.err.println(robot_LinuxHardWareUsed.getDeviceNo()+"-----------");
 			}
-			
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}

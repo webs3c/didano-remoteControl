@@ -27,7 +27,7 @@ public class QRobot_LinuxHardWareUsed extends EntityPathBase<Robot_LinuxHardWare
     public final StringPath deviceNo = createString("deviceNo");
 
     //inherited
-    public final StringPath id = _super.id;
+    public final ComparablePath<org.bson.types.ObjectId> id = _super.id;
 
     public final StringPath linux_cpu_used = createString("linux_cpu_used");
 

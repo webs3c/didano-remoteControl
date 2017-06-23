@@ -137,9 +137,6 @@ public class RobotMongoDbFindService {
 	public List<Robot_LinuxHardWareUsed> findRobot_LinuxHardWareUsed(Date time1,Date time2,String system_type,String deviceNo) {
 		return this.lhur_repository.findByCreateDate2(time1,time2,system_type,deviceNo);
 	}
-	public List<Robot_LinuxHardWareUsed> findRobot_LinuxHardWareUsed(String deviceNo,String deviceNo1) {
-		return this.lhur_repository.findByCreateDate3(deviceNo,deviceNo1);
-	}
 	//+++++++++++++++++++++++++++++++照片片曲线图查询+++++++++++++++++++++++++++++++++
 	public List<Robot_PhotographicQualityInfo> queryPhotographicQualityInfo(Date time1,Date time2,String system_type) {
 		return this.pqr_repository.findByCreateDate1(time1,time2,system_type);

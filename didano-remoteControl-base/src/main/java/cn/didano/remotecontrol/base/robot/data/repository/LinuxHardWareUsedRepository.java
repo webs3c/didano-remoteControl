@@ -20,8 +20,4 @@ public interface LinuxHardWareUsedRepository extends MongoRepository<Robot_Linux
 	//根据指定模块模糊查询所有的数据(对应的设备编号)
 	@Query("{'$and':[{'createDate':{'$gt' : ?1, '$lt' : ?0}},{'SystemType':?2},{'DeviceNo':?3}]}")
 	public List<Robot_LinuxHardWareUsed> findByCreateDate2(Date createDate1,Date createDate2,String system_type,String deviceNo);
-	@Query("{'DeviceNo': ?#{[0]? {$exists :true} : [1]} }")
-	
-	//@Query("{ '$cond' : { 'if' : { '$eq' : ['$segmentedStatus', 1] }, 'then' : 1, 'else' : 0 } }")
-	public List<Robot_LinuxHardWareUsed> findByCreateDate3(String deviceNo,String deviceNo1);
 }

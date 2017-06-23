@@ -18,8 +18,9 @@ package cn.didano.remotecontrol.base.robot.data;
 
 import java.util.Date;
 
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Id;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -33,14 +34,12 @@ import io.swagger.annotations.ApiModel;
  * 
  * @author stephen.wang
  */
-@QueryEntity
-@Document
 @ApiModel
 public class RInfo {
 
 	@Id // 自动生成唯一索引号
 	@JsonIgnore // json转换，忽略该属性
-	private String id;
+	private ObjectId id;
 
 	@CreatedDate // 自动生成时间
 	//@JsonIgnore // json转换，忽略该属性
@@ -50,11 +49,11 @@ public class RInfo {
 	@JsonIgnore // json转换，忽略该属性
 	private int version;
 
-	public String getId() {
+	public ObjectId getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(ObjectId id) {
 		this.id = id;
 	}
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")

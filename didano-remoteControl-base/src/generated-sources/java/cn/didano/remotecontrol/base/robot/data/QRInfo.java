@@ -12,8 +12,8 @@ import com.querydsl.core.types.Path;
 /**
  * QRInfo is a Querydsl query type for RInfo
  */
-@Generated("com.querydsl.codegen.EntitySerializer")
-public class QRInfo extends EntityPathBase<RInfo> {
+@Generated("com.querydsl.codegen.EmbeddableSerializer")
+public class QRInfo extends BeanPath<RInfo> {
 
     private static final long serialVersionUID = 381812222L;
 
@@ -21,7 +21,7 @@ public class QRInfo extends EntityPathBase<RInfo> {
 
     public final DateTimePath<java.util.Date> createDate = createDateTime("createDate", java.util.Date.class);
 
-    public final StringPath id = createString("id");
+    public final ComparablePath<org.bson.types.ObjectId> id = createComparable("id", org.bson.types.ObjectId.class);
 
     public final NumberPath<Integer> version = createNumber("version", Integer.class);
 

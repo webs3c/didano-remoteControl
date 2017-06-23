@@ -15,6 +15,8 @@
  */
 package cn.didano.remotecontrol.base.robot.data;
 
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Id;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -31,7 +33,8 @@ import io.swagger.annotations.ApiModelProperty;
 @Document
 @ApiModel
 @TypeAlias("Linux的硬件使用信息")
-public class Robot_LinuxHardWareUsed extends RInfo {
+public class Robot_LinuxHardWareUsed extends RInfo{
+	
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
 	@ApiModelProperty(value = "版本类型", required = true)
@@ -61,6 +64,7 @@ public class Robot_LinuxHardWareUsed extends RInfo {
 	private String linux_wifi_signal_time;
 	@ApiModelProperty(value = "学校名称", required = true)
 	private String schoolName;
+	
 	public String getSchoolName() {
 		return schoolName;
 	}

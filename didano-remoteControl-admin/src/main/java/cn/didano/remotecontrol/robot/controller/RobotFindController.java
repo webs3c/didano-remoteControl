@@ -7,6 +7,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +50,8 @@ public class RobotFindController {
 	static Logger logger = Logger.getLogger(RobotFindController.class);
 	@Autowired
 	private RobotMongoDbFindService robotMongoDbFindService;
-	
+	@Autowired
+	private Datastore datastore;
 	
 	
 	/**
@@ -242,26 +246,97 @@ public class RobotFindController {
 	public List<Robot_LinuxHardWareUsed> queryLinuxHardWareUsed(@PathVariable("system_type") String system_type,@PathVariable("arr") String arr) {
 		List<Robot_LinuxHardWareUsed> query=null;
 		try {
-			System.err.println(arr+"-------");
+			//分割数组
 			String[]  strs=arr.split(",");
-			
+			datastore.ensureIndexes();
+			Query<Robot_LinuxHardWareUsed> query123 = datastore.createQuery(Robot_LinuxHardWareUsed.class);
 			for(int i=0,len=strs.length;i<len;i++){
-				String[]  aa=strs[i].split(":");
-				if(aa[1].toString()!="" && i==0){
-					//说明要用编号进行查询
-					
-					System.err.println(aa[1].toString());
+				String[] aa=strs[i].split(":");
+				//filter之间使用and连接起来
+				if(aa[1].toString()!="" && aa[0].toString()=="deviceNo"){
+					query123.filter("deviceNo=",aa[1].toString());
+				}else if(aa[1].toString()!="" && aa[0].toString()=="linux_cpu_used"){
+					query123.filter("linux_cpu_used=",aa[1].toString());
+				}else if(aa[1].toString()!="" && aa[0].toString()=="linux_cpu_used_app"){
+					//时间是用来查询两者之间的，如果前台传的只有起始时间，就会查询所有大于这个起始时间的数据，如果只传结束时间，查询所有比结束时间小的数据
+					//如果起始时间和结束时间都穿过来，就查询这两个时间之内的数据。
+					query123.filter("linux_cpu_used_app=",aa[1].toString());
+				}else if(aa[1].toString()!="" && aa[0].toString()=="linux_cpu_used_time1"){
+					query123.filter("linux_cpu_used_time1>=",aa[1].toString());
+				}else if(aa[1].toString()!="" && aa[0].toString()=="linux_cpu_used_time2"){
+					query123.filter("linux_cpu_used_time2<=",aa[1].toString());
+				}else if(aa[1].toString()!="" && aa[0].toString()=="linux_flash_used"){
+					query123.filter("linux_flash_used=",aa[1].toString());
+				}else if(aa[1].toString()!="" && aa[0].toString()=="linux_flash_used_time1"){
+					query123.filter("linux_flash_used_time1>=",aa[1].toString());
+				}else if(aa[1].toString()!="" && aa[0].toString()=="linux_flash_used_time2"){
+					query123.filter("linux_flash_used_time2<=",aa[1].toString());
+				}else if(aa[1].toString()!="" && aa[0].toString()=="linux_memory_used"){
+					query123.filter("linux_memory_used=",aa[1].toString());
+				}else if(aa[1].toString()!="" && aa[0].toString()=="linux_memory_used_app"){
+					query123.filter("linux_memory_used_app=",aa[1].toString());
+				}else if(aa[1].toString()!="" && aa[0].toString()=="linux_memory_used_time1"){
+					query123.filter("linux_memory_used_time1>=",aa[1].toString());
+				}else if(aa[1].toString()!="" && aa[0].toString()=="linux_memory_used_time2"){
+					query123.filter("linux_memory_used_time2<=",aa[1].toString());
+				}else if(aa[1].toString()!="" && aa[0].toString()=="linux_wifi_signal"){
+					query123.filter("linux_wifi_signal=",aa[1].toString());
+				}else if(aa[1].toString()!="" && aa[0].toString()=="linux_wifi_signal_time1"){
+					query123.filter("linux_wifi_signal_time1>=",aa[1].toString());
+				}else if(aa[1].toString()!="" && aa[0].toString()=="linux_wifi_signal_time2"){
+					query123.filter("linux_wifi_signal_time2<=",aa[1].toString());
+				}else if(aa[1].toString()!="" && aa[0].toString()=="createDate1"){
+					query123.filter("createDate1>=",aa[1].toString());
+				}else if(aa[1].toString()!="" && aa[0].toString()=="createDate2"){
+					query123.filter("createDate2<=",aa[1].toString());
 				}
 			}
+			for (Robot_LinuxHardWareUsed robot_LinuxHardWareUsed : query123) {
+				System.err.println(robot_LinuxHardWareUsed.getCreateDate());
+			}
+			/*Morphia morphia; 
+			MongoClient mongoClient; 
+
+			morphia = new Morphia();
+			// Person is an entity object with Morphia annotations
+			morphia.map(Robot_LinuxHardWareUsed.class);
+			System.err.println(Robot_LinuxHardWareUsed.class);
+			// THESE properties MUST be read from environment variables in Spring BOOT.
+			 String host = "localhost";
+			 int port = 27017;
+
+			mongoClient = new MongoClient(host, port);*/
 			
-			/*//由于硬件的使用数据非诚的多，所以在初次显示曲线图时只查询一个小时
-			Date beginDate = new Date();
-			Calendar calendar = Calendar.getInstance();
-			calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 20);
-			System.err.println(beginDate+"-----------------"+calendar.getTime());
-			query = robotMongoDbFindService.findRobot_LinuxHardWareUsed(beginDate,calendar.getTime(),system_type);
-			for (Robot_LinuxHardWareUsed robot_LinuxHardWareUsed : query) {
-				System.err.println(robot_LinuxHardWareUsed.getCreateDate()+"==========");
+			//Set database
+			// this instance would be autowired all data access classes
+			/*Morphia morphia;
+			morphia = new Morphia();
+			morphia.map(Robot_LinuxHardWareUsed.class);*/
+			//Datastore ds  = morphia.createDatastore(mongoClient, "remoteControl");
+//			Datastore ds  = morphia.createDatastore(mongoClient, "test");
+//			ds.ensureIndexes();
+//			Query<Robot_LinuxHardWareUsed> query123 = ds.createQuery(Robot_LinuxHardWareUsed.class);
+			
+			//Query<Robot_LinuxHardWareUsed> filter = query123.filter("linux_cpu_used", "800");
+			//MorphiaIterator<Robot_LinuxHardWareUsed,Robot_LinuxHardWareUsed> fetch = query123.where("{deviceNo:123}").fetch();
+			
+			
+//			Robot_LinuxHardWareUsed robot_LinuxHardWareUsed2 = query123.get();
+//			System.err.println(robot_LinuxHardWareUsed2.getDeviceNo());
+//			for (Robot_LinuxHardWareUsed robot_LinuxHardWareUsed : user) {
+//				System.err.println(robot_LinuxHardWareUsed.getCreateDate());
+//			}
+			
+			
+//			Morphia morphia;
+//			Datastore datastore;
+			//不是任何的包，而是定义的类
+			/*QRobot_LinuxHardWareUsed qRobot_LinuxHardWareUsed = new QRobot_LinuxHardWareUsed("robot_LinuxHardWareUsed");
+			MorphiaQuery<Robot_LinuxHardWareUsed> query1 = new MorphiaQuery<Robot_LinuxHardWareUsed>(morphia, ds, qRobot_LinuxHardWareUsed);
+			List<Robot_LinuxHardWareUsed> list =query1.fetch();
+			
+			for (Robot_LinuxHardWareUsed robot_LinuxHardWareUsed : list) {
+				System.err.println(robot_LinuxHardWareUsed.getDeviceNo()+"-----------");
 			}*/
 		} catch (Exception e) {
 			logger.error(e.getMessage());

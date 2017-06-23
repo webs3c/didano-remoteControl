@@ -1,7 +1,10 @@
 package cn.didano.remotecontrol.app.config;
 
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +23,9 @@ import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 
+import cn.didano.remotecontrol.base.robot.data.RInfo;
+import cn.didano.remotecontrol.base.robot.data.Robot_LinuxHardWareUsed;
+
 /**
  * 跨域支持
  * 
@@ -29,6 +35,7 @@ import com.mongodb.MongoClientURI;
 @Configuration
 public class SpringMongoConfig extends AbstractMongoConfiguration {
 
+	
 	@Value("${spring.data.mongodb.database}")
 	private String mongoDB;
 
@@ -47,6 +54,16 @@ public class SpringMongoConfig extends AbstractMongoConfiguration {
 		return new MongoClient(new MongoClientURI(uri));
 	}
 
+	@Bean
+	public Datastore datastores() throws Exception {
+		Morphia morphia;
+		morphia = new Morphia();
+		morphia.map(RInfo.class);
+		//Datastore ds  = morphia.createDatastore(mongoClient, "remoteControl");
+		Datastore ds  = morphia.createDatastore((MongoClient)mongo(), mongoDB);
+		return ds;
+	}
+	
 	@Override
 	protected String getDatabaseName() {
 		// TODO Auto-generated method stub
