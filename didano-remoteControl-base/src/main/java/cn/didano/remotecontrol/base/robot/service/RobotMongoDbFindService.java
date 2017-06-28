@@ -7,21 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.didano.base.model.Robot_School;
-import cn.didano.remotecontrol.base.robot.data.Robot_AndroidHardWareUsed;
-import cn.didano.remotecontrol.base.robot.data.Robot_AndroidSoftWareVersion;
-import cn.didano.remotecontrol.base.robot.data.Robot_AppRunningStatus;
-import cn.didano.remotecontrol.base.robot.data.Robot_CalibrateInfo;
-import cn.didano.remotecontrol.base.robot.data.Robot_CandidatesInfo;
-import cn.didano.remotecontrol.base.robot.data.Robot_FinalRecogResult;
-import cn.didano.remotecontrol.base.robot.data.Robot_LinuxEnvTemperatureInfo;
-import cn.didano.remotecontrol.base.robot.data.Robot_LinuxHardWareInfo;
-import cn.didano.remotecontrol.base.robot.data.Robot_LinuxHardWareUsed;
-import cn.didano.remotecontrol.base.robot.data.Robot_LinuxSoftWareVersion;
-import cn.didano.remotecontrol.base.robot.data.Robot_LinuxStartUpRecord;
-import cn.didano.remotecontrol.base.robot.data.Robot_MotionSoftWareVersion;
-import cn.didano.remotecontrol.base.robot.data.Robot_PhotographicQualityInfo;
-import cn.didano.remotecontrol.base.robot.data.Robot_SelfLnspectionInfo;
-import cn.didano.remotecontrol.base.robot.data.Robot_UploadType;
+import cn.didano.remotecontrol.base.robot.data.robot_AndroidHardWareUsed;
+import cn.didano.remotecontrol.base.robot.data.robot_AndroidSoftWareVersion;
+import cn.didano.remotecontrol.base.robot.data.robot_AppRunningStatus;
+import cn.didano.remotecontrol.base.robot.data.robot_CalibrateInfo;
+import cn.didano.remotecontrol.base.robot.data.robot_CandidatesInfo;
+import cn.didano.remotecontrol.base.robot.data.robot_FinalRecogResult;
+import cn.didano.remotecontrol.base.robot.data.robot_LinuxEnvTemperatureInfo;
+import cn.didano.remotecontrol.base.robot.data.robot_LinuxHardWareInfo;
+import cn.didano.remotecontrol.base.robot.data.robot_LinuxHardWareUsed;
+import cn.didano.remotecontrol.base.robot.data.robot_LinuxSoftWareVersion;
+import cn.didano.remotecontrol.base.robot.data.robot_LinuxStartUpRecord;
+import cn.didano.remotecontrol.base.robot.data.robot_MotionSoftWareVersion;
+import cn.didano.remotecontrol.base.robot.data.robot_PhotographicQualityInfo;
+import cn.didano.remotecontrol.base.robot.data.robot_SelfLnspectionInfo;
+import cn.didano.remotecontrol.base.robot.data.robot_UploadType;
 import cn.didano.remotecontrol.base.robot.data.repository.AndroidHardWareUsedRepository;
 import cn.didano.remotecontrol.base.robot.data.repository.AndroidSoftWareVersionRepository;
 import cn.didano.remotecontrol.base.robot.data.repository.AppRunningStatusRepository;
@@ -81,83 +81,129 @@ public class RobotMongoDbFindService {
 	private TypeNameRepository tn_repository;
 	
 	
-	public List<Robot_LinuxSoftWareVersion> queryLinuxSoftWareVersion(String system_type) {
+	public List<robot_LinuxSoftWareVersion> queryLinuxSoftWareVersion(String system_type) {
 		return this.v_repository.findBySystemType(system_type);
 	}
-	public List<Robot_AndroidHardWareUsed> queryAndroidHardWareUsed(String system_type) {
-		System.err.println(system_type+"--------------");
+	public List<robot_AndroidHardWareUsed> queryAndroidHardWareUsed(String system_type) {
 		return this.ahwr_repository.findBySystemType(system_type);
 	}
-	public List<Robot_AndroidSoftWareVersion> queryAndroidSoftWareVersion(String system_type) {
+	public List<robot_AndroidSoftWareVersion> queryAndroidSoftWareVersion(String system_type) {
 		return this.aswr_repository.findBySystemType(system_type);
 	}
-	public List<Robot_AppRunningStatus> queryAppRunningStatus(String system_type) {
+	public List<robot_AppRunningStatus> queryAppRunningStatus(String system_type) {
 		return this.arsr_repository.findBySystemType(system_type);
 	}
-	public List<Robot_CalibrateInfo> queryCalibrateInfo(String system_type) {
+	public List<robot_CalibrateInfo> queryCalibrateInfo(String system_type) {
 		return this.cir_repository.findBySystemType(system_type);
 	}
-	public List<Robot_CandidatesInfo> queryCandidatesInfo(String system_type) {
+	public List<robot_CandidatesInfo> queryCandidatesInfo(String system_type) {
 		return this.cdir_repository.findBySystemType(system_type);
 	}
 	
-	public List<Robot_FinalRecogResult> queryFinalRecogResult(String system_type) {
+	public List<robot_FinalRecogResult> queryFinalRecogResult(String system_type) {
 		return this.frrr_repository.findBySystemType(system_type);
 	}
-	public List<Robot_LinuxEnvTemperatureInfo> queryLinuxEnvTemperatureInfo(String system_type) {
+	public List<robot_LinuxEnvTemperatureInfo> queryLinuxEnvTemperatureInfo(String system_type) {
 		return this.letr_repository.findBySystemType(system_type);
 	}
-	public List<Robot_LinuxHardWareInfo> queryLinuxHardWareInfo(String system_type) {
+	public List<robot_LinuxHardWareInfo> queryLinuxHardWareInfo(String system_type) {
 		return this.lhwr_repository.findBySystemType(system_type);
 	}
-	public List<Robot_LinuxHardWareUsed> queryLinuxHardWareUsed(String system_type) {
+	public List<robot_LinuxHardWareUsed> queryLinuxHardWareUsed(String system_type) {
 		return this.lhur_repository.findBySystemType(system_type);
 	}
-	public List<Robot_LinuxStartUpRecord> queryLinuxStartUpRecord(String system_type) {
+	public List<robot_LinuxStartUpRecord> queryLinuxStartUpRecord(String system_type) {
 		return this.lsupr_repository.findBySystemType(system_type);
 	}
 	
-	public List<Robot_MotionSoftWareVersion> queryMotionSoftWareVersion(String system_type) {
+	public List<robot_MotionSoftWareVersion> queryMotionSoftWareVersion(String system_type) {
 		return this.mtwr_repository.findBySystemType(system_type);
 	}
-	public List<Robot_PhotographicQualityInfo> queryPhotographicQualityInfo(String system_type) {
+	public List<robot_PhotographicQualityInfo> queryPhotographicQualityInfo(String system_type) {
 		return this.pqr_repository.findBySystemType(system_type);
 	}
-	public List<Robot_SelfLnspectionInfo> querySelfLnspectionInfo(String system_type) {
-		//.sort({“a”:-1}).limit(1)
+	public List<robot_SelfLnspectionInfo> querySelfLnspectionInfo(String system_type) {
 		return this.str_repository.findBySystemType(system_type);
 	}
 	
 	
 	
 	//___________________________版本信息曲线图查询___________________
-	public List<Robot_LinuxHardWareUsed> findRobot_LinuxHardWareUsed(Date time1,Date time2,String system_type) {
+	public List<robot_LinuxHardWareUsed> findRobot_LinuxHardWareUsed(Date time1,Date time2,String system_type) {
 		return this.lhur_repository.findByCreateDate1(time1,time2,system_type);
 	}
-	public List<Robot_LinuxHardWareUsed> findRobot_LinuxHardWareUsed(Date time1,Date time2,String system_type,String deviceNo) {
+	public List<robot_LinuxHardWareUsed> findRobot_LinuxHardWareUsed(Date time1,Date time2,String system_type,String deviceNo) {
 		return this.lhur_repository.findByCreateDate2(time1,time2,system_type,deviceNo);
 	}
 	//+++++++++++++++++++++++++++++++照片片曲线图查询+++++++++++++++++++++++++++++++++
-	public List<Robot_PhotographicQualityInfo> queryPhotographicQualityInfo(Date time1,Date time2,String system_type) {
+	public List<robot_PhotographicQualityInfo> queryPhotographicQualityInfo(Date time1,Date time2,String system_type) {
 		return this.pqr_repository.findByCreateDate1(time1,time2,system_type);
 	}
-	public List<Robot_PhotographicQualityInfo> queryPhotographicQualityInfo(Date time1,Date time2,String system_type,String deviceNo) {
+	public List<robot_PhotographicQualityInfo> queryPhotographicQualityInfo(Date time1,Date time2,String system_type,String deviceNo) {
 		return this.pqr_repository.findByCreateDate2(time1,time2,system_type,deviceNo);
 	}
 	//===================================体重校准信息查询============================================
-	public List<Robot_CalibrateInfo> queryCalibrateInfo(Date time1,Date time2,String system_type) {
+	public List<robot_CalibrateInfo> queryCalibrateInfo(Date time1,Date time2,String system_type) {
 		return this.cir_repository.findBySystemType1(time1,time2,system_type);
 	}
-	public List<Robot_CalibrateInfo> queryCalibrateInfo(Date time1,Date time2,String system_type,String deviceNo) {
+	public List<robot_CalibrateInfo> queryCalibrateInfo(Date time1,Date time2,String system_type,String deviceNo) {
 		return this.cir_repository.findBySystemType2(time1,time2,system_type,deviceNo);
 	}
 	//+++++++++++++++++++++++++++++++++++候选人信息查询+++++++++++++++++++++++++++++++++++++++++++++
-	public List<Robot_CandidatesInfo> queryCandidatesInfo(Date time1,Date time2,String system_type) {
+	public List<robot_CandidatesInfo> queryCandidatesInfo(Date time1,Date time2,String system_type) {
 		return this.cdir_repository.findBySystemType1(time1,time2,system_type);
 	}
-	public List<Robot_CandidatesInfo> queryCandidatesInfo(Date time1,Date time2,String system_type,String deviceNo) {
+	
+	public List<robot_CandidatesInfo> queryCandidatesInfo(Date time1,Date time2,String system_type,String deviceNo) {
 		return this.cdir_repository.findBySystemType2(time1,time2,system_type,deviceNo);
 	}
+	//+++++++++++++++++++++++++++++++++++最终结果信息查询+++++++++++++++++++++++++++++++++++++++++++++
+	public List<robot_FinalRecogResult> queryFinalRecogResult(Date time1,Date time2,String system_type) {
+		return this.frrr_repository.findBySystemType1(time1,time2,system_type);
+	}
+	//+++++++++++++++++++++++++++++++++++板子温度信息查询+++++++++++++++++++++++++++++++++++++++++++++
+	public List<robot_LinuxEnvTemperatureInfo> queryLinuxEnvTemperatureInfo(Date time1,Date time2,String system_type) {
+		return this.letr_repository.findBySystemType1(time1,time2,system_type);
+	}
+	//+++++++++++++++++++++++++++++++++++版本信息查询+++++++++++++++++++++++++++++++++++++++++++++
+	public List<robot_MotionSoftWareVersion> queryMotionSoftWareVersion(Date time1,Date time2,String system_type) {
+		return this.mtwr_repository.findByCreateDate1(time1,time2,system_type);
+	}
+	//+++++++++++++++++++++++++++++++++++启动信息+++++++++++++++++++++++++++++++++++++++++++++
+	public List<robot_LinuxStartUpRecord> queryLinuxStartUpRecord(Date time1,Date time2,String system_type) {
+		return this.lsupr_repository.findByCreateDate1(time1,time2,system_type);
+	}
+	//++++++++++++++++++++++++++++++++++软件版本信息查询+++++++++++++++++++++++++++++++++++++++++++++
+	public List<robot_LinuxSoftWareVersion> queryLinuxSoftWareVersion(Date time1,Date time2,String system_type) {
+		return this.v_repository.findByCreateDate1(time1,time2,system_type);
+	}
+	//+++++++++++++++++++++++++++++++++++硬件使用信息查询+++++++++++++++++++++++++++++++++++++++++++++
+	public List<robot_LinuxHardWareUsed> queryLinuxHardWareUsed(Date time1,Date time2,String system_type) {
+		return this.lhur_repository.findByCreateDate1(time1,time2,system_type);
+	}
+	//+++++++++++++++++++++++++++++++++++ECID号信息查询+++++++++++++++++++++++++++++++++++++++++++++
+	public List<robot_LinuxHardWareInfo> queryLinuxHardWareInfo(Date time1,Date time2,String system_type) {
+		return this.lhwr_repository.findByCreateDate1(time1,time2,system_type);
+	}
+	//+++++++++++++++++++++++++++++++++++运用程序运行状态信息查询+++++++++++++++++++++++++++++++++++++++++++++
+	public List<robot_AppRunningStatus> queryAppRunningStatus(Date time1,Date time2,String system_type) {
+		return this.arsr_repository.findByCreateDate1(time1,time2,system_type);
+	}
+	//+++++++++++++++++++++++++++++++++++安卓软件版本度信息查询+++++++++++++++++++++++++++++++++++++++++++++
+	public List<robot_AndroidSoftWareVersion> queryAndroidSoftWareVersion(Date time1,Date time2,String system_type) {
+		return this.aswr_repository.findByCreateDate1(time1,time2,system_type);
+	}
+	//+++++++++++++++++++++++++++++++++++安卓软件使用信息查询+++++++++++++++++++++++++++++++++++++++++++++
+	public List<robot_AndroidHardWareUsed> queryAndroidHardWareUsed(Date time1,Date time2,String system_type) {
+		return this.ahwr_repository.findByCreateDate1(time1,time2,system_type);
+	}
+	//+++++++++++++++++++++++++++++++++++自检信息查询+++++++++++++++++++++++++++++++++++++++++++++
+	public List<robot_SelfLnspectionInfo> querySelfLnspectionInfo(Date time1,Date time2,String system_type) {
+		return this.str_repository.findByCreateDate1(time1,time2,system_type);
+	}
+	//+++++++++++++++++++++++++++++++++++板子温度信息查询+++++++++++++++++++++++++++++++++++++++++++++
+	//+++++++++++++++++++++++++++++++++++板子温度信息查询+++++++++++++++++++++++++++++++++++++++++++++
+	//+++++++++++++++++++++++++++++++++++板子温度信息查询+++++++++++++++++++++++++++++++++++++++++++++
 	
 	
 	
@@ -170,7 +216,7 @@ public class RobotMongoDbFindService {
 		return this.sr_repository.findBySchoolName(schoolName);
 	}
 	
-	public List<Robot_UploadType> selectType() {
+	public List<robot_UploadType> selectType() {
 		return this.tn_repository.findAll();
 	}
 	

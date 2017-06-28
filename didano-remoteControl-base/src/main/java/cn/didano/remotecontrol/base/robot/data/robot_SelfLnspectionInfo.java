@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @ApiModel
 @TypeAlias("自检信息")
-public class Robot_SelfLnspectionInfo extends RInfo {
+public class robot_SelfLnspectionInfo extends rInfo {
 	//公用
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;

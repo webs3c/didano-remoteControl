@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @ApiModel
 @TypeAlias("体重校准信息")
-public class Robot_CalibrateInfo extends RInfo {
+public class robot_CalibrateInfo extends rInfo {
 	
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;

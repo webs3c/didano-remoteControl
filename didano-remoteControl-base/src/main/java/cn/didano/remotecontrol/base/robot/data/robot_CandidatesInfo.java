@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel
 @TypeAlias("候选人信息")
-public class Robot_CandidatesInfo extends RInfo {
+public class robot_CandidatesInfo extends rInfo {
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
 	@ApiModelProperty(value = "版本类型", required = true)

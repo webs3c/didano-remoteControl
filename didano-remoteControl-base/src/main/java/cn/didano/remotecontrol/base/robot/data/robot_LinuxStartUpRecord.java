@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @ApiModel
 @TypeAlias("linux的重启信息")
-public class Robot_LinuxStartUpRecord extends RInfo {
+public class robot_LinuxStartUpRecord extends rInfo {
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
 	@ApiModelProperty(value = "版本类型", required = true)

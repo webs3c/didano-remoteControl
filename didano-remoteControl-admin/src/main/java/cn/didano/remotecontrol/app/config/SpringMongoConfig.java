@@ -23,8 +23,8 @@ import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 
-import cn.didano.remotecontrol.base.robot.data.RInfo;
-import cn.didano.remotecontrol.base.robot.data.Robot_LinuxHardWareUsed;
+import cn.didano.remotecontrol.base.robot.data.rInfo;
+import cn.didano.remotecontrol.base.robot.data.robot_LinuxHardWareUsed;
 
 /**
  * 跨域支持
@@ -58,7 +58,7 @@ public class SpringMongoConfig extends AbstractMongoConfiguration {
 	public Datastore datastores() throws Exception {
 		Morphia morphia;
 		morphia = new Morphia();
-		morphia.map(RInfo.class);
+		morphia.map(rInfo.class);
 		//Datastore ds  = morphia.createDatastore(mongoClient, "remoteControl");
 		Datastore ds  = morphia.createDatastore((MongoClient)mongo(), mongoDB);
 		return ds;

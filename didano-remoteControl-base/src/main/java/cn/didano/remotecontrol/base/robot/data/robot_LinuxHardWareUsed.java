@@ -33,7 +33,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Document
 @ApiModel
 @TypeAlias("Linux的硬件使用信息")
-public class Robot_LinuxHardWareUsed extends RInfo{
+public class robot_LinuxHardWareUsed extends rInfo{
 	
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;

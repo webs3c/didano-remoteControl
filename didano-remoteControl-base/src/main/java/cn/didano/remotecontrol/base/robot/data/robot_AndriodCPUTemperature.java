@@ -27,18 +27,13 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @ApiModel
 @TypeAlias("linux的版本信息")
-public class Robot_LinuxSoftWareVersion extends RInfo {
-	
+public class robot_AndriodCPUTemperature extends rInfo {
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
-	@ApiModelProperty(value = "版本类型", required = true)
-	private String systemType;
-	@ApiModelProperty(value = "软件版本", required = true)
-	private String linux_version_software;
-	@ApiModelProperty(value = "系统版本", required = true)
-	private String linux_version_system;
-	@ApiModelProperty(value = "内核版本", required = true)
-	private String linux_version_kernel;
+	@ApiModelProperty(value = "Android板CPU当前温度", required = true)
+	private String android_cpu_temperature;
+	@ApiModelProperty(value = "Android板获取温度的时间", required = true)
+	private String android_temperature_time;
 	@ApiModelProperty(value = "学校名称", required = true)
 	private String schoolName;
 	public String getSchoolName() {
@@ -53,35 +48,22 @@ public class Robot_LinuxSoftWareVersion extends RInfo {
 	public void setDeviceNo(String deviceNo) {
 		this.deviceNo = deviceNo;
 	}
-	
-	public String getSystemType() {
-		return systemType;
+	public String getAndroid_cpu_temperature() {
+		return android_cpu_temperature;
 	}
-	public void setSystemType(String systemType) {
-		this.systemType = systemType;
+	public void setAndroid_cpu_temperature(String android_cpu_temperature) {
+		this.android_cpu_temperature = android_cpu_temperature;
 	}
-	public String getLinux_version_software() {
-		return linux_version_software;
+	public String getAndroid_temperature_time() {
+		return android_temperature_time;
 	}
-	public void setLinux_version_software(String linux_version_software) {
-		this.linux_version_software = linux_version_software;
-	}
-	public String getLinux_version_system() {
-		return linux_version_system;
-	}
-	public void setLinux_version_system(String linux_version_system) {
-		this.linux_version_system = linux_version_system;
-	}
-	public String getLinux_version_kernel() {
-		return linux_version_kernel;
-	}
-	public void setLinux_version_kernel(String linux_version_kernel) {
-		this.linux_version_kernel = linux_version_kernel;
+	public void setAndroid_temperature_time(String android_temperature_time) {
+		this.android_temperature_time = android_temperature_time;
 	}
 	@Override
 	public String toString() {
-		return "Robot_VersionInfo [deviceNo=" + deviceNo + ", linux_version_software=" + linux_version_software
-				+ ", linux_version_system=" + linux_version_system + ", linux_version_kernel=" + linux_version_kernel
-				+ "]";
+		return "robot_AndriodCPUTemperature [deviceNo=" + deviceNo + ", android_cpu_temperature="
+				+ android_cpu_temperature + ", android_temperature_time=" + android_temperature_time + ", schoolName="
+				+ schoolName + "]";
 	}
 }

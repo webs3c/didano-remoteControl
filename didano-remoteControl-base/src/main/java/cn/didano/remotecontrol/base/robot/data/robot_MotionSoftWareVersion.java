@@ -26,21 +26,15 @@ import io.swagger.annotations.ApiModelProperty;
  * @Todo 没有安卓操作系统版本号
  */
 @ApiModel
-@TypeAlias("linux的CPU的ECID号")
-public class Robot_LinuxHardWareInfo extends RInfo {
+@TypeAlias("运动控制软件版本信息")
+public class robot_MotionSoftWareVersion extends rInfo {
 	
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
 	@ApiModelProperty(value = "版本类型", required = true)
 	private String systemType;
-	@ApiModelProperty(value = "CPU的ECID号1", required = true)
-	private String linux_hard_ecid_0;
-	@ApiModelProperty(value = "CPU的ECID号2", required = true)
-	private String linux_hard_ecid_1;
-	@ApiModelProperty(value = "CPU的ECID号3", required = true)
-	private String linux_hard_ecid_2;
-	@ApiModelProperty(value = "CPU的ECID号4", required = true)
-	private String linux_hard_ecid_3;
+	@ApiModelProperty(value = "运动控制软件版本号", required = true)
+	private String motion_version_software;
 	@ApiModelProperty(value = "学校名称", required = true)
 	private String schoolName;
 	public String getSchoolName() {
@@ -62,34 +56,16 @@ public class Robot_LinuxHardWareInfo extends RInfo {
 	public void setSystemType(String systemType) {
 		this.systemType = systemType;
 	}
-	public String getLinux_hard_ecid_0() {
-		return linux_hard_ecid_0;
+	public String getMotion_version_software() {
+		return motion_version_software;
 	}
-	public void setLinux_hard_ecid_0(String linux_hard_ecid_0) {
-		this.linux_hard_ecid_0 = linux_hard_ecid_0;
-	}
-	public String getLinux_hard_ecid_1() {
-		return linux_hard_ecid_1;
-	}
-	public void setLinux_hard_ecid_1(String linux_hard_ecid_1) {
-		this.linux_hard_ecid_1 = linux_hard_ecid_1;
-	}
-	public String getLinux_hard_ecid_2() {
-		return linux_hard_ecid_2;
-	}
-	public void setLinux_hard_ecid_2(String linux_hard_ecid_2) {
-		this.linux_hard_ecid_2 = linux_hard_ecid_2;
-	}
-	public String getLinux_hard_ecid_3() {
-		return linux_hard_ecid_3;
-	}
-	public void setLinux_hard_ecid_3(String linux_hard_ecid_3) {
-		this.linux_hard_ecid_3 = linux_hard_ecid_3;
+	public void setMotion_version_software(String motion_version_software) {
+		this.motion_version_software = motion_version_software;
 	}
 	@Override
 	public String toString() {
-		return "Robot_LinuxhardwareInfo [deviceNo=" + deviceNo + ", linux_hard_ecid_0=" + linux_hard_ecid_0
-				+ ", linux_hard_ecid_1=" + linux_hard_ecid_1 + ", linux_hard_ecid_2=" + linux_hard_ecid_2
-				+ ", linux_hard_ecid_3=" + linux_hard_ecid_3 + "]";
+		return "Robot_MotionSoftWareVersion [deviceNo=" + deviceNo + ", motion_version_software="
+				+ motion_version_software + "]";
 	}
+	
 }

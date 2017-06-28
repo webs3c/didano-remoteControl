@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @ApiModel
 @TypeAlias("保存上传类型信息")
-public class Robot_UploadType extends RInfo {
+public class robot_UploadType extends rInfo {
 	@ApiModelProperty(value = "上传类型的名称", required = true)
 	private String typeName;
 	@ApiModelProperty(value = "上传所对应的方法名", required = true)

@@ -26,19 +26,19 @@ import io.swagger.annotations.ApiModelProperty;
  * @Todo 没有安卓操作系统版本号
  */
 @ApiModel
-@TypeAlias("安卓的版本信息")
-public class Robot_AndroidSoftWareVersion extends RInfo {
+@TypeAlias("linux的版本信息")
+public class robot_LinuxSoftWareVersion extends rInfo {
 	
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
 	@ApiModelProperty(value = "版本类型", required = true)
 	private String systemType;
-	@ApiModelProperty(value = "Android程序版本号", required = true)
-	private String andriod_version_software;
-	@ApiModelProperty(value = "Andriod系统版本号", required = true)
-	private String andriod_version_system;
-	@ApiModelProperty(value = "Andriod内核版本号", required = true)
-	private String andriod_version_kernel;
+	@ApiModelProperty(value = "软件版本", required = true)
+	private String linux_version_software;
+	@ApiModelProperty(value = "系统版本", required = true)
+	private String linux_version_system;
+	@ApiModelProperty(value = "内核版本", required = true)
+	private String linux_version_kernel;
 	@ApiModelProperty(value = "学校名称", required = true)
 	private String schoolName;
 	public String getSchoolName() {
@@ -53,12 +53,6 @@ public class Robot_AndroidSoftWareVersion extends RInfo {
 	public void setDeviceNo(String deviceNo) {
 		this.deviceNo = deviceNo;
 	}
-	@Override
-	public String toString() {
-		return "Robot_AndroidSoftWareVersion [deviceNo=" + deviceNo + ", andriod_version_software="
-				+ andriod_version_software + ", andriod_version_system=" + andriod_version_system
-				+ ", andriod_version_kernel=" + andriod_version_kernel + "]";
-	}
 	
 	public String getSystemType() {
 		return systemType;
@@ -66,22 +60,28 @@ public class Robot_AndroidSoftWareVersion extends RInfo {
 	public void setSystemType(String systemType) {
 		this.systemType = systemType;
 	}
-	public String getAndriod_version_software() {
-		return andriod_version_software;
+	public String getLinux_version_software() {
+		return linux_version_software;
 	}
-	public void setAndriod_version_software(String andriod_version_software) {
-		this.andriod_version_software = andriod_version_software;
+	public void setLinux_version_software(String linux_version_software) {
+		this.linux_version_software = linux_version_software;
 	}
-	public String getAndriod_version_system() {
-		return andriod_version_system;
+	public String getLinux_version_system() {
+		return linux_version_system;
 	}
-	public void setAndriod_version_system(String andriod_version_system) {
-		this.andriod_version_system = andriod_version_system;
+	public void setLinux_version_system(String linux_version_system) {
+		this.linux_version_system = linux_version_system;
 	}
-	public String getAndriod_version_kernel() {
-		return andriod_version_kernel;
+	public String getLinux_version_kernel() {
+		return linux_version_kernel;
 	}
-	public void setAndriod_version_kernel(String andriod_version_kernel) {
-		this.andriod_version_kernel = andriod_version_kernel;
+	public void setLinux_version_kernel(String linux_version_kernel) {
+		this.linux_version_kernel = linux_version_kernel;
+	}
+	@Override
+	public String toString() {
+		return "Robot_VersionInfo [deviceNo=" + deviceNo + ", linux_version_software=" + linux_version_software
+				+ ", linux_version_system=" + linux_version_system + ", linux_version_kernel=" + linux_version_kernel
+				+ "]";
 	}
 }

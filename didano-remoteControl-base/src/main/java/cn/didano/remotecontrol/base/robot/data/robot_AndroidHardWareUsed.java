@@ -26,7 +26,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @ApiModel
 @TypeAlias("安卓的硬件使用")
-public class Robot_AndroidHardWareUsed extends RInfo {
+public class robot_AndroidHardWareUsed extends rInfo {
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
 	@ApiModelProperty(value = "版本类型", required = true)

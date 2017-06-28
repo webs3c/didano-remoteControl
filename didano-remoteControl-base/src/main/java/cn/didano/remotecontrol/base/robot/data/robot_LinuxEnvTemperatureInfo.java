@@ -21,23 +21,26 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 照片的质量信息类
- * @Todo 
+ * @类名称：TemperatureInfo
+ * @类描述：上报环境温度信息
+ * @创建人：杨朝强
+ * @创建时间：2017年3月17日 下午3:38:14：
+ * @version
  */
 @ApiModel
-@TypeAlias("照片质量")
-public class Robot_PhotographicQualityInfo extends RInfo {
+@TypeAlias("linux运行环境温度")
+public class robot_LinuxEnvTemperatureInfo extends rInfo {
+
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
 	@ApiModelProperty(value = "版本类型", required = true)
 	private String systemType;
-	@ApiModelProperty(value = "最大信心指数", required = true)
-	private String confidence_statistics_max;
-	@ApiModelProperty(value = "平均的信心指数", required = true)
-	private String confidence_statistics_average;
-	@ApiModelProperty(value = "最小信心指数", required = true)
-	private String confidence_statistics_min;
-	//m_webSocket.sendTextMessage(QStringLiteral("{\"methodName\":\"reportPhotographicQualityInfo\",\"info\":{\"deviceNo\":\"2sf21\",\"acerageConfidenceIndex\":\"你是我的眼\",\"maximumConfidenceInfo\":\"3.2\",\"minimumConfidenceInfo\":\"5.1\"}}"));
+	@ApiModelProperty(value = "Linux板环境温度", required = true)
+	private String linux_env_temperature;
+	@ApiModelProperty(value = "Linux板CPU当前温度", required = true)
+	private String linux_cpu_temperature;
+	@ApiModelProperty(value = "得到Linux板CPU当前温度的时间", required = true)
+	private String linux_temperature_time;
 	@ApiModelProperty(value = "学校名称", required = true)
 	private String schoolName;
 	public String getSchoolName() {
@@ -59,23 +62,28 @@ public class Robot_PhotographicQualityInfo extends RInfo {
 	public void setSystemType(String systemType) {
 		this.systemType = systemType;
 	}
-	public String getConfidence_statistics_max() {
-		return confidence_statistics_max;
+	public String getLinux_env_temperature() {
+		return linux_env_temperature;
 	}
-	public void setConfidence_statistics_max(String confidence_statistics_max) {
-		this.confidence_statistics_max = confidence_statistics_max;
+	public void setLinux_env_temperature(String linux_env_temperature) {
+		this.linux_env_temperature = linux_env_temperature;
 	}
-	public String getConfidence_statistics_average() {
-		return confidence_statistics_average;
+	public String getLinux_cpu_temperature() {
+		return linux_cpu_temperature;
 	}
-	public void setConfidence_statistics_average(String confidence_statistics_average) {
-		this.confidence_statistics_average = confidence_statistics_average;
+	public void setLinux_cpu_temperature(String linux_cpu_temperature) {
+		this.linux_cpu_temperature = linux_cpu_temperature;
 	}
-	public String getConfidence_statistics_min() {
-		return confidence_statistics_min;
+	public String getLinux_temperature_time() {
+		return linux_temperature_time;
 	}
-	public void setConfidence_statistics_min(String confidence_statistics_min) {
-		this.confidence_statistics_min = confidence_statistics_min;
+	public void setLinux_temperature_time(String linux_temperature_time) {
+		this.linux_temperature_time = linux_temperature_time;
 	}
-	
+	@Override
+	public String toString() {
+		return "Robot_TemperatureInfo [deviceNo=" + deviceNo + ", linux_env_temperature=" + linux_env_temperature
+				+ ", linux_cpu_temperature=" + linux_cpu_temperature + ", linux_temperature_time="
+				+ linux_temperature_time + "]";
+	}
 }

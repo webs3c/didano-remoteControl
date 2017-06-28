@@ -15,29 +15,31 @@
  */
 package cn.didano.remotecontrol.base.robot.data;
 
+import org.mongodb.morphia.annotations.Entity;
 import org.springframework.data.annotation.TypeAlias;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 运行在线信息类
+ * 
+ * @author stephen.wang
+ * @Todo 没有安卓操作系统版本号
  */
 @ApiModel
-@TypeAlias("应用程序运行状态")
-public class Robot_AppRunningStatus extends RInfo {
+@TypeAlias("安卓的版本信息")
+public class robot_AndroidSoftWareVersion extends rInfo {
+	
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
 	@ApiModelProperty(value = "版本类型", required = true)
 	private String systemType;
-	@ApiModelProperty(value = "小诺Linux程序在线状态", required = true)
-	private String linux_app_status;
-	
-	@ApiModelProperty(value = "小诺Android程序在线状态", required = true)
-	private String android_app_status;
-	
-	@ApiModelProperty(value = "运动控制程序在线状态", required = true)
-	private String motion_app_status;
+	@ApiModelProperty(value = "Android程序版本号", required = true)
+	private String andriod_version_software;
+	@ApiModelProperty(value = "Andriod系统版本号", required = true)
+	private String andriod_version_system;
+	@ApiModelProperty(value = "Andriod内核版本号", required = true)
+	private String andriod_version_kernel;
 	@ApiModelProperty(value = "学校名称", required = true)
 	private String schoolName;
 	public String getSchoolName() {
@@ -52,7 +54,12 @@ public class Robot_AppRunningStatus extends RInfo {
 	public void setDeviceNo(String deviceNo) {
 		this.deviceNo = deviceNo;
 	}
-	
+	@Override
+	public String toString() {
+		return "Robot_AndroidSoftWareVersion [deviceNo=" + deviceNo + ", andriod_version_software="
+				+ andriod_version_software + ", andriod_version_system=" + andriod_version_system
+				+ ", andriod_version_kernel=" + andriod_version_kernel + "]";
+	}
 	
 	public String getSystemType() {
 		return systemType;
@@ -60,28 +67,22 @@ public class Robot_AppRunningStatus extends RInfo {
 	public void setSystemType(String systemType) {
 		this.systemType = systemType;
 	}
-	public String getLinux_app_status() {
-		return linux_app_status;
+	public String getAndriod_version_software() {
+		return andriod_version_software;
 	}
-	public void setLinux_app_status(String linux_app_status) {
-		this.linux_app_status = linux_app_status;
+	public void setAndriod_version_software(String andriod_version_software) {
+		this.andriod_version_software = andriod_version_software;
 	}
-	public String getAndroid_app_status() {
-		return android_app_status;
+	public String getAndriod_version_system() {
+		return andriod_version_system;
 	}
-	public void setAndroid_app_status(String android_app_status) {
-		this.android_app_status = android_app_status;
+	public void setAndriod_version_system(String andriod_version_system) {
+		this.andriod_version_system = andriod_version_system;
 	}
-	public String getMotion_app_status() {
-		return motion_app_status;
+	public String getAndriod_version_kernel() {
+		return andriod_version_kernel;
 	}
-	public void setMotion_app_status(String motion_app_status) {
-		this.motion_app_status = motion_app_status;
+	public void setAndriod_version_kernel(String andriod_version_kernel) {
+		this.andriod_version_kernel = andriod_version_kernel;
 	}
-	@Override
-	public String toString() {
-		return "Robot_OnLineInfo [deviceNo=" + deviceNo + ", linux_app_status=" + linux_app_status
-				+ ", android_app_status=" + android_app_status + ", motion_app_status=" + motion_app_status + "]";
-	}
-	
 }

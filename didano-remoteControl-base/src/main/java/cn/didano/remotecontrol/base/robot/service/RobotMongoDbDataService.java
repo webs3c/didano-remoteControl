@@ -4,21 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.didano.base.model.Robot_School;
-import cn.didano.remotecontrol.base.robot.data.Robot_AndroidHardWareUsed;
-import cn.didano.remotecontrol.base.robot.data.Robot_AndroidSoftWareVersion;
-import cn.didano.remotecontrol.base.robot.data.Robot_AppRunningStatus;
-import cn.didano.remotecontrol.base.robot.data.Robot_CalibrateInfo;
-import cn.didano.remotecontrol.base.robot.data.Robot_CandidatesInfo;
-import cn.didano.remotecontrol.base.robot.data.Robot_FinalRecogResult;
-import cn.didano.remotecontrol.base.robot.data.Robot_LinuxEnvTemperatureInfo;
-import cn.didano.remotecontrol.base.robot.data.Robot_LinuxHardWareInfo;
-import cn.didano.remotecontrol.base.robot.data.Robot_LinuxHardWareUsed;
-import cn.didano.remotecontrol.base.robot.data.Robot_LinuxSoftWareVersion;
-import cn.didano.remotecontrol.base.robot.data.Robot_LinuxStartUpRecord;
-import cn.didano.remotecontrol.base.robot.data.Robot_MotionSoftWareVersion;
-import cn.didano.remotecontrol.base.robot.data.Robot_PhotographicQualityInfo;
-import cn.didano.remotecontrol.base.robot.data.Robot_SelfLnspectionInfo;
-import cn.didano.remotecontrol.base.robot.data.Robot_UploadType;
+import cn.didano.remotecontrol.base.robot.data.robot_AndriodCPUTemperature;
+import cn.didano.remotecontrol.base.robot.data.robot_AndroidHardWareUsed;
+import cn.didano.remotecontrol.base.robot.data.robot_AndroidSoftWareVersion;
+import cn.didano.remotecontrol.base.robot.data.robot_AppRunningStatus;
+import cn.didano.remotecontrol.base.robot.data.robot_CalibrateInfo;
+import cn.didano.remotecontrol.base.robot.data.robot_CandidatesInfo;
+import cn.didano.remotecontrol.base.robot.data.robot_FinalRecogResult;
+import cn.didano.remotecontrol.base.robot.data.robot_LinuxEnvTemperatureInfo;
+import cn.didano.remotecontrol.base.robot.data.robot_LinuxHardWareInfo;
+import cn.didano.remotecontrol.base.robot.data.robot_LinuxHardWareUsed;
+import cn.didano.remotecontrol.base.robot.data.robot_LinuxSoftWareVersion;
+import cn.didano.remotecontrol.base.robot.data.robot_LinuxStartUpRecord;
+import cn.didano.remotecontrol.base.robot.data.robot_MotionSoftWareVersion;
+import cn.didano.remotecontrol.base.robot.data.robot_PhotographicQualityInfo;
+import cn.didano.remotecontrol.base.robot.data.robot_SelfLnspectionInfo;
+import cn.didano.remotecontrol.base.robot.data.robot_UploadType;
+import cn.didano.remotecontrol.base.robot.data.repository.AndriodCPUTemperatureRepository;
 import cn.didano.remotecontrol.base.robot.data.repository.AndroidHardWareUsedRepository;
 import cn.didano.remotecontrol.base.robot.data.repository.AndroidSoftWareVersionRepository;
 import cn.didano.remotecontrol.base.robot.data.repository.AppRunningStatusRepository;
@@ -77,7 +79,8 @@ public class RobotMongoDbDataService {
 	private CandidatesInfoRepository cir_sepository;
 	@Autowired
 	private AppRunningStatusRepository app_sepository;
-	
+	@Autowired
+	private AndriodCPUTemperatureRepository actr_sepository;
 	
 	
 	
@@ -86,7 +89,7 @@ public class RobotMongoDbDataService {
 	 * 
 	 * @return
 	 */
-	public Robot_LinuxSoftWareVersion findRVersionInfo(String device_no) {
+	public robot_LinuxSoftWareVersion findRVersionInfo(String device_no) {
 		return this.v_repository.findByDeviceNo(device_no);
 	}
 	
@@ -96,7 +99,7 @@ public class RobotMongoDbDataService {
 	 * @param record
 	 * @return 更新行数
 	 */
-	public Robot_LinuxSoftWareVersion saveRVersionInfo(Robot_LinuxSoftWareVersion linuxSoftWareVersion) {
+	public robot_LinuxSoftWareVersion saveRVersionInfo(robot_LinuxSoftWareVersion linuxSoftWareVersion) {
 		return this.v_repository.save(linuxSoftWareVersion);
 	}
 	
@@ -106,7 +109,7 @@ public class RobotMongoDbDataService {
 	 * @param record
 	 * @return 更新行数
 	 */
-	public Robot_AndroidSoftWareVersion saveRandroidSoftWareVersion(Robot_AndroidSoftWareVersion AndroidSoftWareVersion) {
+	public robot_AndroidSoftWareVersion saveRandroidSoftWareVersion(robot_AndroidSoftWareVersion AndroidSoftWareVersion) {
 		return this.ar_sepository.save(AndroidSoftWareVersion);
 	}
 	/**
@@ -115,7 +118,7 @@ public class RobotMongoDbDataService {
 	 * @param record
 	 * @return 更新行数
 	 */
-	public Robot_MotionSoftWareVersion saveRandroidSoftWareVersion(Robot_MotionSoftWareVersion motionSoftWareVersion) {
+	public robot_MotionSoftWareVersion saveRandroidSoftWareVersion(robot_MotionSoftWareVersion motionSoftWareVersion) {
 		return this.mv_sepository.save(motionSoftWareVersion);
 	}
 	
@@ -131,7 +134,7 @@ public class RobotMongoDbDataService {
 	 * 版本：1.0.0
 	 * @throws
 	 */
-	public Robot_LinuxEnvTemperatureInfo saveTemperatureInfo(Robot_LinuxEnvTemperatureInfo temperatureInfo) {
+	public robot_LinuxEnvTemperatureInfo saveTemperatureInfo(robot_LinuxEnvTemperatureInfo temperatureInfo) {
 		return this.t_repository.save(temperatureInfo);
 	}
 	
@@ -146,7 +149,7 @@ public class RobotMongoDbDataService {
 	 * 版本：1.0.0
 	 * @throws
 	 */
-	public Robot_LinuxHardWareUsed saveOperationInfo(Robot_LinuxHardWareUsed linuxHarfWareUsed) {
+	public robot_LinuxHardWareUsed saveOperationInfo(robot_LinuxHardWareUsed linuxHarfWareUsed) {
 		return this.o_repository.save(linuxHarfWareUsed);
 	}
 	
@@ -160,7 +163,7 @@ public class RobotMongoDbDataService {
 	 * 版本：1.0.0
 	 * @throws
 	 */
-	public Robot_CandidatesInfo saveCandidatesInfo(Robot_CandidatesInfo candidatesInfo) {
+	public robot_CandidatesInfo saveCandidatesInfo(robot_CandidatesInfo candidatesInfo) {
 		return this.cir_sepository.save(candidatesInfo);
 	}
 	
@@ -174,7 +177,7 @@ public class RobotMongoDbDataService {
 	 * 版本：1.0.0
 	 * @throws
 	 */
-	public Robot_FinalRecogResult saveFinalRecogResult(Robot_FinalRecogResult inalRecogResult) {
+	public robot_FinalRecogResult saveFinalRecogResult(robot_FinalRecogResult inalRecogResult) {
 		return this.fr_sepository.save(inalRecogResult);
 	}
 	
@@ -189,7 +192,7 @@ public class RobotMongoDbDataService {
 	 * 版本：1.0.0
 	 * @throws
 	 */
-	public Robot_AndroidHardWareUsed saveAndroidHardWareUsed(Robot_AndroidHardWareUsed androidHardWareUsed) {
+	public robot_AndroidHardWareUsed saveAndroidHardWareUsed(robot_AndroidHardWareUsed androidHardWareUsed) {
 		return this.aur_sepository.save(androidHardWareUsed);
 	}
 	
@@ -203,7 +206,7 @@ public class RobotMongoDbDataService {
 	 * 版本：1.0.0
 	 * @throws
 	 */
-	public Robot_LinuxStartUpRecord saveLinuxStartUpRecord(Robot_LinuxStartUpRecord linuxStartUpRecord) {
+	public robot_LinuxStartUpRecord saveLinuxStartUpRecord(robot_LinuxStartUpRecord linuxStartUpRecord) {
 		return this.lsur_sepository.save(linuxStartUpRecord);
 	}
 	
@@ -217,7 +220,7 @@ public class RobotMongoDbDataService {
 	 * 版本：1.0.0
 	 * @throws
 	 */
-	public Robot_SelfLnspectionInfo saveSelfLnspectionInfo(Robot_SelfLnspectionInfo selfLnspectionInfo) {
+	public robot_SelfLnspectionInfo saveSelfLnspectionInfo(robot_SelfLnspectionInfo selfLnspectionInfo) {
 		return this.slr_sepository.save(selfLnspectionInfo);
 	}
 	
@@ -232,7 +235,7 @@ public class RobotMongoDbDataService {
 	 * 版本：1.0.0
 	 * @throws
 	 */
-	public Robot_LinuxHardWareInfo saveLinuxHardWareInfo(Robot_LinuxHardWareInfo linuxHardWareInfo) {
+	public robot_LinuxHardWareInfo saveLinuxHardWareInfo(robot_LinuxHardWareInfo linuxHardWareInfo) {
 		return this.lw_sepository.save(linuxHardWareInfo);
 	}
 	/**
@@ -245,7 +248,7 @@ public class RobotMongoDbDataService {
 	 * 版本：1.0.0
 	 * @throws
 	 */
-	public Robot_AppRunningStatus saveAppRunningStatus(Robot_AppRunningStatus calibrateInfo) {
+	public robot_AppRunningStatus saveAppRunningStatus(robot_AppRunningStatus calibrateInfo) {
 		return this.app_sepository.save(calibrateInfo);
 	}
 	/**
@@ -258,7 +261,7 @@ public class RobotMongoDbDataService {
 	 * 版本：1.0.0
 	 * @throws
 	 */
-	public Robot_CalibrateInfo saveCalibrateInfo(Robot_CalibrateInfo calibrateInfo) {
+	public robot_CalibrateInfo saveCalibrateInfo(robot_CalibrateInfo calibrateInfo) {
 		return this.clr_sepository.save(calibrateInfo);
 	}
 	/**
@@ -271,8 +274,21 @@ public class RobotMongoDbDataService {
 	 * 版本：1.0.0
 	 * @throws
 	 */
-	public Robot_PhotographicQualityInfo savePhotographicQualityInfo(Robot_PhotographicQualityInfo onLineInfo) {
+	public robot_PhotographicQualityInfo savePhotographicQualityInfo(robot_PhotographicQualityInfo onLineInfo) {
 		return this.p_sepository.save(onLineInfo);
+	}
+	/**
+	 * 创建人：SevenYang
+	 * @创建时间：2017年3月17日 下午4:13:13
+	 * @Title: saveTemperatureInfo
+	 * @Description: （保存机器人运行在线信息）
+	 * @return saveOperationInfo 
+	 * 修改人：
+	 * 版本：1.0.0
+	 * @throws
+	 */
+	public robot_AndriodCPUTemperature saveAndriodCPUTemperature(robot_AndriodCPUTemperature andriodCPUTemperature) {
+		return this.actr_sepository.save(andriodCPUTemperature);
 	}
 	
 	/**
@@ -288,7 +304,7 @@ public class RobotMongoDbDataService {
 	public Robot_School saveRobot_school(Robot_School robot_school) {
 		return this.sr_sepository.save(robot_school);
 	}
-	public Robot_UploadType saveRobot_UploadType(Robot_UploadType robot_UploadType) {
+	public robot_UploadType saveRobot_UploadType(robot_UploadType robot_UploadType) {
 		return this.tn_sepository.save(robot_UploadType);
 	}
 }

@@ -34,8 +34,10 @@ import io.swagger.annotations.ApiModel;
  * 
  * @author stephen.wang
  */
+@Document
+@QueryEntity
 @ApiModel
-public class RInfo {
+public class rInfo {
 
 	@Id // 自动生成唯一索引号
 	@JsonIgnore // json转换，忽略该属性
