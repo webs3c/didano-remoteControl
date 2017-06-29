@@ -74,12 +74,15 @@ public class RobotFindGraphController {
 			}else{
 				findSchollName = fsnr_SchoolService.findSheBei(system_type);
 			}
-			System.err.println(system_type);
-			// 直接保存信息
-			
-			for (Robot_School robot_School : findSchollName) {
-				System.err.println(robot_School.getSchoolName());
-			}
+			System.err.println(system_type+"");
+			//将重复的学校取出来后重新进行组装
+			for  ( int  i  =   0 ; i  <  findSchollName.size()  -   1 ; i ++ )  {       
+		      for  ( int  j  =  findSchollName.size()  -   1 ; j  >  i; j -- )  {       
+		           if  (findSchollName.get(j).getSchoolName().equals(findSchollName.get(i).getSchoolName()))  {       
+		        	   findSchollName.remove(j);       
+		            }        
+		        }        
+		      }
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			out.setBackTypeWithLog(BackType.FAIL_DIAGNOSE_MONGO_SAVE, e.getMessage());
@@ -87,8 +90,24 @@ public class RobotFindGraphController {
 		return findSchollName;
 	}
 	
-	
-	
+	@PostMapping(value = "findDeviceNo/{schoolName}/{system_type}")
+	@ApiOperation(value = "查询设备号所对应的学校", notes = "查询设备号所对应的学校")
+	@ResponseBody
+	public List<Robot_School> findDeviceNo(@PathVariable("schoolName") String schoolName,@PathVariable("system_type") Integer system_type) {
+		System.err.println("查询所有的设备"+schoolName);
+		Out<String> out = new Out<String>();
+		List<Robot_School> findSchollName=null;
+		Robot_School rs=new Robot_School();
+		try {
+			rs.setSystemType(system_type);
+			rs.setSchoolName(schoolName);
+			findSchollName=fsnr_SchoolService.findDeviceNo(rs);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			out.setBackTypeWithLog(BackType.FAIL_DIAGNOSE_MONGO_SAVE, e.getMessage());
+		}
+		return findSchollName;
+	}
 	/**
 	 * ==============================================linu硬件的使用==================================================
 	 * 不带翻页
@@ -103,11 +122,19 @@ public class RobotFindGraphController {
 			//由于硬件的使用数据非诚的多，所以在初次显示曲线图时只查询一个小时
 			Date beginDate = new Date();
 			Calendar calendar = Calendar.getInstance();
-			calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 2);
+			calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
 			System.err.println(beginDate+"-----------------"+calendar.getTime());
 			query = robotMongoDbFindService.findRobot_LinuxHardWareUsed(beginDate,calendar.getTime(),system_type);
-			for (robot_LinuxHardWareUsed robot_LinuxHardWareUsed : query) {
-				System.err.println(robot_LinuxHardWareUsed.getDeviceNo()+"-----------");
+			int num=1;
+			for(int i=1;i>0;i++){
+				num=num+1;
+				if(query.size()<1){
+					calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - num);
+					query = robotMongoDbFindService.findRobot_LinuxHardWareUsed(beginDate,calendar.getTime(),system_type);
+				}else{
+					return query;
+				}
+				System.err.println(num);
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -170,13 +197,22 @@ public class RobotFindGraphController {
 	public List<robot_PhotographicQualityInfo> queryPhotographicQualityInfo(@PathVariable("system_type") String system_type) {
 		List<robot_PhotographicQualityInfo> rPhotographicQualityInfo=null;
 		try {
-			rPhotographicQualityInfo = robotMongoDbFindService.queryPhotographicQualityInfo(system_type);
-			System.err.println(rPhotographicQualityInfo.size());
-			int i=0;
-			for (robot_PhotographicQualityInfo robot_PhotographicQualityInfo : rPhotographicQualityInfo) {
-				i=i+1;
+			//由于硬件的使用数据非诚的多，所以在初次显示曲线图时只查询一个小时
+			Date beginDate = new Date();
+			Calendar calendar = Calendar.getInstance();
+			calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
+			rPhotographicQualityInfo = robotMongoDbFindService.queryPhotographicQualityInfo(beginDate,calendar.getTime(),system_type);
+			int num=1;
+			for(int i=1;i>0;i++){
+				num=num+1;
+				if(rPhotographicQualityInfo.size()<1){
+					calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - num);
+					rPhotographicQualityInfo = robotMongoDbFindService.queryPhotographicQualityInfo(beginDate,calendar.getTime(),system_type);
+				}else{
+					return rPhotographicQualityInfo;
+				}
+				System.err.println(num);
 			}
-			System.err.println(i);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -194,6 +230,7 @@ public class RobotFindGraphController {
 	public List<robot_PhotographicQualityInfo> queryPhotographicQualityInfo(@PathVariable("system_type") String system_type,@PathVariable("qsTime") String qsTime,@PathVariable("jsTime") String jsTime) {
 		List<robot_PhotographicQualityInfo> rPhotographicQualityInfo=null;
 		try {
+			
 			//将string类型转换为时间类型
 			java.text.SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
 			Date jsTime1 =  formatter.parse(jsTime);
@@ -239,7 +276,22 @@ public class RobotFindGraphController {
 	public List<robot_CalibrateInfo> queryCalibrateInfo(@PathVariable("system_type") String system_type) {
 		List<robot_CalibrateInfo> rCalibrateInfo=null;
 		try {
-			rCalibrateInfo = robotMongoDbFindService.queryCalibrateInfo(system_type);
+			//由于硬件的使用数据非诚的多，所以在初次显示曲线图时只查询一个小时
+			Date beginDate = new Date();
+			Calendar calendar = Calendar.getInstance();
+			calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
+			rCalibrateInfo = robotMongoDbFindService.queryCalibrateInfo(beginDate,calendar.getTime(),system_type);
+			int num=1;
+			for(int i=1;i>0;i++){
+				num=num+1;
+				if(rCalibrateInfo.size()<1){
+					calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - num);
+					rCalibrateInfo = robotMongoDbFindService.queryCalibrateInfo(beginDate,calendar.getTime(),system_type);
+				}else{
+					return rCalibrateInfo;
+				}
+				System.err.println(num);
+			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -293,7 +345,23 @@ public class RobotFindGraphController {
 	public List<robot_CandidatesInfo> queryCandidatesInfo(@PathVariable("system_type") String system_type) {
 		List<robot_CandidatesInfo> rCandidatesInfo=null;
 		try {
-			rCandidatesInfo = robotMongoDbFindService.queryCandidatesInfo(system_type);
+			//由于硬件的使用数据非诚的多，所以在初次显示曲线图时只查询一个小时
+			Date beginDate = new Date();
+			Calendar calendar = Calendar.getInstance();
+			calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
+			rCandidatesInfo = robotMongoDbFindService.queryCandidatesInfo(beginDate,calendar.getTime(),system_type);
+			int num=1;
+			for(int i=1;i>0;i++){
+				num=num+1;
+				if(rCandidatesInfo.size()<1){
+					calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - num);
+					
+					rCandidatesInfo = robotMongoDbFindService.queryCandidatesInfo(beginDate,calendar.getTime(),system_type);
+				}else{
+					return rCandidatesInfo;
+				}
+				System.err.println(num);
+			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}

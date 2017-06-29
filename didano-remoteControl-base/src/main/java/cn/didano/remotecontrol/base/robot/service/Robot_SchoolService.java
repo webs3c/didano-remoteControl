@@ -49,8 +49,14 @@ public class Robot_SchoolService {
 		 List<Robot_School> findSchollName = fsnr_repository.findSheBei(system_type);
 		 return findSchollName;
 	}
+	
 	public List<Robot_School> findSheBei() {
 		 List<Robot_School> findSchollName = fsnr_repository.findSheBei1();
+		 return findSchollName;
+	}
+	//查询该学校所对应的设备编号
+	public List<Robot_School> findDeviceNo(Robot_School rs){
+		List<Robot_School> findSchollName = fsnr_repository.findDeviceNo(rs);
 		 return findSchollName;
 	}
 }

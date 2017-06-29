@@ -30,5 +30,15 @@
      on a.school_id=b.id 
      where a.deleted=0 and b.deleted=0
   </select>
+  
+  <select id="findDeviceNo" parameterType="cn.didano.base.model.Robot_School" resultMap="BaseResultMap">
+     SELECT 
+     a.no
+     FROM `tb_device` a 
+     left join tb_school b 
+     on a.school_id=b.id 
+     where a.device_type=#{systemType} and b.title=#{schoolName} and b.deleted=0 and a.deleted=0
+  </select>
+  
 </mapper>
 

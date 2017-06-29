@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
-import cn.didano.remotecontrol.base.robot.data.robot_CalibrateInfo;
 import cn.didano.remotecontrol.base.robot.data.robot_CandidatesInfo;
 /**
  * 硬件信息容器
