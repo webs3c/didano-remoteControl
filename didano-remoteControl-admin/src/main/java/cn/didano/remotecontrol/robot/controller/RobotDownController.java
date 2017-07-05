@@ -71,6 +71,7 @@ public class RobotDownController {
 		if (RobotWebsocketServer.getRobotInfoMap() != null) {
 			DownInfo downInfo = new DownInfo();
 			downInfo.setMethodName("reportAndroidSoftWareVersion");
+			downInfo.setService_no(service_no);
 			try{
 				RobotWebsocketServer.sendMessage(service_no, downInfo);
 				back.setBackTypeWithLog(BackType.SUCCESS_DIAGNOSE_EXCUTE);

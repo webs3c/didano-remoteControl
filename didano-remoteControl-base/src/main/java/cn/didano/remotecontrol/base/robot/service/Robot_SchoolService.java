@@ -59,4 +59,9 @@ public class Robot_SchoolService {
 		List<Robot_School> findSchollName = fsnr_repository.findDeviceNo(rs);
 		 return findSchollName;
 	}
+	
+	public Robot_School studentNumber(Integer system_type){
+		Robot_School studentNumber = fsnr_repository.studentNumber(system_type);
+		 return studentNumber;
+	}
 }

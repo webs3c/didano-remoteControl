@@ -16,4 +16,6 @@ public interface FinalRecogResultRepository extends MongoRepository<robot_FinalR
 	public  List<robot_FinalRecogResult> findBySystemType(String system_type);
 	@Query("{'$and':[{'createDate':{'$gt' : ?1, '$lt' : ?0}},{'SystemType':?2}]}")
 	public List<robot_FinalRecogResult> findBySystemType1(Date createDate1,Date createDate2,String system_type);
+	@Query("{'$and':[{'createDate':{'$gt' : ?1, '$lt' : ?0}},{'deviceNo':?2}]}")
+	public List<robot_FinalRecogResult> findBySystemType2(Date createDate1,Date createDate2,String deviceNo);
 }

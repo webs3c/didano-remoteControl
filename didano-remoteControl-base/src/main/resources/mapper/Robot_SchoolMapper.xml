@@ -16,7 +16,7 @@
   </select>
   <select id="findSheBei" parameterType="INTEGER" resultMap="BaseResultMap">
      SELECT 
-     b.title,a.*
+     b.title,a.no,b.id as device_type
      FROM `tb_device` a 
      left join tb_school b 
      on a.school_id=b.id 
@@ -33,12 +33,15 @@
   
   <select id="findDeviceNo" parameterType="cn.didano.base.model.Robot_School" resultMap="BaseResultMap">
      SELECT 
-     a.no
+     a.no,
+     b.id
      FROM `tb_device` a 
      left join tb_school b 
      on a.school_id=b.id 
      where a.device_type=#{systemType} and b.title=#{schoolName} and b.deleted=0 and a.deleted=0
   </select>
-  
+   <select id="studentNumber" parameterType="INTEGER" resultMap="BaseResultMap">
+    SELECT COUNT(1) device_type FROM tb_student where school_id=#{system_type} and deleted=0
+  </select>
 </mapper>
 

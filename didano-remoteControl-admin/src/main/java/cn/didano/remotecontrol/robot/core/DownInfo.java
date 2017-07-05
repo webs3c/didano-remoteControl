@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 public class DownInfo {
 	private String methodName;
 	private JsonNode info;
+	private String service_no;
 	public String getMethodName() {
 		return methodName;
 	}
@@ -20,5 +21,11 @@ public class DownInfo {
 	}
 	public void setInfo(JsonNode info) {
 		this.info = info;
+	}
+	public String getService_no() {
+		return service_no;
+	}
+	public void setService_no(String service_no) {
+		this.service_no = service_no;
 	}
 }

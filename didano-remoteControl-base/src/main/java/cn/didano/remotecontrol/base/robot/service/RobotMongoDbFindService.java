@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.didano.base.model.Robot_School;
+import cn.didano.remotecontrol.base.robot.data.robot_AndriodCPUTemperature;
 import cn.didano.remotecontrol.base.robot.data.robot_AndroidHardWareUsed;
 import cn.didano.remotecontrol.base.robot.data.robot_AndroidSoftWareVersion;
 import cn.didano.remotecontrol.base.robot.data.robot_AppRunningStatus;
@@ -22,6 +23,7 @@ import cn.didano.remotecontrol.base.robot.data.robot_MotionSoftWareVersion;
 import cn.didano.remotecontrol.base.robot.data.robot_PhotographicQualityInfo;
 import cn.didano.remotecontrol.base.robot.data.robot_SelfLnspectionInfo;
 import cn.didano.remotecontrol.base.robot.data.robot_UploadType;
+import cn.didano.remotecontrol.base.robot.data.repository.AndriodCPUTemperatureRepository;
 import cn.didano.remotecontrol.base.robot.data.repository.AndroidHardWareUsedRepository;
 import cn.didano.remotecontrol.base.robot.data.repository.AndroidSoftWareVersionRepository;
 import cn.didano.remotecontrol.base.robot.data.repository.AppRunningStatusRepository;
@@ -79,6 +81,8 @@ public class RobotMongoDbFindService {
 	private SchoolRepository sr_repository;
 	@Autowired
 	private TypeNameRepository tn_repository;
+	@Autowired
+	private AndriodCPUTemperatureRepository acr_repository;
 	
 	
 	public List<robot_LinuxSoftWareVersion> queryLinuxSoftWareVersion(String system_type) {
@@ -126,6 +130,9 @@ public class RobotMongoDbFindService {
 		return this.str_repository.findBySystemType(system_type);
 	}
 	
+	/*public List<robot_AndriodCPUTemperature> queryAndriodCPUTemperature(String system_type){
+		return this.acr_repository.findBySystemType(system_type);
+	}*/
 	
 	
 	//___________________________版本信息曲线图查询___________________
@@ -160,6 +167,9 @@ public class RobotMongoDbFindService {
 	//+++++++++++++++++++++++++++++++++++最终结果信息查询+++++++++++++++++++++++++++++++++++++++++++++
 	public List<robot_FinalRecogResult> queryFinalRecogResult(Date time1,Date time2,String system_type) {
 		return this.frrr_repository.findBySystemType1(time1,time2,system_type);
+	}
+	public List<robot_FinalRecogResult> queryFinalRecogResult1(Date time1,Date time2,String deviceNo) {
+		return this.frrr_repository.findBySystemType2(time1,time2,deviceNo);
 	}
 	//+++++++++++++++++++++++++++++++++++板子温度信息查询+++++++++++++++++++++++++++++++++++++++++++++
 	public List<robot_LinuxEnvTemperatureInfo> queryLinuxEnvTemperatureInfo(Date time1,Date time2,String system_type) {
@@ -201,7 +211,10 @@ public class RobotMongoDbFindService {
 	public List<robot_SelfLnspectionInfo> querySelfLnspectionInfo(Date time1,Date time2,String system_type) {
 		return this.str_repository.findByCreateDate1(time1,time2,system_type);
 	}
-	//+++++++++++++++++++++++++++++++++++板子温度信息查询+++++++++++++++++++++++++++++++++++++++++++++
+	//+++++++++++++++++++++++++++++++++++安卓cpu温度信息+++++++++++++++++++++++++++++++++++++++++++++
+	public List<robot_AndriodCPUTemperature> queryAndriodCPUTemperature(Date time1,Date time2,String system_type){
+		return this.acr_repository.findByCreateDate1(time1,time2,system_type);
+	}
 	//+++++++++++++++++++++++++++++++++++板子温度信息查询+++++++++++++++++++++++++++++++++++++++++++++
 	//+++++++++++++++++++++++++++++++++++板子温度信息查询+++++++++++++++++++++++++++++++++++++++++++++
 	

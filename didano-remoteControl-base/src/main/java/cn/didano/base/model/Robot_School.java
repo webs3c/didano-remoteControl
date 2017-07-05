@@ -37,6 +37,8 @@ public class Robot_School extends rInfo {
 	@ApiModelProperty(value = "设备类型", required = true)
 	public Integer systemType;
 	
+	@ApiModelProperty(value = "在线说明", required = true)
+	public String isOnline;
 	
 	public Integer getSystemType() {
 		return systemType;
@@ -61,4 +63,13 @@ public class Robot_School extends rInfo {
 	public void setSchoolName(String schoolName) {
 		this.schoolName = schoolName;
 	}
+
+	public String getIsOnline() {
+		return isOnline;
+	}
+
+	public void setIsOnline(String isOnline) {
+		this.isOnline = isOnline;
+	}
+	
 }

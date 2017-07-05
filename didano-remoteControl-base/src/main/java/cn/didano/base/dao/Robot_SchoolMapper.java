@@ -10,4 +10,5 @@ public interface Robot_SchoolMapper {
 	List<Robot_School> findSheBei(Integer system_type);
 	List<Robot_School> findSheBei1();
 	List<Robot_School> findDeviceNo(Robot_School rs);
+	Robot_School studentNumber(Integer system_type);
 }

@@ -32,6 +32,8 @@ public class QRobot_School extends EntityPathBase<Robot_School> {
     // inherited
     public final org.bson.types.QObjectId id;
 
+    public final StringPath isOnline = createString("isOnline");
+
     public final StringPath schoolName = createString("schoolName");
 
     public final NumberPath<Integer> systemType = createNumber("systemType", Integer.class);

@@ -410,7 +410,6 @@ public class RobotUpController {
 			@ApiParam(value = "远程机器人照片质量信息", required = true) @RequestBody robot_PhotographicQualityInfo photographicQualityInfo) {
 		logger.info("访问  RobotController :reportreportMeetSpeedInfo reportMeetSpeedInfo=" + photographicQualityInfo);
 		System.err.println("上报机器人的照片质量信息");
-		System.err.println(photographicQualityInfo.getId()+"______________________________");
 		Out<String> out = new Out<String>();
 		try {
 			// 直接保存信息
@@ -439,7 +438,6 @@ public class RobotUpController {
 			@ApiParam(value = "安卓cpu温度", required = true) @RequestBody robot_AndriodCPUTemperature andriodCPUTemperature) {
 		logger.info("访问  RobotController :reportreportMeetSpeedInfo reportMeetSpeedInfo=" + andriodCPUTemperature);
 		System.err.println("上报机器人的安卓cpu温度");
-		System.err.println(andriodCPUTemperature.getId()+"______________________________");
 		Out<String> out = new Out<String>();
 		try {
 			// 直接保存信息
@@ -528,7 +526,6 @@ public class RobotUpController {
 		Robot_School findSchollName=new Robot_School();
 		try {
 			// 直接保存信息
-			System.err.println("________________________________________________________");
 			Robot_School r_school=new Robot_School();
 			r_school.setDeviceNo(deviceNo);
 			findSchollName = fsnr_SchoolService.findSchollName(r_school);

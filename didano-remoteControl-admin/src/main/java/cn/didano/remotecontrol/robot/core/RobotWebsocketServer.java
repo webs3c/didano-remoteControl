@@ -1,6 +1,10 @@
 package cn.didano.remotecontrol.robot.core;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpSession;
@@ -20,6 +24,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import cn.didano.base.model.Robot_School;
 import cn.didano.remotecontrol.app.config.GetHttpSessionConfigurator;
 import cn.didano.remotecontrol.base.exception.DBExceptionEnums;
 import cn.didano.remotecontrol.base.exception.ServiceException;
@@ -83,6 +88,7 @@ public class RobotWebsocketServer {
 	@OnClose
 	public void onClose() {
 		subOnlineCount(); // 在线数减1
+		//删除设备号
 		logger.info("有一连接关闭！当前在线机器人为" + getOnlineCount());
 	}
 
@@ -160,7 +166,12 @@ public class RobotWebsocketServer {
 	 */
 	public static synchronized void sendMessage(String service_no, DownInfo downInfo) throws ServiceException{
 		ConcurrentHashMap<String, RobotSession> tmp = RobotWebsocketServer.getRobotInfoMap();
+		int size = robotInfoMap.size();
+		
 		RobotSession session = RobotWebsocketServer.getRobotInfoMap().get(service_no);
+		for(ConcurrentHashMap.Entry<String,RobotSession> e: tmp.entrySet() ){
+	        System.out.println("键:"+e.getKey()+", 值:"+e.getValue().getService_no());
+		}
 		if (session != null) {
 			ObjectMapper mapper = new ObjectMapper();
 			String data = null;
@@ -255,6 +266,25 @@ public class RobotWebsocketServer {
 	public void setSession(Session session) {
 		this.session = session;
 	}
+	
+	//取出session中的设备号
+	public List<Robot_School> getSessionValue(){
+		List<Robot_School> listR=new ArrayList<Robot_School>();
+		
+		
+		Collection<RobotSession> values = robotInfoMap.values();
+		for (RobotSession robotSession : values) {
+			Robot_School r=new Robot_School();
+			String service_no2 = robotSession.getService_no();
+			System.out.println(service_no2+"----------------------");
+			r.setDeviceNo(service_no2);
+			listR.add(r);
+		}
+		for (Robot_School robot_School : listR) {
+			System.err.println(robot_School.getDeviceNo()+"--------集合数据");
+		}
+		return listR;
+	} 
 	
 	
 }

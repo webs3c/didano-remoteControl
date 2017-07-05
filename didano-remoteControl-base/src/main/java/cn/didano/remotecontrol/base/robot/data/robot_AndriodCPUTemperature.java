@@ -30,6 +30,8 @@ import io.swagger.annotations.ApiModelProperty;
 public class robot_AndriodCPUTemperature extends rInfo {
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
+	@ApiModelProperty(value = "类型", required = true)
+	private String systemType;
 	@ApiModelProperty(value = "Android板CPU当前温度", required = true)
 	private String android_cpu_temperature;
 	@ApiModelProperty(value = "Android板获取温度的时间", required = true)
@@ -50,6 +52,12 @@ public class robot_AndriodCPUTemperature extends rInfo {
 	}
 	public String getAndroid_cpu_temperature() {
 		return android_cpu_temperature;
+	}
+	public String getSystemType() {
+		return systemType;
+	}
+	public void setSystemType(String systemType) {
+		this.systemType = systemType;
 	}
 	public void setAndroid_cpu_temperature(String android_cpu_temperature) {
 		this.android_cpu_temperature = android_cpu_temperature;

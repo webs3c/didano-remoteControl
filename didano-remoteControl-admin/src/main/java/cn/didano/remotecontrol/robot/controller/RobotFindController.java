@@ -1,15 +1,10 @@
 package cn.didano.remotecontrol.robot.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.mongodb.morphia.Datastore;
-import org.mongodb.morphia.Morphia;
-import org.mongodb.morphia.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.didano.base.model.Robot_School;
+import cn.didano.remotecontrol.base.robot.data.robot_AndriodCPUTemperature;
 import cn.didano.remotecontrol.base.robot.data.robot_AndroidHardWareUsed;
 import cn.didano.remotecontrol.base.robot.data.robot_AndroidSoftWareVersion;
 import cn.didano.remotecontrol.base.robot.data.robot_AppRunningStatus;
@@ -54,7 +50,6 @@ public class RobotFindController {
 	public int num=12;
 	
 	public Date beginDate = new Date();
-	
 	/**
 	 * 安卓版本信息查询----------------------------------------------------------------------------------------------------------------------------
 	 * 不带翻页
@@ -350,6 +345,44 @@ public class RobotFindController {
 		}
 		return rSelfLnspectionInfo;
 	}
+	
+	
+	/**
+	 *安卓cpu温度信息----------------------------------------------------------------------------------------------------------------------------
+	 * 不带翻页
+	 * @return
+	 */
+	@RequestMapping(value = "queryAndriodCPUTemperature/{system_type}", method = {RequestMethod.GET, RequestMethod.POST})
+	@ApiOperation(value = "安卓cpu温度信息", notes = "安卓cpu温度信息")
+	@ResponseBody
+	public List<robot_AndriodCPUTemperature> queryAndriodCPUTemperature(@PathVariable("system_type") String system_type) {
+		List<robot_AndriodCPUTemperature> rSelfLnspectionInfo=null;
+		try {
+			Calendar calendar = Calendar.getInstance();
+			calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) -12);
+			rSelfLnspectionInfo = robotMongoDbFindService.queryAndriodCPUTemperature(beginDate,calendar.getTime(),system_type);
+			int num=12;
+			for(int i=1;i>0;i++){
+				num=num+1;
+				if(rSelfLnspectionInfo.size()<1){
+					calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - num);
+					rSelfLnspectionInfo = robotMongoDbFindService.queryAndriodCPUTemperature(beginDate,calendar.getTime(),system_type);
+				}else{
+					return rSelfLnspectionInfo;
+				}
+				System.err.println(num);
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return rSelfLnspectionInfo;
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

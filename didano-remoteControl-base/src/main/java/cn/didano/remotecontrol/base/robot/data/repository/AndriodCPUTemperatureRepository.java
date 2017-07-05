@@ -13,6 +13,9 @@ import cn.didano.remotecontrol.base.robot.data.robot_AndriodCPUTemperature;
  */
 public interface AndriodCPUTemperatureRepository extends MongoRepository<robot_AndriodCPUTemperature, String> {
 	public robot_AndriodCPUTemperature findByDeviceNo(String device_no);
+	
+	//public List<robot_AndriodCPUTemperature> findBySystemType(String system_type);
+	
 	@Query("{'$and':[{'createDate':{'$gt' : ?1, '$lt' : ?0}},{'SystemType':?2}]}")
 	public List<robot_AndriodCPUTemperature> findByCreateDate1(Date createDate1,Date createDate2,String system_type);
 }

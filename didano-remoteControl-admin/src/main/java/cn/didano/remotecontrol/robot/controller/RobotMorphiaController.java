@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.didano.remotecontrol.base.robot.data.robot_AndriodCPUTemperature;
 import cn.didano.remotecontrol.base.robot.data.robot_AndroidHardWareUsed;
 import cn.didano.remotecontrol.base.robot.data.robot_AndroidSoftWareVersion;
 import cn.didano.remotecontrol.base.robot.data.robot_AppRunningStatus;
@@ -313,4 +314,24 @@ public class RobotMorphiaController {
 		}
 		return query;
 	}
+	/**
+	 * ===============================================自检信息数据查询使用==================================================
+	 * 不带翻页
+	 * @return
+	 */
+	@RequestMapping(value = "queryAndriodCPUTemperature/{arr}/{system_type}", method = {RequestMethod.GET, RequestMethod.POST})
+	@ApiOperation(value = "自检信息数据查询使用", notes = "自检信息数据查询使用")
+	@ResponseBody
+	public List<robot_AndriodCPUTemperature> queryAndriodCPUTemperature(@PathVariable("system_type") String system_type,@PathVariable("arr") String arr) {
+		
+		List<robot_AndriodCPUTemperature> query=null;
+		try {
+			System.err.println(arr+"++++++++++++"+system_type);
+			query = robotMorphiaService.queryAndriodCPUTemperature(arr,system_type);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return query;
+	}
+	
 }

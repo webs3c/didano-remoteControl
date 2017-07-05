@@ -38,6 +38,8 @@ public class Qrobot_AndriodCPUTemperature extends EntityPathBase<robot_AndriodCP
 
     public final StringPath schoolName = createString("schoolName");
 
+    public final StringPath systemType = createString("systemType");
+
     //inherited
     public final NumberPath<Integer> version;
 

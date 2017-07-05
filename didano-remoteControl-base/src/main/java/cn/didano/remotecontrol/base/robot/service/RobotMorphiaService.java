@@ -2,6 +2,7 @@ package cn.didano.remotecontrol.base.robot.service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -10,6 +11,7 @@ import org.mongodb.morphia.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.didano.remotecontrol.base.robot.data.robot_AndriodCPUTemperature;
 import cn.didano.remotecontrol.base.robot.data.robot_AndroidHardWareUsed;
 import cn.didano.remotecontrol.base.robot.data.robot_AndroidSoftWareVersion;
 import cn.didano.remotecontrol.base.robot.data.robot_AppRunningStatus;
@@ -37,9 +39,19 @@ public class RobotMorphiaService {
 	@Autowired
 	private Datastore datastore;
 	//全局时间转换
-	SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public SimpleDateFormat formatter2=new SimpleDateFormat("yyyy-MM-dd");
 	
-	
+	//判断是否是指定的格式  是指定的格式转化为formatter  不是一律转换为formatter2
+	public boolean getDate(String str){
+		boolean a=true;
+		try {
+			formatter.parse(str);
+		} catch (Exception e) {
+			a=false;
+		}
+		return a;
+	}
 	
 	/**
 	 * ==============================================linu硬件表格数据查询使用==================================================
@@ -81,9 +93,17 @@ public class RobotMorphiaService {
 				}else if(!aa[1].equals("null") && aa[0].equals("linux_wifi_signal_time1")){
 					query1.filter("linux_wifi_signal_time =",aa[1]);
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate1")){
-					query1.filter("createDate >",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate >",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate >",formatter2.parse(aa[1]));
+					}
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate2")){
-					query1.filter("createDate <",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate <",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate <",formatter2.parse(aa[1]));
+					}
 				}
 			}
 			for (robot_LinuxHardWareUsed robot_LinuxHardWareUsed : query1) {
@@ -94,7 +114,6 @@ public class RobotMorphiaService {
 		}
 		return query;
 	}
-	
 	
 	/**
 	 * ==============================================照片表格数据查询使用==================================================
@@ -122,9 +141,17 @@ public class RobotMorphiaService {
 					//如果起始时间和结束时间都穿过来，就查询这两个时间之内的数据。(还要将string类型转换为时间类型)
 					query1.filter("confidence_statistics_min =",aa[1]);
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate1")){
-					query1.filter("createDate >",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate >",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate >",formatter2.parse(aa[1]));
+					}
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate2")){
-					query1.filter("createDate <",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate <",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate <",formatter2.parse(aa[1]));
+					}
 				}
 			}
 			for (robot_PhotographicQualityInfo photographicQualityInfo : query1) {
@@ -176,10 +203,18 @@ public class RobotMorphiaService {
 					query1.filter("linux_wifi_signal =",aa[1]);
 				}else if(!aa[1].equals("null") && aa[0].equals("linux_wifi_signal_time1")){
 					query1.filter("linux_wifi_signal_time =",aa[1]);
+				}else if(!aa[1].equals("null") && aa[0].equals("createDate1")){
+					if(getDate(aa[1])){
+						query1.filter("createDate >",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate >",formatter2.parse(aa[1]));
+					}
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate2")){
-					query1.filter("createDate <",formatter.parse(aa[1]));
-				}else if(!aa[1].equals("null") && aa[0].equals("systemType")){
-					query1.filter("systemType >",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate <",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate <",formatter2.parse(aa[1]));
+					}
 				}
 			}
 			for (robot_AndroidHardWareUsed robot_androidHardWareUsed : query1) {
@@ -218,9 +253,17 @@ public class RobotMorphiaService {
 					//如果起始时间和结束时间都穿过来，就查询这两个时间之内的数据。(还要将string类型转换为时间类型)
 					query1.filter("andriod_version_kernel =",aa[1]);
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate1")){
-					query1.filter("createDate >",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate >",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate >",formatter2.parse(aa[1]));
+					}
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate2")){
-					query1.filter("createDate <",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate <",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate <",formatter2.parse(aa[1]));
+					}
 				}
 			}
 			for (robot_AndroidSoftWareVersion androidSoftWareVersion : query1) {
@@ -259,9 +302,17 @@ public class RobotMorphiaService {
 					//如果起始时间和结束时间都穿过来，就查询这两个时间之内的数据。(还要将string类型转换为时间类型)
 					query1.filter("andriod_version_kernel =",aa[1]);
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate1")){
-					query1.filter("createDate >",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate >",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate >",formatter2.parse(aa[1]));
+					}
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate2")){
-					query1.filter("createDate <",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate <",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate <",formatter2.parse(aa[1]));
+					}
 				}
 			}
 			query1.filter("systemType =",system_type);
@@ -300,9 +351,17 @@ public class RobotMorphiaService {
 					//如果起始时间和结束时间都穿过来，就查询这两个时间之内的数据。(还要将string类型转换为时间类型)
 					query1.filter("calibrate_raw_weight =",aa[1]);
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate1")){
-					query1.filter("createDate >",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate >",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate >",formatter2.parse(aa[1]));
+					}
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate2")){
-					query1.filter("createDate <",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate <",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate <",formatter2.parse(aa[1]));
+					}
 				}
 			}
 			for (robot_CalibrateInfo calibrateInfo : query1) {
@@ -350,9 +409,17 @@ public class RobotMorphiaService {
 				}else if(!aa[1].equals("null") && aa[0].equals("candidates_weight_diff")){
 					query1.filter("candidates_weight_diff =",aa[1]);
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate1")){
-					query1.filter("createDate >",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate >",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate >",formatter2.parse(aa[1]));
+					}
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate2")){
-					query1.filter("createDate <",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate <",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate <",formatter2.parse(aa[1]));
+					}
 				}
 			}
 			for (robot_CandidatesInfo candidatesInfo : query1) {
@@ -394,9 +461,17 @@ public class RobotMorphiaService {
 				}else if(!aa[1].equals("null") && aa[0].equals("recognition_result_time_consumed_ms")){
 					query1.filter("recognition_result_time_consumed_ms =",aa[1]);
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate1")){
-					query1.filter("createDate >",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate >",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate >",formatter2.parse(aa[1]));
+					}
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate2")){
-					query1.filter("createDate <",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate <",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate <",formatter2.parse(aa[1]));
+					}
 				}
 			}
 			for (robot_FinalRecogResult finalRecogResult : query1) {
@@ -435,9 +510,17 @@ public class RobotMorphiaService {
 					//如果起始时间和结束时间都穿过来，就查询这两个时间之内的数据。(还要将string类型转换为时间类型)
 					query1.filter("linux_temperature_time =",aa[1]);
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate1")){
-					query1.filter("createDate >",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate >",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate >",formatter2.parse(aa[1]));
+					}
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate2")){
-					query1.filter("createDate <",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate <",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate <",formatter2.parse(aa[1]));
+					}
 				}
 			}
 			query1.filter("systemType =",system_type);
@@ -476,11 +559,17 @@ public class RobotMorphiaService {
 				}else if(!aa[1].equals("null") && aa[0].equals("linux_hard_ecid_3")){
 					query1.filter("linux_hard_ecid_3 =",aa[1]);
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate1")){
-					//时间是用来查询两者之间的，如果前台传的只有起始时间，就会查询所有大于这个起始时间的数据，如果只传结束时间，查询所有比结束时间小的数据
-					//如果起始时间和结束时间都穿过来，就查询这两个时间之内的数据。(还要将string类型转换为时间类型)
-					query1.filter("createDate >",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate >",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate >",formatter2.parse(aa[1]));
+					}
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate2")){
-					query1.filter("createDate <",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate <",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate <",formatter2.parse(aa[1]));
+					}
 				}
 			}
 			query1.filter("systemType =",system_type);
@@ -513,11 +602,17 @@ public class RobotMorphiaService {
 				if(!aa[1].equals("null") && aa[0].equals("deviceNo")){
 					query1.filter("deviceNo =",aa[1]);
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate1")){
-					//时间是用来查询两者之间的，如果前台传的只有起始时间，就会查询所有大于这个起始时间的数据，如果只传结束时间，查询所有比结束时间小的数据
-					//如果起始时间和结束时间都穿过来，就查询这两个时间之内的数据。(还要将string类型转换为时间类型)
-					query1.filter("createDate >",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate >",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate >",formatter2.parse(aa[1]));
+					}
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate2")){
-					query1.filter("createDate <",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate <",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate <",formatter2.parse(aa[1]));
+					}
 				}
 			}
 			query1.filter("systemType =",system_type);
@@ -555,11 +650,17 @@ public class RobotMorphiaService {
 				}else if(!aa[1].equals("null") && aa[0].equals("startup_time")){
 					query1.filter("startup_time =",aa[1]);
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate1")){
-					//时间是用来查询两者之间的，如果前台传的只有起始时间，就会查询所有大于这个起始时间的数据，如果只传结束时间，查询所有比结束时间小的数据
-					//如果起始时间和结束时间都穿过来，就查询这两个时间之内的数据。(还要将string类型转换为时间类型)
-					query1.filter("createDate >",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate >",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate >",formatter2.parse(aa[1]));
+					}
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate2")){
-					query1.filter("createDate <",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate <",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate <",formatter2.parse(aa[1]));
+					}
 				}
 			}
 			query1.filter("systemType =",system_type);
@@ -591,11 +692,17 @@ public class RobotMorphiaService {
 				if(!aa[1].equals("null") && aa[0].equals("deviceNo")){
 					query1.filter("deviceNo =",aa[1]);
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate1")){
-					//时间是用来查询两者之间的，如果前台传的只有起始时间，就会查询所有大于这个起始时间的数据，如果只传结束时间，查询所有比结束时间小的数据
-					//如果起始时间和结束时间都穿过来，就查询这两个时间之内的数据。(还要将string类型转换为时间类型)
-					query1.filter("createDate >",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate >",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate >",formatter2.parse(aa[1]));
+					}
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate2")){
-					query1.filter("createDate <",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate <",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate <",formatter2.parse(aa[1]));
+					}
 				}
 			}
 			for (robot_MotionSoftWareVersion motionSoftWareVersion : query1) {
@@ -626,20 +733,72 @@ public class RobotMorphiaService {
 				if(!aa[1].equals("null") && aa[0].equals("deviceNo")){
 					query1.filter("deviceNo =",aa[1]);
 				}else if(!aa[1].equals("null") && aa[0].equals("selfcheck_rfid")){
-					query1.filter("selfcheck_rfid =",formatter.parse(aa[1]));
+					query1.filter("selfcheck_rfid =",aa[1]);
 				}else if(!aa[1].equals("null") && aa[0].equals("selfcheck_voice")){
-					query1.filter("selfcheck_voice =",formatter.parse(aa[1]));
+					query1.filter("selfcheck_voice =",aa[1]);
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate1")){
-					//时间是用来查询两者之间的，如果前台传的只有起始时间，就会查询所有大于这个起始时间的数据，如果只传结束时间，查询所有比结束时间小的数据
-					//如果起始时间和结束时间都穿过来，就查询这两个时间之内的数据。(还要将string类型转换为时间类型)
-					query1.filter("createDate >",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate >",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate >",formatter2.parse(aa[1]));
+					}
 				}else if(!aa[1].equals("null") && aa[0].equals("createDate2")){
-					query1.filter("createDate <",formatter.parse(aa[1]));
+					if(getDate(aa[1])){
+						query1.filter("createDate <",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate <",formatter2.parse(aa[1]));
+					}
 				}
 			}
 			query1.filter("systemType =",system_type);
 			for (robot_SelfLnspectionInfo selfLnspectionInfo : query1) {
 				query.add(selfLnspectionInfo);
+			}
+		} catch (Exception e) {
+			logger.error("Morphia异常："+e.getMessage());
+		}
+		return query;
+	}
+	
+	
+	/**
+	 * ==============================================自检信息数据查询使用==================================================
+	 * 不带翻页
+	 * @return
+	 */
+	public List<robot_AndriodCPUTemperature> queryAndriodCPUTemperature(String arr,String system_type) {
+		List<robot_AndriodCPUTemperature> query=new ArrayList<robot_AndriodCPUTemperature>();
+		try {
+			//分割数组
+			String[]  strs=arr.split(",");
+			datastore.ensureIndexes();
+			Query<robot_AndriodCPUTemperature> query1 = datastore.createQuery(robot_AndriodCPUTemperature.class);
+			for(int i=0;i<strs.length;i++){
+				String[] aa=strs[i].split("__");
+				//filter之间使用and连接起来
+				if(!aa[1].equals("null") && aa[0].equals("deviceNo")){
+					query1.filter("deviceNo =",aa[1]);
+				}else if(!aa[1].equals("null") && aa[0].equals("android_cpu_temperature")){
+					query1.filter("android_cpu_temperature =",aa[1]);
+				}else if(!aa[1].equals("null") && aa[0].equals("android_temperature_time")){
+					query1.filter("android_temperature_time =",aa[1]);
+				}else if(!aa[1].equals("null") && aa[0].equals("createDate1")){
+					if(getDate(aa[1])){
+						query1.filter("createDate >",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate >",formatter2.parse(aa[1]));
+					}
+				}else if(!aa[1].equals("null") && aa[0].equals("createDate2")){
+					if(getDate(aa[1])){
+						query1.filter("createDate <",formatter.parse(aa[1]));
+					}else{
+						query1.filter("createDate <",formatter2.parse(aa[1]));
+					}
+				}
+			}
+			query1.filter("systemType =",system_type);
+			for (robot_AndriodCPUTemperature andriodCPUTemperature : query1) {
+				query.add(andriodCPUTemperature);
 			}
 		} catch (Exception e) {
 			logger.error("Morphia异常："+e.getMessage());
