@@ -1,38 +1,35 @@
 package cn.didano.remotecontrol.robot.core;
 
-import javax.servlet.http.HttpSession;
+import org.springframework.web.socket.WebSocketSession;
 
 /**
  * websocket事物信息
  * @author stephen.wang 2017-03-02 
  */
 public class RobotSession {
-	private String httpSessionId;
-	private HttpSession httpSession;
+	//sessionid  取webSocketSession的id，这个id是以个位数往上增
+	private String sessionId;
+	//设备号
 	private String service_no;
-	private RobotWebsocketServer robotWebsocketServer;
-	public String getHttpSessionId() {
-		return httpSessionId;
+	private WebSocketSession webSocketSession;
+	
+	public String getSessionId() {
+		return sessionId;
 	}
-	public void setHttpSessionId(String httpSessionId) {
-		this.httpSessionId = httpSessionId;
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
 	}
-	public HttpSession getHttpSession() {
-		return httpSession;
-	}
-	public void setHttpSession(HttpSession httpSession) {
-		this.httpSession = httpSession;
-	}
+	
 	public String getService_no() {
 		return service_no;
 	}
 	public void setService_no(String service_no) {
 		this.service_no = service_no;
 	}
-	public RobotWebsocketServer getRobotWebsocketServer() {
-		return robotWebsocketServer;
+	public WebSocketSession getWebSocketSession() {
+		return webSocketSession;
 	}
-	public void setRobotWebsocketServer(RobotWebsocketServer robotWebsocketServer) {
-		this.robotWebsocketServer = robotWebsocketServer;
+	public void setWebSocketSession(WebSocketSession webSocketSession) {
+		this.webSocketSession = webSocketSession;
 	}
 }

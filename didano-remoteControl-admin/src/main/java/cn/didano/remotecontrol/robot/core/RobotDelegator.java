@@ -85,12 +85,7 @@ public class RobotDelegator {
 			// 客户端上报信息，执行成功，则服务器端无返回信息
 			// 什么也不做
 		} else {
-			// 有异常，反馈客户端错误信息
-			RobotSession session = RobotWebsocketServer.getRobotInfoMap().get(service_no);
-			if (session != null) {
-				RobotWebsocketServer server = session.getRobotWebsocketServer();
-				server.sendMessage(service_no, out);
-			}
+			RobotWebsocketServer.sendMessage(service_no, out);
 		}
 	}
 
