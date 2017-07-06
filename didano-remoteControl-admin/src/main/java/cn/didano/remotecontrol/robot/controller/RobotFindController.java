@@ -63,7 +63,6 @@ public class RobotFindController {
 			Calendar calendar = Calendar.getInstance();
 			calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) -num);
 			System.err.println(system_type+"查询版本讯息");
-			System.err.println();
 			rAndroidHardWareUsed = robotMongoDbFindService.queryAndroidHardWareUsed(getDate(),calendar.getTime(),system_type);
 			for(int i=1;i>0;i++){
 				if(rAndroidHardWareUsed.size()<1){
@@ -91,7 +90,6 @@ public class RobotFindController {
 	@ApiOperation(value = "查询版本信息,并且不分页", notes = "查询版本信息,并且不分页")
 	@ResponseBody
 	public List<robot_AndroidSoftWareVersion> queryAndroidSoftWareVersion(@PathVariable("system_type") String system_type) {
-		System.err.println(system_type+"======================");
 		List<robot_AndroidSoftWareVersion> rAndroidSoftWareVersion=null;
 		try {
 			int num=1;
@@ -274,8 +272,6 @@ public class RobotFindController {
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String format = formatter.format(getDate());
 			String format1 = formatter.format(calendar.getTime());
-			System.err.println("==========================="+format+"========================");
-			System.err.println("==========================="+format1+"========================");
 			rLinuxEnvTemperatureInfo = robotMongoDbFindService.queryLinuxEnvTemperatureInfo(getDate(),calendar.getTime(),system_type);
 			for(int i=1;i>0;i++){
 				if(rLinuxEnvTemperatureInfo.size()<1){
@@ -555,7 +551,6 @@ public class RobotFindController {
 				}else{
 					return rSelfLnspectionInfo;
 				}
-				System.err.println(num);
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());

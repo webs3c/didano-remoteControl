@@ -95,7 +95,6 @@ public class RobotWarningController {
 						String deviceNo = sessionValue.get(j).getDeviceNo();
 						String deviceNo2 = findSheBei.get(i).getDeviceNo();
 						if(deviceNo.equals(deviceNo2)){
-							System.err.println("已连接");
 							findSheBei.get(i).setIsOnline("已连接");
 						}
 					}
@@ -103,7 +102,6 @@ public class RobotWarningController {
 			}
 			for(int i=0;i<findSheBei.size();i++){
 				String isOnline = findSheBei.get(i).getIsOnline();
-				System.err.println(isOnline+":+++++++++");
 				if(isOnline==null){
 					findSheBei.get(i).setIsOnline("设备以掉线");
 				}

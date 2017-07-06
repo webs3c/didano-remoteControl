@@ -65,7 +65,6 @@ public class RobotFindGraphController {
 	@ApiOperation(value = "查询设备号所对应的学校", notes = "查询设备号所对应的学校")
 	@ResponseBody
 	public List<Robot_School> schoolDeviceNoFindAll(@PathVariable("system_type") Integer system_type) {
-		System.err.println("查询所有的设备");
 		Out<String> out = new Out<String>();
 		List<Robot_School> findSchollName=null;
 		try {
@@ -89,7 +88,6 @@ public class RobotFindGraphController {
 	@ApiOperation(value = "查询设备号所对应的学校", notes = "查询设备号所对应的学校")
 	@ResponseBody
 	public List<Robot_School> findAll(@PathVariable("system_type") Integer system_type) {
-		System.err.println("查询所有的设备");
 		Out<String> out = new Out<String>();
 		List<Robot_School> findSchollName=null;
 		try {
@@ -98,7 +96,6 @@ public class RobotFindGraphController {
 			}else{
 				findSchollName = fsnr_SchoolService.findSheBei(system_type);
 			}
-			System.err.println(system_type+"");
 			//将重复的学校取出来后重新进行组装
 			for  ( int  i  =   0 ; i  <  findSchollName.size()  -   1 ; i ++ )  {       
 		      for  ( int  j  =  findSchollName.size()  -   1 ; j  >  i; j -- )  {       
@@ -118,7 +115,6 @@ public class RobotFindGraphController {
 	@ApiOperation(value = "查询设备号所对应的学校", notes = "查询设备号所对应的学校")
 	@ResponseBody
 	public List<Robot_School> findDeviceNo(@PathVariable("schoolName") String schoolName,@PathVariable("system_type") Integer system_type) {
-		System.err.println("查询所有的设备"+schoolName);
 		Out<String> out = new Out<String>();
 		List<Robot_School> findSchollName=null;
 		Robot_School rs=new Robot_School();
@@ -147,7 +143,6 @@ public class RobotFindGraphController {
 			Date beginDate = new Date();
 			Calendar calendar = Calendar.getInstance();
 			calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
-			System.err.println(beginDate+"-----------------"+calendar.getTime());
 			query = robotMongoDbFindService.findRobot_LinuxHardWareUsed(beginDate,calendar.getTime(),system_type);
 			int num=1;
 			for(int i=1;i>0;i++){
@@ -158,7 +153,6 @@ public class RobotFindGraphController {
 				}else{
 					return query;
 				}
-				System.err.println(num);
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -235,7 +229,6 @@ public class RobotFindGraphController {
 				}else{
 					return rPhotographicQualityInfo;
 				}
-				System.err.println(num);
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -260,7 +253,6 @@ public class RobotFindGraphController {
 			Date jsTime1 =  formatter.parse(jsTime);
 			Date qsTime1 =	formatter.parse(qsTime);
 			rPhotographicQualityInfo = robotMongoDbFindService.queryPhotographicQualityInfo(jsTime1,qsTime1,system_type);
-			System.err.println(rPhotographicQualityInfo.size()+"____________");
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -282,7 +274,6 @@ public class RobotFindGraphController {
 			Date jsTime1 =  formatter.parse(jsTime);
 			Date qsTime1 =	formatter.parse(qsTime);
 			rPhotographicQualityInfo = robotMongoDbFindService.queryPhotographicQualityInfo(jsTime1,qsTime1,system_type,deviceNo);
-			System.err.println(rPhotographicQualityInfo.size()+"____________");
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -314,7 +305,6 @@ public class RobotFindGraphController {
 				}else{
 					return rCalibrateInfo;
 				}
-				System.err.println(num);
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -384,7 +374,6 @@ public class RobotFindGraphController {
 				}else{
 					return rCandidatesInfo;
 				}
-				System.err.println(num);
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -478,7 +467,6 @@ public class RobotFindGraphController {
 	public List<robot_AndroidHardWareUsed> queryAndroidHardWareUsed(@PathVariable("system_type") String system_type) {
 		List<robot_AndroidHardWareUsed> rAndroidHardWareUsed=null;
 		try {
-			System.err.println(system_type+"查询版本讯息");
 			rAndroidHardWareUsed = robotMongoDbFindService.queryAndroidHardWareUsed(system_type);
 		} catch (Exception e) {
 			logger.error(e.getMessage());

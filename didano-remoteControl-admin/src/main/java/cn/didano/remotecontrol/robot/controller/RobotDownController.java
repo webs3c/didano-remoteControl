@@ -95,8 +95,6 @@ public class RobotDownController {
 	public Out<String> reportTemperatureInfo(@PathVariable("service_no") String service_no) {
 		Out<String> back = new Out<String>();
 		if (RobotWebsocketServer.getRobotInfoMap() != null) {
-			System.err.println(RobotWebsocketServer.getRobotInfoMap().toString());
-			
 			DownInfo downInfo = new DownInfo();
 			downInfo.setMethodName("reportTemperatureInfo");
 			back.setBackTypeWithLog(BackType.SUCCESS_DIAGNOSE_EXCUTE);
@@ -125,8 +123,6 @@ public class RobotDownController {
 	public Out<String> reportOperationInfo(@PathVariable("service_no") String service_no) {
 		Out<String> back = new Out<String>();
 		if (RobotWebsocketServer.getRobotInfoMap() != null) {
-			System.err.println(RobotWebsocketServer.getRobotInfoMap().toString());
-			
 			DownInfo downInfo = new DownInfo();
 			downInfo.setMethodName("reportOperationInfo");
 			back.setBackTypeWithLog(BackType.SUCCESS_DIAGNOSE_EXCUTE);
@@ -155,7 +151,6 @@ public class RobotDownController {
 	public Out<String> reportSelfLnspectionInfo(@PathVariable("service_no") String service_no) {
 		Out<String> back = new Out<String>();
 		if (RobotWebsocketServer.getRobotInfoMap() != null) {
-			System.err.println(RobotWebsocketServer.getRobotInfoMap().toString());
 			
 			DownInfo downInfo = new DownInfo();
 			downInfo.setMethodName("reportSelfLnspectionInfo");
@@ -186,7 +181,6 @@ public class RobotDownController {
 	public Out<String> reportMeetSpeedInfo(@PathVariable("service_no") String service_no) {
 		Out<String> back = new Out<String>();
 		if (RobotWebsocketServer.getRobotInfoMap() != null) {
-			System.err.println(RobotWebsocketServer.getRobotInfoMap().toString());
 			
 			DownInfo downInfo = new DownInfo();
 			downInfo.setMethodName("reportMeetSpeedInfo");
@@ -216,7 +210,6 @@ public class RobotDownController {
 	public Out<String> reportMeetPropertyInfo(@PathVariable("service_no") String service_no) {
 		Out<String> back = new Out<String>();
 		if (RobotWebsocketServer.getRobotInfoMap() != null) {
-			System.err.println(RobotWebsocketServer.getRobotInfoMap().toString());
 			
 			DownInfo downInfo = new DownInfo();
 			downInfo.setMethodName("reportMeetPropertyInfo");
@@ -247,7 +240,6 @@ public class RobotDownController {
 	public Out<String> reportOnLineInfo(@PathVariable("service_no") String service_no) {
 		Out<String> back = new Out<String>();
 		if (RobotWebsocketServer.getRobotInfoMap() != null) {
-			System.err.println(RobotWebsocketServer.getRobotInfoMap().toString());
 			
 			DownInfo downInfo = new DownInfo();
 			downInfo.setMethodName("reportOnLineInfo");
@@ -277,8 +269,6 @@ public class RobotDownController {
 	public Out<String> reportPhotographicQualityInfo(@PathVariable("service_no") String service_no) {
 		Out<String> back = new Out<String>();
 		if (RobotWebsocketServer.getRobotInfoMap() != null) {
-			System.err.println(RobotWebsocketServer.getRobotInfoMap().toString());
-			
 			DownInfo downInfo = new DownInfo();
 			downInfo.setMethodName("reportPhotographicQualityInfo");
 			back.setBackTypeWithLog(BackType.SUCCESS_DIAGNOSE_EXCUTE);
@@ -306,7 +296,6 @@ public class RobotDownController {
 	public Out<String> reportManageInfo(@PathVariable("service_no") String service_no) {
 		Out<String> back = new Out<String>();
 		if (RobotWebsocketServer.getRobotInfoMap() != null) {
-			System.err.println(RobotWebsocketServer.getRobotInfoMap().toString());
 			DownInfo downInfo = new DownInfo();
 			downInfo.setMethodName("reportManageInfo");
 			back.setBackTypeWithLog(BackType.SUCCESS_DIAGNOSE_EXCUTE);

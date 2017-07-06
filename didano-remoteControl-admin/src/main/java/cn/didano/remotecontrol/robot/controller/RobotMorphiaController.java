@@ -112,7 +112,6 @@ public class RobotMorphiaController {
 	public List<robot_AppRunningStatus> queryAppRunningStatus(@PathVariable("system_type") String system_type,@PathVariable("arr") String arr) {
 		List<robot_AppRunningStatus> query=null;
 		try {
-			System.err.println(system_type);
 			System.err.println(arr);
 			query = robotMorphiaService.queryAppRunningStatus(arr,system_type);
 		} catch (Exception e) {
@@ -287,7 +286,7 @@ public class RobotMorphiaController {
 		
 		List<robot_SelfLnspectionInfo> query=null;
 		try {
-			System.err.println(arr+"++++++++++++"+system_type);
+			System.err.println(arr+"++++++++++++"+arr);
 			query = robotMorphiaService.querySelfLnspectionInfo(arr,system_type);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -307,7 +306,7 @@ public class RobotMorphiaController {
 		
 		List<robot_AndroidHardWareUsed> query=null;
 		try {
-			System.err.println(arr+"++++++++++++"+system_type);
+			System.err.println(arr+"++++++++++++"+arr);
 			query = robotMorphiaService.queryAndroidHardWareUsed(arr);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -326,7 +325,7 @@ public class RobotMorphiaController {
 		
 		List<robot_AndriodCPUTemperature> query=null;
 		try {
-			System.err.println(arr+"++++++++++++"+system_type);
+			System.err.println(arr+"++++++++++++"+arr);
 			query = robotMorphiaService.queryAndriodCPUTemperature(arr,system_type);
 		} catch (Exception e) {
 			logger.error(e.getMessage());

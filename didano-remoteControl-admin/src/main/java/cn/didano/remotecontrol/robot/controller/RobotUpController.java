@@ -67,7 +67,6 @@ public class RobotUpController {
 		Out<String> out = new Out<String>();
 		try {
 			
-			System.err.println(linuxSoftWareVersion.getCreateDate());
 			Object o = robotMongoDbDataService.saveRVersionInfo(linuxSoftWareVersion);
 			out.setBackTypeWithLog(o.toString(), BackType.SUCCESS);
 		} catch (Exception e) {
@@ -141,7 +140,6 @@ public class RobotUpController {
 		Out<String> out = new Out<String>();                                                                                                                                                                                                                                  
 		try {
 			UpInfo u=new UpInfo();
-			System.err.println(u.getDeviceNo()+"-------上报温度----");
 			// 直接保存信息
 			Object o = robotMongoDbDataService.saveTemperatureInfo(inuxEnvTemperatureInfo);
 			out.setBackTypeWithLog(o.toString(), BackType.SUCCESS);
@@ -275,7 +273,6 @@ public class RobotUpController {
 		System.err.println("上报机器人linux的重启信息");
 		Out<String> out = new Out<String>();
 		try {
-			System.err.println(linuxStartUpRecord.getPoweroff_time()+"=========="+linuxStartUpRecord.getStartup_time());
 			// 直接保存信息
 			Object o = robotMongoDbDataService.saveLinuxStartUpRecord(linuxStartUpRecord);
 			out.setBackTypeWithLog(o.toString(), BackType.SUCCESS);
@@ -529,8 +526,6 @@ public class RobotUpController {
 			Robot_School r_school=new Robot_School();
 			r_school.setDeviceNo(deviceNo);
 			findSchollName = fsnr_SchoolService.findSchollName(r_school);
-			System.err.println(findSchollName.getSchoolName()+"------------------");
-			
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			out.setBackTypeWithLog(BackType.FAIL_DIAGNOSE_MONGO_SAVE, e.getMessage());
