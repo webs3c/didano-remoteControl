@@ -35,7 +35,7 @@ import io.swagger.annotations.ApiOperation;
  * 
  * @author stephen Created on 2016年12月17日 下午6:38:30
  */
-@Api(value = "诊断查询服务", tags = "诊断查询服务")
+@Api(value = "诊断平台morphia查询服务", tags = "自身的mongodb查询已经不满足需求，引入morphia")
 @RestController
 @RequestMapping(value = "/robot/morphia/")
 public class RobotMorphiaController {

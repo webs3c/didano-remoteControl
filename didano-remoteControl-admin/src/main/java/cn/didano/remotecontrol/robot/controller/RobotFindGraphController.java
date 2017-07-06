@@ -38,12 +38,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * 诊断平台api服务
- * 诊断查询服务
+ * 诊断平台条件查询服务
  * 
  * @author stephen Created on 2016年12月17日 下午6:38:30
  */
-@Api(value = "诊断查询服务", tags = "诊断查询服务")
+@Api(value = "诊断平台条件查询服务", tags = "使用mongodb自身对数据库进行操作")
 @RestController
 @RequestMapping(value = "/robot/findGraph/")
 public class RobotFindGraphController {
@@ -52,6 +51,31 @@ public class RobotFindGraphController {
 	private RobotMongoDbFindService robotMongoDbFindService;
 	@Autowired
 	private Robot_SchoolService fsnr_SchoolService;
+	
+	/**
+	 * 创建人：SevenYang 
+	 * @创建时间：2017年3月17日 下午3:59:48 
+	 * @Title:
+	 * reportMeetSpeedInfo 
+	 * @Description: （存上传类型信息） 
+	 * @return Out<String> 修改人：
+	 * 版本：1.0.0 @throws
+	 */
+	@PostMapping(value = "schoolDeviceNoFindAll/{system_type}")
+	@ApiOperation(value = "查询设备号所对应的学校", notes = "查询设备号所对应的学校")
+	@ResponseBody
+	public List<Robot_School> schoolDeviceNoFindAll(@PathVariable("system_type") Integer system_type) {
+		System.err.println("查询所有的设备");
+		Out<String> out = new Out<String>();
+		List<Robot_School> findSchollName=null;
+		try {
+			findSchollName = fsnr_SchoolService.findSheBei(system_type);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			out.setBackTypeWithLog(BackType.FAIL_DIAGNOSE_MONGO_SAVE, e.getMessage());
+		}
+		return findSchollName;
+	}
 	/**
 	 * 创建人：SevenYang 
 	 * @创建时间：2017年3月17日 下午3:59:48 

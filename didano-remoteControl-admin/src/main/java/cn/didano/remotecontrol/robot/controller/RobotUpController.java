@@ -45,7 +45,7 @@ import io.swagger.annotations.ApiParam;
  * 
  * @author stephen Created on 2016年12月17日 下午6:38:30
  */
-@Api(value = "诊断rest服务", tags = "诊断rest服务")
+@Api(value = "诊断平台上传服务", tags = "客户端上传数据接口")
 @RestController
 @RequestMapping(value = "/robot/up/")
 public class RobotUpController {

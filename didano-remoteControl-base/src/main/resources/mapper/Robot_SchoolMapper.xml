@@ -20,7 +20,7 @@
      FROM `tb_device` a 
      left join tb_school b 
      on a.school_id=b.id 
-     where a.device_type=#{system_type} and a.deleted=0 and b.deleted=0
+     where a.device_type=#{system_type} and a.deleted=0 and b.deleted=0 ORDER BY b.title
   </select>
   <select id="findSheBei1" resultMap="BaseResultMap">
      SELECT 

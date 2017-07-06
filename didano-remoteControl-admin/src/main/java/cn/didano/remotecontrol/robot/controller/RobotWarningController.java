@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiOperation;
  * 
  * @author stephen Created on 2016年12月17日 下午6:38:30
  */
-@Api(value = "预警报告", tags = "预警报告")
+@Api(value = "诊断平台预警报告服务", tags = "对数据或设备进行检查并显示结果")
 @RestController
 @RequestMapping(value = "/robot/warning/")
 public class RobotWarningController {
@@ -70,7 +70,7 @@ public class RobotWarningController {
 				System.err.println(robot_School);
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println(e);
 		} 
 		return Listrw;
 	}
@@ -110,6 +110,7 @@ public class RobotWarningController {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.err.println(e);
 		} 
 		return findSheBei;
 	}

@@ -23,14 +23,11 @@ import io.swagger.annotations.ApiOperation;
  * @author stephen Created on 2016年12月17日 下午6:38:30
  */
 
-@Api(value = "诊断控制服务", tags = "诊断控制服务")
+@Api(value = "诊断平台向下控制服务", tags = "服务器以发送命令的方式对客户端进行控制")
 @RestController
 @RequestMapping(value = "/robot/down/")
 public class RobotDownController {
 	static Logger logger = Logger.getLogger(RobotDownController.class);
-
-	
-	
 	/**
 	 *上报linux版本信息
 	 * @param service_no-----------------修改
