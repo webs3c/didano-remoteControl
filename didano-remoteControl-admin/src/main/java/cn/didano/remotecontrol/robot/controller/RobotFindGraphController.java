@@ -230,14 +230,11 @@ public class RobotFindGraphController {
 			Date jsTime1 =  formatter.parse(jsTime);
 			Date qsTime1 =	formatter.parse(qsTime);
 			//得到学校1的信息
-			System.err.println(deviceNo+"============="+deviceNo2);
 			query = robotMongoDbFindService.findRobot_LinuxHardWareUsed(jsTime1,qsTime1,system_type,deviceNo);
 			query1 = robotMongoDbFindService.findRobot_LinuxHardWareUsed(jsTime1,qsTime1,system_type,deviceNo2);
-			System.err.println(query.size()+"=========="+query1.size());
-			//得出查询出来的信息条数最大的
+			//重新循环查询出出来的数据进行重新组装数据
 			if(query.size()>query1.size()){
 				for(int i=0;i<query.size();i++){
-					System.err.println(formatter.format(query.get(i).getCreateDate())+"===if1========"+i);
 					robot_LinuxHardWareUsedGraph graph =new robot_LinuxHardWareUsedGraph();
 					graph.setLinux_cpu_used(query.get(i).getLinux_cpu_used());
 					graph.setLinux_flash_used(query.get(i).getLinux_flash_used());
@@ -247,7 +244,6 @@ public class RobotFindGraphController {
 					linuxHardWareUsedGraph.add(graph);
 				}
 				for(int i=0;i<query1.size();i++){
-					System.err.println(formatter.format(query.get(i).getCreateDate())+"===if2==="+formatter.format(query1.get(i).getCreateDate())+"====="+i);
 					linuxHardWareUsedGraph.get(i).setLinux_cpu_used2(query1.get(i).getLinux_cpu_used());
 					linuxHardWareUsedGraph.get(i).setLinux_flash_used2(query1.get(i).getLinux_flash_used());
 					linuxHardWareUsedGraph.get(i).setLinux_memory_used2(query1.get(i).getLinux_memory_used());
@@ -256,8 +252,6 @@ public class RobotFindGraphController {
 				}
 			}else{
 				for(int i=0;i<query1.size();i++){
-					System.err.println(query1.size());
-					System.err.println("===else1==="+formatter.format(query1.get(i).getCreateDate())+"====="+i);
 					robot_LinuxHardWareUsedGraph graph =new robot_LinuxHardWareUsedGraph();
 					graph.setLinux_cpu_used2(query1.get(i).getLinux_cpu_used());
 					graph.setLinux_flash_used2(query1.get(i).getLinux_flash_used());
@@ -267,7 +261,6 @@ public class RobotFindGraphController {
 					linuxHardWareUsedGraph.add(graph);
 				}
 				for(int i=0;i<query.size();i++){
-					System.err.println(formatter.format(query.get(i).getCreateDate())+"===else2==="+formatter.format(query1.get(i).getCreateDate())+"====="+i);
 					linuxHardWareUsedGraph.get(i).setLinux_cpu_used(query.get(i).getLinux_cpu_used());
 					linuxHardWareUsedGraph.get(i).setLinux_flash_used(query.get(i).getLinux_flash_used());
 					linuxHardWareUsedGraph.get(i).setLinux_memory_used(query.get(i).getLinux_memory_used());
@@ -738,7 +731,6 @@ public class RobotFindGraphController {
 			Date qsTime1 =	formatter.parse(qsTime);
 			List<robot_AndriodCPUTemperature> query = robotMongoDbFindService.queryAndriodCPUTemperature(jsTime1,qsTime1,system_type,deviceNo);
 			List<robot_AndriodCPUTemperature> query2 = robotMongoDbFindService.queryAndriodCPUTemperature(jsTime1,qsTime1,system_type,deviceNo2);
-			System.err.println(query.size()+"========="+query2.size());
 			if(query.size()>query2.size()){
 				for(int i=0;i<query.size();i++){
 					robot_AndriodCPUTemperatureGraph rl=new robot_AndriodCPUTemperatureGraph();
@@ -861,14 +853,11 @@ public class RobotFindGraphController {
 			Date jsTime1 =  formatter.parse(jsTime);
 			Date qsTime1 =	formatter.parse(qsTime);
 			//得到学校1的信息
-			System.err.println(deviceNo+"============="+deviceNo2);
 			query = robotMongoDbFindService.queryAndroidHardWareUsed(jsTime1,qsTime1,system_type,deviceNo);
 			query1 = robotMongoDbFindService.queryAndroidHardWareUsed(jsTime1,qsTime1,system_type,deviceNo2);
-			System.err.println(query.size()+"=========="+query1.size());
 			//得出查询出来的信息条数最大的
 			if(query.size()>query1.size()){
 				for(int i=0;i<query.size();i++){
-					System.err.println(formatter.format(query.get(i).getCreateDate())+"===if1========"+i);
 					robot_AndroidHardWareUsedGraph graph =new robot_AndroidHardWareUsedGraph();
 					graph.setAndroid_cpu_used(query.get(i).getAndroid_cpu_used());
 					graph.setAndroid_flash_used(query.get(i).getAndroid_flash_used());
@@ -878,7 +867,6 @@ public class RobotFindGraphController {
 					androidHardWareUsedGraph.add(graph);
 				}
 				for(int i=0;i<query1.size();i++){
-					System.err.println(formatter.format(query.get(i).getCreateDate())+"===if2==="+formatter.format(query1.get(i).getCreateDate())+"====="+i);
 					androidHardWareUsedGraph.get(i).setAndroid_cpu_used(query1.get(i).getAndroid_cpu_used());
 					androidHardWareUsedGraph.get(i).setAndroid_flash_used2(query1.get(i).getAndroid_flash_used());
 					androidHardWareUsedGraph.get(i).setAndroid_memory_used2(query1.get(i).getAndroid_memory_used());
@@ -887,8 +875,6 @@ public class RobotFindGraphController {
 				}
 			}else{
 				for(int i=0;i<query1.size();i++){
-					System.err.println(query1.size());
-					System.err.println("===else1==="+formatter.format(query1.get(i).getCreateDate())+"====="+i);
 					robot_AndroidHardWareUsedGraph graph =new robot_AndroidHardWareUsedGraph();
 					graph.setAndroid_cpu_used2(query1.get(i).getAndroid_cpu_used());
 					graph.setAndroid_flash_used2(query1.get(i).getAndroid_flash_used());
@@ -898,7 +884,6 @@ public class RobotFindGraphController {
 					androidHardWareUsedGraph.add(graph);
 				}
 				for(int i=0;i<query.size();i++){
-					System.err.println(formatter.format(query.get(i).getCreateDate())+"===else2==="+formatter.format(query1.get(i).getCreateDate())+"====="+i);
 					androidHardWareUsedGraph.get(i).setAndroid_cpu_used(query.get(i).getAndroid_cpu_used());
 					androidHardWareUsedGraph.get(i).setAndroid_flash_used(query.get(i).getAndroid_flash_used());
 					androidHardWareUsedGraph.get(i).setAndroid_memory_used(query.get(i).getAndroid_memory_used());
