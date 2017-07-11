@@ -26,7 +26,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @Todo 没有安卓操作系统版本号
  */
 @ApiModel
-@TypeAlias("linux的版本信息")
+@TypeAlias("安卓的cpu温度")
 public class robot_AndriodCPUTemperature extends rInfo {
 	@ApiModelProperty(value = "产品硬件识别码", required = true)
 	private String deviceNo;
@@ -38,6 +38,7 @@ public class robot_AndriodCPUTemperature extends rInfo {
 	private String android_temperature_time;
 	@ApiModelProperty(value = "学校名称", required = true)
 	private String schoolName;
+	
 	public String getSchoolName() {
 		return schoolName;
 	}

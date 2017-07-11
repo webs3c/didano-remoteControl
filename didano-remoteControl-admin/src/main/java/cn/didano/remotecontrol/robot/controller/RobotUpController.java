@@ -242,12 +242,13 @@ public class RobotUpController {
 	@ApiOperation(value = "上报Android运行环境的信息", notes = "上报Android运行环境的信息")
 	@ResponseBody
 	public Out<String> reportAndroidHardWareUsed(
-			@ApiParam(value = "上报Android运行环境的信息", required = true) @RequestBody robot_AndroidHardWareUsed androidHardWareUsed) {
+		@ApiParam(value = "上报Android运行环境的信息", required = true) @RequestBody robot_AndroidHardWareUsed androidHardWareUsed) {
 		logger.info("访问  RobotController :reportAndroidHardWareUsed reportAndroidHardWareUsed=" + androidHardWareUsed);
 		System.err.println("上报Android运行环境的信息");
 		Out<String> out = new Out<String>();
 		try {
 			Object o = robotMongoDbDataService.saveAndroidHardWareUsed(androidHardWareUsed);
+			
 			out.setBackTypeWithLog(o.toString(), BackType.SUCCESS);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -438,6 +439,7 @@ public class RobotUpController {
 		Out<String> out = new Out<String>();
 		try {
 			// 直接保存信息
+			System.err.println("保存安卓cpu温度");
 			Object o = robotMongoDbDataService.saveAndriodCPUTemperature(andriodCPUTemperature);
 			out.setBackTypeWithLog(o.toString(), BackType.SUCCESS);
 		} catch (Exception e) {

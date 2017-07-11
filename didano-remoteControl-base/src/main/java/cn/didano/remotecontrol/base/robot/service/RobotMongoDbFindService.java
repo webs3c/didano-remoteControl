@@ -175,6 +175,9 @@ public class RobotMongoDbFindService {
 	public List<robot_LinuxEnvTemperatureInfo> queryLinuxEnvTemperatureInfo(Date time1,Date time2,String system_type) {
 		return this.letr_repository.findBySystemType1(time1,time2,system_type);
 	}
+	public List<robot_LinuxEnvTemperatureInfo> queryLinuxEnvTemperatureInfo(Date time1,Date time2,String system_type,String deviceNo) {
+		return this.letr_repository.findBySystemType2(time1,time2,system_type,deviceNo);
+	}
 	//+++++++++++++++++++++++++++++++++++版本信息查询+++++++++++++++++++++++++++++++++++++++++++++
 	public List<robot_MotionSoftWareVersion> queryMotionSoftWareVersion(Date time1,Date time2,String system_type) {
 		return this.mtwr_repository.findByCreateDate1(time1,time2,system_type);
@@ -207,6 +210,9 @@ public class RobotMongoDbFindService {
 	public List<robot_AndroidHardWareUsed> queryAndroidHardWareUsed(Date time1,Date time2,String system_type) {
 		return this.ahwr_repository.findByCreateDate1(time1,time2,system_type);
 	}
+	public List<robot_AndroidHardWareUsed> queryAndroidHardWareUsed(Date time1,Date time2,String system_type,String deviceNo) {
+		return this.ahwr_repository.findByCreateDate2(time1,time2,system_type,deviceNo);
+	}
 	//+++++++++++++++++++++++++++++++++++自检信息查询+++++++++++++++++++++++++++++++++++++++++++++
 	public List<robot_SelfLnspectionInfo> querySelfLnspectionInfo(Date time1,Date time2,String system_type) {
 		return this.str_repository.findByCreateDate1(time1,time2,system_type);
@@ -214,6 +220,9 @@ public class RobotMongoDbFindService {
 	//+++++++++++++++++++++++++++++++++++安卓cpu温度信息+++++++++++++++++++++++++++++++++++++++++++++
 	public List<robot_AndriodCPUTemperature> queryAndriodCPUTemperature(Date time1,Date time2,String system_type){
 		return this.acr_repository.findByCreateDate1(time1,time2,system_type);
+	}
+	public List<robot_AndriodCPUTemperature> queryAndriodCPUTemperature(Date time1,Date time2,String system_type,String deviceNo){
+		return this.acr_repository.findByCreateDate2(time1,time2,system_type,deviceNo);
 	}
 	//+++++++++++++++++++++++++++++++++++板子温度信息查询+++++++++++++++++++++++++++++++++++++++++++++
 	//+++++++++++++++++++++++++++++++++++板子温度信息查询+++++++++++++++++++++++++++++++++++++++++++++

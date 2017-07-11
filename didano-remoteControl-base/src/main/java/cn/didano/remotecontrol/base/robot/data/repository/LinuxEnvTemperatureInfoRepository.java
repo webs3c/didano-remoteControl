@@ -16,4 +16,7 @@ public interface LinuxEnvTemperatureInfoRepository extends MongoRepository<robot
 	public List<robot_LinuxEnvTemperatureInfo> findBySystemType(String system_type);
 	@Query("{'$and':[{'createDate':{'$gt' : ?1, '$lt' : ?0}},{'SystemType':?2}]}")
 	public List<robot_LinuxEnvTemperatureInfo> findBySystemType1(Date createDate1,Date createDate2,String system_type);
+	
+	@Query("{'$and':[{'createDate':{'$gt' : ?1, '$lt' : ?0}},{'SystemType':?2},{'DeviceNo':?3}]}")
+	public List<robot_LinuxEnvTemperatureInfo> findBySystemType2(Date createDate1,Date createDate2,String system_type,String device_no);
 }
