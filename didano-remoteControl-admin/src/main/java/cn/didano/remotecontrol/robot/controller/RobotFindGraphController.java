@@ -62,9 +62,6 @@ public class RobotFindGraphController {
 	/**
 	 * 创建人：SevenYang 
 	 * @创建时间：2017年3月17日 下午3:59:48 
-	 * @Title:
-	 * reportMeetSpeedInfo 
-	 * @Description: （存上传类型信息） 
 	 * @return Out<String> 修改人：
 	 * 版本：1.0.0 @throws
 	 */
@@ -85,19 +82,19 @@ public class RobotFindGraphController {
 	/**
 	 * 创建人：SevenYang 
 	 * @创建时间：2017年3月17日 下午3:59:48 
-	 * @Title:
-	 * reportMeetSpeedInfo 
-	 * @Description: （存上传类型信息） 
+	 * @Title:findAll
+	 * @Description: （查询所有的设备号和所对应的学校） 
 	 * @return Out<String> 修改人：
 	 * 版本：1.0.0 @throws
 	 */
 	@PostMapping(value = "findAll/{system_type}")
-	@ApiOperation(value = "查询设备号所对应的学校", notes = "查询设备号所对应的学校")
+	@ApiOperation(value = "查询所有的设备号和所对应的学校", notes = "查询所有的设备号和所对应的学校")
 	@ResponseBody
 	public List<Robot_School> findAll(@PathVariable("system_type") Integer system_type) {
 		Out<String> out = new Out<String>();
 		List<Robot_School> findSchollName=null;
 		try {
+			//如果system_type为0 ，就没有使用system_type这个参数进行查询操作
 			if(system_type==0){
 				findSchollName = fsnr_SchoolService.findSheBei();
 			}else{
@@ -152,6 +149,7 @@ public class RobotFindGraphController {
 			calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
 			query = robotMongoDbFindService.findRobot_LinuxHardWareUsed(beginDate,calendar.getTime(),system_type);
 			int num=1;
+			//利用死循环，不断的进行查询数据，如果查询到数据，使用return返回结果并结束循环。
 			for(int i=1;i>0;i++){
 				num=num+1;
 				if(query.size()<1){
@@ -230,23 +228,29 @@ public class RobotFindGraphController {
 			//得到学校1的信息
 			query = robotMongoDbFindService.findRobot_LinuxHardWareUsed(jsTime1,qsTime1,system_type,deviceNo);
 			query1 = robotMongoDbFindService.findRobot_LinuxHardWareUsed(jsTime1,qsTime1,system_type,deviceNo2);
+			
+			
 			//重新循环查询出出来的数据进行重新组装数据
 			if(query.size()>query1.size()){
+				//先将数据条数多的数据集保存到集合中，
 				for(int i=0;i<query.size();i++){
 					robot_LinuxHardWareUsedGraph graph =new robot_LinuxHardWareUsedGraph();
 					graph.setLinux_cpu_used(query.get(i).getLinux_cpu_used());
 					graph.setLinux_flash_used(query.get(i).getLinux_flash_used());
 					graph.setLinux_memory_used(query.get(i).getLinux_memory_used());
 					graph.setLinux_wifi_signal(query.get(i).getLinux_wifi_signal());
-					graph.setCreateDate1(query.get(i).getCreateDate().getTime()/1000);
+					//得到时间戳，/1000*1000将秒变为000，加8小时在前端转换为utc刚好是本地的具体时间。
+					graph.setCreateDate1(query.get(i).getCreateDate().getTime()/1000*1000+8*3600000);
 					linuxHardWareUsedGraph.add(graph);
 				}
+				//在循环数据条数少的对先前保存的集合进行赋值
 				for(int i=0;i<query1.size();i++){
 					linuxHardWareUsedGraph.get(i).setLinux_cpu_used2(query1.get(i).getLinux_cpu_used());
 					linuxHardWareUsedGraph.get(i).setLinux_flash_used2(query1.get(i).getLinux_flash_used());
 					linuxHardWareUsedGraph.get(i).setLinux_memory_used2(query1.get(i).getLinux_memory_used());
 					linuxHardWareUsedGraph.get(i).setLinux_wifi_signal2(query1.get(i).getLinux_wifi_signal());
-					linuxHardWareUsedGraph.get(i).setCreateDate2(query1.get(i).getCreateDate().getTime()/1000);
+					//得到时间戳，/1000*1000将秒变为000，加8小时在前端转换为utc刚好是本地的具体时间。
+					linuxHardWareUsedGraph.get(i).setCreateDate2(query1.get(i).getCreateDate().getTime()/1000*1000+8*3600000);
 				}
 			}else{
 				for(int i=0;i<query1.size();i++){
@@ -255,7 +259,7 @@ public class RobotFindGraphController {
 					graph.setLinux_flash_used2(query1.get(i).getLinux_flash_used());
 					graph.setLinux_memory_used2(query1.get(i).getLinux_memory_used());
 					graph.setLinux_wifi_signal2(query1.get(i).getLinux_wifi_signal());
-					graph.setCreateDate2(query1.get(i).getCreateDate().getTime()/1000);
+					graph.setCreateDate2(query1.get(i).getCreateDate().getTime()/1000*1000+8*3600000);
 					linuxHardWareUsedGraph.add(graph);
 				}
 				for(int i=0;i<query.size();i++){
@@ -263,7 +267,7 @@ public class RobotFindGraphController {
 					linuxHardWareUsedGraph.get(i).setLinux_flash_used(query.get(i).getLinux_flash_used());
 					linuxHardWareUsedGraph.get(i).setLinux_memory_used(query.get(i).getLinux_memory_used());
 					linuxHardWareUsedGraph.get(i).setLinux_wifi_signal(query.get(i).getLinux_wifi_signal());
-					linuxHardWareUsedGraph.get(i).setCreateDate1(query.get(i).getCreateDate().getTime()/1000);
+					linuxHardWareUsedGraph.get(i).setCreateDate1(query.get(i).getCreateDate().getTime()/1000*1000+8*3600000);
 				}
 			}
 		} catch (Exception e) {
@@ -290,6 +294,7 @@ public class RobotFindGraphController {
 			calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
 			rPhotographicQualityInfo = robotMongoDbFindService.queryPhotographicQualityInfo(beginDate,calendar.getTime(),system_type);
 			int num=1;
+			//死循环不断查询数据，知道查到数据才结束循环，并返回查询结果
 			for(int i=1;i>0;i++){
 				num=num+1;
 				if(rPhotographicQualityInfo.size()<1){
@@ -365,35 +370,41 @@ public class RobotFindGraphController {
 			Date qsTime1 =	formatter.parse(qsTime);
 			List<robot_PhotographicQualityInfo> queryPhotographicQualityInfo = robotMongoDbFindService.queryPhotographicQualityInfo(jsTime1,qsTime1,system_type,deviceNo);
 			List<robot_PhotographicQualityInfo> queryPhotographicQualityInfo2 = robotMongoDbFindService.queryPhotographicQualityInfo(jsTime1,qsTime1,system_type,deviceNo2);
+			//这样循环组装数据可以避免出现一个问题，不管怎样向集合中添加数据，都不会出现下标越界，或者在size小的循环中去不到数据的情况。
 			if(queryPhotographicQualityInfo.size()>queryPhotographicQualityInfo2.size()){
+				//循环size大的到集合中
 				for(int i=0;i<queryPhotographicQualityInfo.size();i++){
 					robot_PhotographicQualityInfoGraph ph=new robot_PhotographicQualityInfoGraph();
 					ph.setConfidence_statistics_average(queryPhotographicQualityInfo.get(i).getConfidence_statistics_average());
 					ph.setConfidence_statistics_max(queryPhotographicQualityInfo.get(i).getConfidence_statistics_max());
 					ph.setConfidence_statistics_min(queryPhotographicQualityInfo.get(i).getConfidence_statistics_min());
-					ph.setCreateDate1(queryPhotographicQualityInfo.get(i).getCreateDate().getTime()/1000);
+					//得到时间戳，/1000*1000将秒变为000，加8小时在前端转换为utc刚好是本地的具体时间。
+					ph.setCreateDate1(queryPhotographicQualityInfo.get(i).getCreateDate().getTime()/1000*1000+8*3600000);
 					rPhotographicQualityInfo.add(ph);
 				}
+				//size小的循环进行结合的赋值。
 				for(int i=0;i<queryPhotographicQualityInfo2.size();i++){
 					rPhotographicQualityInfo.get(i).setConfidence_statistics_average2(queryPhotographicQualityInfo2.get(i).getConfidence_statistics_average());
 					rPhotographicQualityInfo.get(i).setConfidence_statistics_max2(queryPhotographicQualityInfo2.get(i).getConfidence_statistics_max());
 					rPhotographicQualityInfo.get(i).setConfidence_statistics_min2(queryPhotographicQualityInfo2.get(i).getConfidence_statistics_min());
-					rPhotographicQualityInfo.get(i).setCreateDate2(queryPhotographicQualityInfo2.get(i).getCreateDate().getTime()/1000);
+					rPhotographicQualityInfo.get(i).setCreateDate2(queryPhotographicQualityInfo2.get(i).getCreateDate().getTime()/1000*1000+8*3600000);
 				}
+				
 			}else{
 				for(int i=0;i<queryPhotographicQualityInfo2.size();i++){
 					robot_PhotographicQualityInfoGraph ph=new robot_PhotographicQualityInfoGraph();
 					ph.setConfidence_statistics_average2(queryPhotographicQualityInfo2.get(i).getConfidence_statistics_average());
 					ph.setConfidence_statistics_max2(queryPhotographicQualityInfo2.get(i).getConfidence_statistics_max());
 					ph.setConfidence_statistics_min2(queryPhotographicQualityInfo2.get(i).getConfidence_statistics_min());
-					ph.setCreateDate2(queryPhotographicQualityInfo2.get(i).getCreateDate().getTime()/1000);
+					ph.setCreateDate2(queryPhotographicQualityInfo2.get(i).getCreateDate().getTime()/1000*1000+8*3600000);
 					rPhotographicQualityInfo.add(ph);
 				}
 				for(int i=0;i<queryPhotographicQualityInfo.size();i++){
 					rPhotographicQualityInfo.get(i).setConfidence_statistics_average(queryPhotographicQualityInfo2.get(i).getConfidence_statistics_average());
 					rPhotographicQualityInfo.get(i).setConfidence_statistics_max(queryPhotographicQualityInfo2.get(i).getConfidence_statistics_max());
 					rPhotographicQualityInfo.get(i).setConfidence_statistics_min(queryPhotographicQualityInfo2.get(i).getConfidence_statistics_min());
-					rPhotographicQualityInfo.get(i).setCreateDate1(queryPhotographicQualityInfo2.get(i).getCreateDate().getTime()/1000);
+					//得到时间戳，/1000*1000将秒变为000，加8小时在前端转换为utc刚好是本地的具体时间。
+					rPhotographicQualityInfo.get(i).setCreateDate1(queryPhotographicQualityInfo2.get(i).getCreateDate().getTime()/1000*1000+8*3600000);
 				}
 			}
 		} catch (Exception e) {
@@ -419,6 +430,7 @@ public class RobotFindGraphController {
 			calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
 			rCalibrateInfo = robotMongoDbFindService.queryCalibrateInfo(beginDate,calendar.getTime(),system_type);
 			int num=1;
+			//无限循环查询数据
 			for(int i=1;i>0;i++){
 				num=num+1;
 				if(rCalibrateInfo.size()<1){
@@ -487,6 +499,7 @@ public class RobotFindGraphController {
 			calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
 			rCandidatesInfo = robotMongoDbFindService.queryCandidatesInfo(beginDate,calendar.getTime(),system_type);
 			int num=1;
+			//无限循环查询数据
 			for(int i=1;i>0;i++){
 				num=num+1;
 				if(rCandidatesInfo.size()<1){
@@ -554,6 +567,7 @@ public class RobotFindGraphController {
 			calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
 			rLinuxEnvTemperatureInfo = robotMongoDbFindService.queryLinuxEnvTemperatureInfo(beginDate,calendar.getTime(),system_type);
 			int num=1;
+			//无限循环查询数据
 			for(int i=1;i>0;i++){
 				num=num+1;
 				if(rLinuxEnvTemperatureInfo.size()<1){
@@ -616,31 +630,33 @@ public class RobotFindGraphController {
 			Date qsTime1 =	formatter.parse(qsTime);
 			List<robot_LinuxEnvTemperatureInfo> query = robotMongoDbFindService.queryLinuxEnvTemperatureInfo(jsTime1,qsTime1,system_type,deviceNo);
 			List<robot_LinuxEnvTemperatureInfo> query2 = robotMongoDbFindService.queryLinuxEnvTemperatureInfo(jsTime1,qsTime1,system_type,deviceNo2);
+			//判断size进行数据的重新组装
 			if(query.size()>query2.size()){
 				for(int i=0;i<query.size();i++){
 					robot_LinuxEnvTemperatureInfoGraph rl=new robot_LinuxEnvTemperatureInfoGraph();
 					rl.setLinux_cpu_temperature(query.get(i).getLinux_cpu_temperature());
 					rl.setLinux_env_temperature(query.get(i).getLinux_env_temperature());
-					rl.setCreateDate1(query.get(i).getCreateDate().getTime()/1000);
+					//得到时间戳，/1000*1000将秒变为000，加8小时在前端转换为utc刚好是本地的具体时间。
+					rl.setCreateDate1(query.get(i).getCreateDate().getTime()/1000*1000+8*3600000);
 					rLinuxEnvTemperatureInfo.add(rl);
 				}
 				for(int i=0;i<query2.size();i++){
 					rLinuxEnvTemperatureInfo.get(i).setLinux_cpu_temperature2(query2.get(i).getLinux_cpu_temperature());
 					rLinuxEnvTemperatureInfo.get(i).setLinux_env_temperature2(query2.get(i).getLinux_env_temperature());
-					rLinuxEnvTemperatureInfo.get(i).setCreateDate2(query2.get(i).getCreateDate().getTime()/1000);
+					rLinuxEnvTemperatureInfo.get(i).setCreateDate2(query2.get(i).getCreateDate().getTime()/1000*1000+8*3600000);
 				}
 			}else{
 				for(int i=0;i<query2.size();i++){
 					robot_LinuxEnvTemperatureInfoGraph rl=new robot_LinuxEnvTemperatureInfoGraph();
 					rl.setLinux_cpu_temperature2(query2.get(i).getLinux_cpu_temperature());
 					rl.setLinux_env_temperature2(query2.get(i).getLinux_env_temperature());
-					rl.setCreateDate2(query2.get(i).getCreateDate().getTime()/1000);
+					rl.setCreateDate2(query2.get(i).getCreateDate().getTime()/1000*1000+8*3600000);
 					rLinuxEnvTemperatureInfo.add(rl);
 				}
 				for(int i=0;i<query.size();i++){
 					rLinuxEnvTemperatureInfo.get(i).setLinux_cpu_temperature(query.get(i).getLinux_cpu_temperature());
 					rLinuxEnvTemperatureInfo.get(i).setLinux_env_temperature(query.get(i).getLinux_env_temperature());
-					rLinuxEnvTemperatureInfo.get(i).setCreateDate1(query.get(i).getCreateDate().getTime()/1000);
+					rLinuxEnvTemperatureInfo.get(i).setCreateDate1(query.get(i).getCreateDate().getTime()/1000*1000+8*3600000);
 				}
 			}
 			
@@ -667,6 +683,7 @@ public class RobotFindGraphController {
 			calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
 			rAndriodCPUTemperature = robotMongoDbFindService.queryAndriodCPUTemperature(beginDate,calendar.getTime(),system_type);
 			int num=1;
+			//无限查询数据，知道查询到数据为止
 			for(int i=1;i>0;i++){
 				num=num+1;
 				if(rAndriodCPUTemperature.size()<1){
@@ -729,27 +746,29 @@ public class RobotFindGraphController {
 			Date qsTime1 =	formatter.parse(qsTime);
 			List<robot_AndriodCPUTemperature> query = robotMongoDbFindService.queryAndriodCPUTemperature(jsTime1,qsTime1,system_type,deviceNo);
 			List<robot_AndriodCPUTemperature> query2 = robotMongoDbFindService.queryAndriodCPUTemperature(jsTime1,qsTime1,system_type,deviceNo2);
+			//数据的重新组装
 			if(query.size()>query2.size()){
 				for(int i=0;i<query.size();i++){
 					robot_AndriodCPUTemperatureGraph rl=new robot_AndriodCPUTemperatureGraph();
 					rl.setAndroid_cpu_temperature(query.get(i).getAndroid_cpu_temperature());
-					rl.setCreateDate1(query.get(i).getCreateDate().getTime()/1000);
+					//得到时间戳，/1000*1000将秒变为000，加8小时在前端转换为utc刚好是本地的具体时间。
+					rl.setCreateDate1(query.get(i).getCreateDate().getTime()/1000*1000+8*3600000);
 					rAndriodCPUTemperature.add(rl);
 				}
 				for(int i=0;i<query2.size();i++){
 					rAndriodCPUTemperature.get(i).setAndroid_cpu_temperature2(query2.get(i).getAndroid_cpu_temperature());
-					rAndriodCPUTemperature.get(i).setCreateDate2(query2.get(i).getCreateDate().getTime()/1000);
+					rAndriodCPUTemperature.get(i).setCreateDate2(query2.get(i).getCreateDate().getTime()/1000*1000+8*3600000);
 				}
 			}else{
 				for(int i=0;i<query2.size();i++){
 					robot_AndriodCPUTemperatureGraph rl=new robot_AndriodCPUTemperatureGraph();
 					rl.setAndroid_cpu_temperature2(query2.get(i).getAndroid_cpu_temperature());
-					rl.setCreateDate2(query2.get(i).getCreateDate().getTime()/1000);
+					rl.setCreateDate2(query2.get(i).getCreateDate().getTime()/1000*1000+8*3600000);
 					rAndriodCPUTemperature.add(rl);
 				}
 				for(int i=0;i<query.size();i++){
 					rAndriodCPUTemperature.get(i).setAndroid_cpu_temperature(query2.get(i).getAndroid_cpu_temperature());
-					rAndriodCPUTemperature.get(i).setCreateDate1(query.get(i).getCreateDate().getTime()/1000);
+					rAndriodCPUTemperature.get(i).setCreateDate1(query.get(i).getCreateDate().getTime()/1000*1000+8*3600000);
 				}
 			}
 			
@@ -775,6 +794,7 @@ public class RobotFindGraphController {
 			calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
 			query = robotMongoDbFindService.queryAndroidHardWareUsed(beginDate,calendar.getTime(),system_type);
 			int num=1;
+			//直到查询到数据为止
 			for(int i=1;i>0;i++){
 				num=num+1;
 				if(query.size()<1){
@@ -853,7 +873,7 @@ public class RobotFindGraphController {
 			//得到学校1的信息
 			query = robotMongoDbFindService.queryAndroidHardWareUsed(jsTime1,qsTime1,system_type,deviceNo);
 			query1 = robotMongoDbFindService.queryAndroidHardWareUsed(jsTime1,qsTime1,system_type,deviceNo2);
-			//得出查询出来的信息条数最大的
+			//对数据的重新组装
 			if(query.size()>query1.size()){
 				for(int i=0;i<query.size();i++){
 					robot_AndroidHardWareUsedGraph graph =new robot_AndroidHardWareUsedGraph();
@@ -861,7 +881,7 @@ public class RobotFindGraphController {
 					graph.setAndroid_flash_used(query.get(i).getAndroid_flash_used());
 					graph.setAndroid_memory_used(query.get(i).getAndroid_memory_used());
 					graph.setLinux_wifi_signal(query.get(i).getLinux_wifi_signal());
-					graph.setCreateDate1(query.get(i).getCreateDate().getTime()/1000);
+					graph.setCreateDate1(query.get(i).getCreateDate().getTime()/1000*1000+8*3600000);
 					androidHardWareUsedGraph.add(graph);
 				}
 				for(int i=0;i<query1.size();i++){
@@ -869,7 +889,8 @@ public class RobotFindGraphController {
 					androidHardWareUsedGraph.get(i).setAndroid_flash_used2(query1.get(i).getAndroid_flash_used());
 					androidHardWareUsedGraph.get(i).setAndroid_memory_used2(query1.get(i).getAndroid_memory_used());
 					androidHardWareUsedGraph.get(i).setLinux_wifi_signal2(query1.get(i).getLinux_wifi_signal());
-					androidHardWareUsedGraph.get(i).setCreateDate2(query1.get(i).getCreateDate().getTime()/1000);
+					//得到时间戳，/1000*1000将秒变为000，加8小时在前端转换为utc刚好是本地的具体时间。
+					androidHardWareUsedGraph.get(i).setCreateDate2(query1.get(i).getCreateDate().getTime()/1000*1000+8*3600000);
 				}
 			}else{
 				for(int i=0;i<query1.size();i++){
@@ -878,7 +899,7 @@ public class RobotFindGraphController {
 					graph.setAndroid_flash_used2(query1.get(i).getAndroid_flash_used());
 					graph.setAndroid_memory_used2(query1.get(i).getAndroid_memory_used());
 					graph.setLinux_wifi_signal2(query1.get(i).getLinux_wifi_signal());
-					graph.setCreateDate2(query1.get(i).getCreateDate().getTime()/1000);
+					graph.setCreateDate2(query1.get(i).getCreateDate().getTime()/1000*1000+8*3600000);
 					androidHardWareUsedGraph.add(graph);
 				}
 				for(int i=0;i<query.size();i++){
@@ -886,7 +907,7 @@ public class RobotFindGraphController {
 					androidHardWareUsedGraph.get(i).setAndroid_flash_used(query.get(i).getAndroid_flash_used());
 					androidHardWareUsedGraph.get(i).setAndroid_memory_used(query.get(i).getAndroid_memory_used());
 					androidHardWareUsedGraph.get(i).setLinux_wifi_signal(query.get(i).getLinux_wifi_signal());
-					androidHardWareUsedGraph.get(i).setCreateDate1(query.get(i).getCreateDate().getTime()/1000);
+					androidHardWareUsedGraph.get(i).setCreateDate1(query.get(i).getCreateDate().getTime()/1000*1000+8*3600000);
 				}
 			}
 		} catch (Exception e) {
